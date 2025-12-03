@@ -1,0 +1,11 @@
+{
+  "name": "ai-sbom-platform",
+  "main": "./index.html",
+  "assets": {
+    "directory": "."
+  },
+  "compatibility_date": "2025-12-03",
+  "observability": {
+    "enabled": true
+  }
+}
