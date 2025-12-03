@@ -1,6 +1,5 @@
 {
   "name": "ai-sbom-platform",
-  "main": "./index.html",
   "assets": {
     "directory": "."
   },
