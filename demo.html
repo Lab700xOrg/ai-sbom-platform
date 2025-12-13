@@ -197,11 +197,45 @@
         <div>
             <div class="logo"><a href="index.html">AI<span>_SBOM</span></a></div>
             
-            <div class="nav-item active" onclick="nav('dashboard', this)"><span>📊</span> Dashboard</div>
-            <div class="nav-item" onclick="nav('scanner', this)"><span>⚡</span> Scanner</div>
-            <div class="nav-item" onclick="nav('history', this)"><span>📜</span> History</div>
-            <div class="nav-item" onclick="nav('policies', this)"><span>🛡️</span> Policies</div>
-            <div class="nav-item" onclick="nav('integrations', this)"><span>🔌</span> Integrations</div>
+            <!-- 1. Switch to Utility App -->
+            <div class="nav-item">
+                <a href="viewer.html" style="text-decoration:none; color:inherit; display:block; width:100%;">
+                    <span>👁️</span> Local Viewer
+                </a>
+            </div>
+            
+            <div style="margin: 15px 0; border-bottom: 1px solid #222;"></div>
+
+            <!-- 2. Main Demo Views -->
+            <!-- Maps to #dashboard (Executive View) -->
+            <div class="nav-item active" onclick="nav('dashboard', this)">
+                <span>📊</span> Dashboard
+            </div>
+
+            <!-- Maps to #scanner (Interactive Simulation) -->
+            <div class="nav-item" onclick="nav('scanner', this)">
+                <span>⚡</span> Scanner
+            </div>
+            
+            <!-- 3. Sub-Features -->
+            <div class="nav-item" onclick="nav('history', this)">
+                <span>📜</span> History
+            </div>
+            <div class="nav-item" onclick="nav('policies', this)">
+                <span>🛡️</span> Policies
+            </div>
+            <div class="nav-item" onclick="nav('integrations', this)">
+                <span>🔌</span> Integrations
+            </div>
+
+            <div style="margin: 15px 0; border-bottom: 1px solid #222;"></div>
+
+            <!-- 4. External -->
+            <div class="nav-item">
+                <a href="https://github.com/Lab700xOrg/aisbom" target="_blank" style="text-decoration:none; color:inherit; display:block; width:100%;">
+                    <span>📦</span> Get CLI
+                </a>
+            </div>
         </div>
         <div style="font-size: 0.7rem; color: #555;">
             User: demo_admin<br>

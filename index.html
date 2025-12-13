@@ -205,12 +205,17 @@
             </p>
             
             <div class="cmd-line">
-                <code>pip install aisbom-cli</code>
-                <span class="copy-icon" onclick="alert('Copied to clipboard!')">📋</span>
+                <!-- Link to PyPI -->
+                <a href="https://pypi.org/project/aisbom-cli/" target="_blank" style="text-decoration: none; display: flex; align-items: center;">
+                    <code>pip install aisbom-cli</code>
+                </a>
+                <!-- Click to Copy -->
+                <span class="copy-icon" onclick="copyToClipboard()" title="Copy to clipboard">📋</span>
             </div>
 
             <div>
-                <a href="#" class="btn">Read the Docs</a>
+                <!-- Point Docs to GitHub README -->
+                <a href="https://github.com/Lab700xOrg/aisbom#readme" target="_blank" class="btn">Read the Docs</a>
                 <span style="margin: 0 15px; color: #555;">or</span>
                 <a href="demo.html" style="color: #fff; text-decoration: underline;">View Live Demo</a>
             </div>
@@ -356,6 +361,14 @@
             }
         }
         setTimeout(typeLine, 1000);
+
+        function copyToClipboard() {
+            navigator.clipboard.writeText("pip install aisbom-cli").then(() => {
+                const icon = document.querySelector('.copy-icon');
+                icon.textContent = "✅"; // Visual feedback
+                setTimeout(() => icon.textContent = "📋", 2000); // Reset
+            });
+        }
     </script>
 </body>
 </html>
