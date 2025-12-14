@@ -129,7 +129,7 @@
             <div>
                  <button class="btn-outline" onclick="generateReport()" id="btn-report" style="opacity: 0.5; cursor: not-allowed;">📄 Download Report</button>
                  <!-- THE UPSELL -->
-                 <button class="btn-action" onclick="alert('Join the waitlist to enable Continuous Monitoring!')">Connect GitHub (Beta)</button>
+                 <button class="btn-action" onclick="trackIntent()">Request Cloud Access</button>
             </div>
         </div>
 
@@ -216,6 +216,18 @@
     </div>
 
     <script>
+        
+        function trackIntent() {
+            // 1. Send data to GA
+            gtag('event', 'click_waitlist', {
+                'event_category': 'conversion',
+                'event_label': 'viewer_dashboard_upsell'
+            });
+            
+            // 2. Show the alert/modal
+            window.open('https://tally.so/r/rj5MoM', '_blank');
+        }
+
         // --- DRAG & DROP LOGIC ---
         const dropArea = document.getElementById('drop-area');
 
@@ -260,6 +272,10 @@
             } else {
                 alert("Please upload a valid .json file");
             }
+            gtag('event', 'file_upload', {
+                'event_category': 'usage',
+                'event_label': 'sbom_viewer'
+            });
         }
 
         // --- PARSING & RENDERING LOGIC ---
