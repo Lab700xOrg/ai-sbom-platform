@@ -129,7 +129,7 @@
             <div>
                  <button class="btn-outline" onclick="generateReport()" id="btn-report" style="opacity: 0.5; cursor: not-allowed;">📄 Download Report</button>
                  <!-- THE UPSELL -->
-                 <button class="btn-action" onclick="trackIntent()">Request Cloud Access</button>
+                <button class="btn-action" onclick="trackLead('viewer_header')">Request Cloud Access</button>
             </div>
         </div>
 
@@ -217,14 +217,15 @@
 
     <script>
         
-        function trackIntent() {
-            // 1. Send data to GA
-            gtag('event', 'click_waitlist', {
-                'event_category': 'conversion',
-                'event_label': 'viewer_dashboard_upsell'
-            });
-            
-            // 2. Show the alert/modal
+        function trackLead(source) {
+            // 1. Fire GA4 Event
+            if (typeof gtag === 'function') {
+                gtag('event', 'click_waitlist', {
+                    'event_category': 'conversion',
+                    'event_label': source // e.g., 'viewer_header' or 'viewer_upsell'
+                });
+            }
+            // 2. Open Form
             window.open('https://tally.so/r/rj5MoM', '_blank');
         }
 

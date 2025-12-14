@@ -265,7 +265,7 @@
                 </div>
                 <div>
                      <button class="btn-outline" onclick="generateReport()">📄 Download PDF Report</button>
-                     <button class="btn-action" onclick="window.open('https://tally.so/r/rj5MoM', '_blank')">Request Cloud Access</button>
+                     <button class="btn-action" onclick="trackLead('demo_dashboard')">Request Cloud Access</button>
                      <!--<button class="btn-action" onclick="openSettings()">Global Settings</button>-->
                 </div>
             </div>
@@ -712,6 +712,18 @@
             log(`Initiating scan on ${data.file}...`);
             let delay = 500; data.logs.forEach((msg) => { setTimeout(() => { let style = msg.includes("ALERT") ? 'log-error' : ''; log(msg, style); }, delay); delay += 500; });
             setTimeout(() => { reportPlaceholder.style.display = 'none'; reportView.style.display = 'block'; document.getElementById('badge-status').textContent = data.status; document.getElementById('badge-status').className = `badge ${data.badgeClass}`; document.getElementById('r-framework').textContent = data.framework; document.getElementById('r-license').textContent = data.license; document.getElementById('r-vuln').textContent = data.vuln; document.getElementById('r-vuln').style.color = type === 'dirty' ? 'var(--danger)' : 'var(--text-main)'; document.getElementById('json-output').textContent = JSON.stringify(data.json, null, 2); document.getElementById('scan-status').textContent = 'Finished'; }, delay);
+        }
+
+        function trackLead(source) {
+            // 1. Fire GA4 Event
+            if (typeof gtag === 'function') {
+                gtag('event', 'click_waitlist', {
+                    'event_category': 'conversion',
+                    'event_label': source // e.g., 'landing_header'
+                });
+            }
+            // 2. Open Form
+            window.open('https://tally.so/r/rj5MoM', '_blank');
         }
     </script>
 </body>
