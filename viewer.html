@@ -16,9 +16,9 @@
     <title>AIsbom | Artifact Viewer</title>
     
     <!-- Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         /* --- REUSING YOUR EXISTING CSS FOR CONSISTENCY --- */
@@ -258,8 +258,8 @@
         }
 
         function handleFiles(files) {
-            const file = files[0];
-            if (file && file.type === "application/json" || file.name.endsWith('.json')) {
+            const file = files && files[0];
+            if (file && (file.type === "application/json" || file.name.endsWith('.json'))) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     try {
@@ -270,7 +270,7 @@
                     }
                 };
                 reader.readAsText(file);
-            } else {
+            } else if (file) {
                 alert("Please upload a valid .json file");
             }
             gtag('event', 'file_upload', {
@@ -281,6 +281,8 @@
 
         // --- PARSING & RENDERING LOGIC ---
         let globalData = null; // Store for PDF generation
+        let typeChartInstance = null;
+        let riskChartInstance = null;
 
         function renderDashboard(data) {
             globalData = data;
@@ -363,8 +365,10 @@
         }
 
         function renderCharts(counts) {
-            // Type Chart
-            new Chart(document.getElementById('typeChart'), {
+            if (typeChartInstance) typeChartInstance.destroy();
+            if (riskChartInstance) riskChartInstance.destroy();
+
+            typeChartInstance = new Chart(document.getElementById('typeChart'), {
                 type: 'doughnut',
                 data: {
                     labels: ['ML Models', 'Libraries'],
@@ -381,8 +385,7 @@
                 }
             });
 
-            // Risk Chart
-            new Chart(document.getElementById('riskChart'), {
+            riskChartInstance = new Chart(document.getElementById('riskChart'), {
                 type: 'bar',
                 data: {
                     labels: ['Critical', 'Legal Risk', 'Safe'],
@@ -407,7 +410,9 @@
         // --- PDF REPORT (Client Side) ---
         function generateReport() {
             if(!globalData) return;
-            const doc = new window.jspdf.jsPDF();
+            const jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
+            if (!jsPDFCtor) { alert("Report generator is still loading. Please try again in a moment."); return; }
+            const doc = new jsPDFCtor();
             
             // Header
             doc.setFillColor(10, 10, 10); doc.rect(0, 0, 210, 40, "F");
@@ -422,6 +427,7 @@
                 (c.description || "").includes("CRITICAL") ? "FAIL" : "PASS"
             ]);
 
+            if (typeof doc.autoTable !== 'function') { alert("Report table renderer is still loading. Please try again in a moment."); return; }
             doc.autoTable({
                 startY: 50,
                 head: [['Component', 'Type', 'Version', 'Status']],

@@ -16,9 +16,9 @@
     <title>AIsbom | Enterprise Platform</title>
     
     <!-- Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         :root {
@@ -218,23 +218,23 @@
 
             <!-- 2. Main Demo Views -->
             <!-- Maps to #dashboard (Executive View) -->
-            <div class="nav-item active" onclick="nav('dashboard', this)">
+            <div class="nav-item active" role="button" tabindex="0" onclick="nav('dashboard', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('dashboard', this);}">
                 <span>📊</span> Dashboard
             </div>
 
             <!-- Maps to #scanner (Interactive Simulation) -->
-            <div class="nav-item" onclick="nav('scanner', this)">
+            <div class="nav-item" role="button" tabindex="0" onclick="nav('scanner', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('scanner', this);}">
                 <span>⚡</span> Scanner
             </div>
             
             <!-- 3. Sub-Features -->
-            <div class="nav-item" onclick="nav('history', this)">
+            <div class="nav-item" role="button" tabindex="0" onclick="nav('history', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('history', this);}">
                 <span>📜</span> History
             </div>
-            <div class="nav-item" onclick="nav('policies', this)">
+            <div class="nav-item" role="button" tabindex="0" onclick="nav('policies', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('policies', this);}">
                 <span>🛡️</span> Policies
             </div>
-            <div class="nav-item" onclick="nav('integrations', this)">
+            <div class="nav-item" role="button" tabindex="0" onclick="nav('integrations', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('integrations', this);}">
                 <span>🔌</span> Integrations
             </div>
 
@@ -635,11 +635,11 @@
             }
         });
 
-        const { jsPDF } = window.jspdf;
-
         // --- Executive Report ---
         function generateReport() {
-            const doc = new jsPDF();
+            const jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
+            if (!jsPDFCtor) { alert("Report generator is still loading. Please try again in a moment."); return; }
+            const doc = new jsPDFCtor();
             doc.setFillColor(10, 10, 10); doc.rect(0, 0, 210, 40, "F");
             doc.setFont("helvetica", "bold"); doc.setTextColor(0, 255, 204); doc.setFontSize(22); doc.text("AI_SBOM", 15, 20);
             doc.setTextColor(200, 200, 200); doc.setFontSize(10); doc.text("EXECUTIVE COMPLIANCE SUMMARY", 15, 30); doc.text(`Generated: ${new Date().toLocaleDateString()}`, 150, 30);
@@ -653,6 +653,7 @@
             doc.setTextColor(0,0,0); doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("EU AI Act Readiness", 140, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.setTextColor(255, 180, 40); doc.text("78%", 140, 90);
 
             doc.setTextColor(0, 0, 0); doc.setFontSize(14); doc.text("2. Critical Action Items", 15, 120);
+            if (typeof doc.autoTable !== 'function') { alert("Report table renderer is still loading. Please try again in a moment."); return; }
             doc.autoTable({
                 startY: 125, head: [['Model Artifact', 'Risk Detected', 'Severity', 'Action']],
                 body: [["fraud_detect_v2.pkl", "CVE-2024-1102", "High", "Patching Required"], ["credit_score_v4.pt", "License Violation", "Critical", "Legal Review"], ["chatbot_support.onnx", "Prompt Injection", "Medium", "Update Weights"]],
