@@ -1,36 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCFJXD07TN"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-YCFJXD07TN');
+        gtag('config', 'G-YCFJXD07TN');
     </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI_SBOM inspects AI model artifacts, tensors, and training lineage to generate deep SBOMs and compliance evidence.">
+    <meta name="description"
+        content="AI_SBOM inspects AI model artifacts, tensors, and training lineage to generate deep SBOMs and compliance evidence.">
     <title>AIsbom | The Supply Chain for Artificial Intelligence</title>
     <style>
         :root {
             --bg-color: #050505;
             --surface-color: #0a0a0a;
             --border-color: #333;
-            --primary-accent: #00ffcc; /* Neon Cyan */
-            --secondary-accent: #bd00ff; /* Cyber Purple */
+            --primary-accent: #00ffcc;
+            /* Neon Cyan */
+            --secondary-accent: #bd00ff;
+            /* Cyber Purple */
             --text-main: #e0e0e0;
             --text-dim: #888;
-            --font-mono: 'Courier New', Courier, monospace; 
+            --font-mono: 'Courier New', Courier, monospace;
             --font-sans: system-ui, -apple-system, sans-serif;
         }
 
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             background-color: var(--bg-color);
@@ -43,18 +51,32 @@
         body::before {
             content: "";
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 40px 40px;
             z-index: -1;
             pointer-events: none;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .text-accent { color: var(--primary-accent); }
-        .text-purple { color: var(--secondary-accent); }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-accent {
+            color: var(--primary-accent);
+        }
+
+        .text-purple {
+            color: var(--secondary-accent);
+        }
+
         .btn {
             display: inline-block;
             padding: 12px 24px;
@@ -68,6 +90,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
         .btn:hover {
             background: var(--primary-accent);
             color: var(--bg-color);
@@ -84,9 +107,22 @@
             backdrop-filter: blur(10px);
             z-index: 100;
         }
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -1px; }
-        .logo span { color: var(--primary-accent); }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--primary-accent);
+        }
 
         /* Hero Section */
         .hero {
@@ -96,16 +132,21 @@
             gap: 50px;
             min-height: 80vh;
         }
-        
-        .hero-content { flex: 1; }
+
+        .hero-content {
+            flex: 1;
+        }
+
         .hero-title {
             font-size: 3.5rem;
             line-height: 1.1;
             margin-bottom: 20px;
             background: linear-gradient(90deg, #fff, #888);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
         .hero-subtitle {
             font-size: 1.2rem;
             color: var(--text-dim);
@@ -123,20 +164,32 @@
             width: fit-content;
             margin-bottom: 40px;
         }
-        .cmd-line code { color: var(--primary-accent); margin-right: 15px; }
-        .copy-icon { cursor: pointer; opacity: 0.7; }
-        .copy-icon:hover { opacity: 1; }
+
+        .cmd-line code {
+            color: var(--primary-accent);
+            margin-right: 15px;
+        }
+
+        .copy-icon {
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .copy-icon:hover {
+            opacity: 1;
+        }
 
         /* Terminal Graphic */
         .terminal-window {
             flex: 1;
             background: #0f0f0f;
             border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px #333;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px #333;
             overflow: hidden;
             font-size: 0.9rem;
             position: relative;
         }
+
         .terminal-header {
             background: #1a1a1a;
             padding: 10px 15px;
@@ -144,52 +197,211 @@
             gap: 8px;
             border-bottom: 1px solid #333;
         }
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-        .terminal-body { padding: 20px; height: 350px; overflow-y: hidden; color: #d4d4d4; }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .red {
+            background: #ff5f56;
+        }
+
+        .yellow {
+            background: #ffbd2e;
+        }
+
+        .green {
+            background: #27c93f;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            height: 350px;
+            overflow-y: hidden;
+            color: #d4d4d4;
+        }
 
         /* --- NEW: Comparison Section (Differentiation) --- */
-        .comparison-section { padding: 80px 0; background: #080808; border-top: 1px solid #222; border-bottom: 1px solid #222;}
-        .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; }
-        .comp-card { padding: 30px; border-radius: 8px; position: relative; }
-        .comp-card.bad { background: rgba(255, 95, 86, 0.05); border: 1px solid #333; }
-        .comp-card.good { background: rgba(0, 255, 204, 0.05); border: 1px solid var(--primary-accent); }
-        .comp-badge {
-            position: absolute; top: -12px; left: 30px; padding: 5px 10px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;
+        .comparison-section {
+            padding: 80px 0;
+            background: #080808;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
         }
-        .bad .comp-badge { background: #ff5f56; color: #000; }
-        .good .comp-badge { background: var(--primary-accent); color: #000; }
 
-        .file-tree { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-top: 20px; }
-        .file-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .status-check { color: #27c93f; }
-        .status-miss { color: #666; font-style: italic; }
-        .status-alert { color: #ff5f56; font-weight: bold; }
+        .comp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .comp-card {
+            padding: 30px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .comp-card.bad {
+            background: rgba(255, 95, 86, 0.05);
+            border: 1px solid #333;
+        }
+
+        .comp-card.good {
+            background: rgba(0, 255, 204, 0.05);
+            border: 1px solid var(--primary-accent);
+        }
+
+        .comp-badge {
+            position: absolute;
+            top: -12px;
+            left: 30px;
+            padding: 5px 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .bad .comp-badge {
+            background: #ff5f56;
+            color: #000;
+        }
+
+        .good .comp-badge {
+            background: var(--primary-accent);
+            color: #000;
+        }
+
+        .file-tree {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        .file-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-check {
+            color: #27c93f;
+        }
+
+        .status-miss {
+            color: #666;
+            font-style: italic;
+        }
+
+        .status-alert {
+            color: #ff5f56;
+            font-weight: bold;
+        }
 
         /* Features */
-        .features { padding: 100px 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-        .card { background: rgba(255,255,255,0.02); border: 1px solid #222; padding: 30px; transition: transform 0.2s, border-color 0.2s; }
-        .card:hover { transform: translateY(-5px); border-color: var(--secondary-accent); }
-        .card h3 { color: var(--primary-accent); margin-bottom: 15px; }
-        .card p { color: var(--text-dim); font-family: var(--font-sans); }
-        .highlight { background: rgba(0, 255, 204, 0.1); padding: 2px 5px; border-radius: 3px; color: var(--primary-accent); }
+        .features {
+            padding: 100px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid #222;
+            padding: 30px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-accent);
+        }
+
+        .card h3 {
+            color: var(--primary-accent);
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-family: var(--font-sans);
+        }
+
+        .highlight {
+            background: rgba(0, 255, 204, 0.1);
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: var(--primary-accent);
+        }
 
         /* Framework Ticker */
-        .ticker-wrap { width: 100%; overflow: hidden; background: #000; border-top: 1px solid #222; border-bottom: 1px solid #222; padding: 15px 0; }
-        .ticker { display: flex; white-space: nowrap; animation: ticker 20s linear infinite; }
-        .ticker-item { padding: 0 40px; font-size: 1.2rem; color: #555; font-weight: bold; text-transform: uppercase; }
-        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background: #000;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+            padding: 15px 0;
+        }
 
-        footer { text-align: center; padding: 50px 0; color: var(--text-dim); border-top: 1px solid #222; font-size: 0.8rem; }
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 20s linear infinite;
+        }
+
+        .ticker-item {
+            padding: 0 40px;
+            font-size: 1.2rem;
+            color: #555;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px 0;
+            color: var(--text-dim);
+            border-top: 1px solid #222;
+            font-size: 0.8rem;
+        }
 
         @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; padding: 50px 0; }
-            .terminal-window { width: 100%; }
-            .comp-grid { grid-template-columns: 1fr; }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 50px 0;
+            }
+
+            .terminal-window {
+                width: 100%;
+            }
+
+            .comp-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -197,9 +409,13 @@
             <nav>
                 <div class="logo">AI<span>_SBOM</span></div>
                 <div>
-                    <a href="https://github.com/Lab700xOrg/aisbom" target="_blank" style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">GitHub</a>
-                    <a href="viewer.html" style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">Viewer</a>
-                    <button onclick="trackLead('landing_nav')" class="btn" style="padding: 8px 16px; font-size: 0.8rem; cursor: pointer;">Request Cloud Access</button>
+                    <a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
+                        style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">GitHub</a>
+                    <a href="viewer.html"
+                        style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">Viewer <span
+                            style="background: var(--primary-accent); color: #000; padding: 2px 4px; border-radius: 2px; font-size: 0.6rem; vertical-align: top; font-weight: bold;">NEW</span></a>
+                    <button onclick="trackLead('landing_nav')" class="btn"
+                        style="padding: 8px 16px; font-size: 0.8rem; cursor: pointer;">Request Platform Invite</button>
                 </div>
             </nav>
         </div>
@@ -207,35 +423,45 @@
 
     <section class="container hero">
         <div class="hero-content">
-            <div style="margin-bottom: 10px; color: var(--secondary-accent); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">
+            <div
+                style="margin-bottom: 10px; color: var(--secondary-accent); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">
                 V 1.0.4 Release | EU AI Act Ready
             </div>
-            <h1 class="hero-title">Don't scan the wrapper.<br>Scan the <span class="text-accent">Brain.</span></h1>
+            <h1 class="hero-title">The Supply Chain Record for <span class="text-accent">Artificial Intelligence.</span>
+            </h1>
             <p class="hero-subtitle">
-                Legacy SBOM tools only see <code>requirements.txt</code>. We inspect the serialized tensors, weights, and training data lineage hidden inside your model artifacts.
+                Detect Malware, License Risks, and <strong>Model Drift</strong> in your CI/CD pipeline. Support for
+                PyTorch, Safetensors, and GGUF.
             </p>
-            
+
             <div class="cmd-line">
                 <!-- Link to PyPI -->
-                <a href="https://pypi.org/project/aisbom-cli/" target="_blank" style="text-decoration: none; display: flex; align-items: center;">
+                <a href="https://pypi.org/project/aisbom-cli/" target="_blank"
+                    style="text-decoration: none; display: flex; align-items: center;">
                     <code>pip install aisbom-cli</code>
                 </a>
                 <!-- Click to Copy -->
-                <span class="copy-icon" role="button" tabindex="0" aria-label="Copy pip install command" onclick="copyToClipboard()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();copyToClipboard();}" title="Copy to clipboard">📋</span>
+                <span class="copy-icon" role="button" tabindex="0" aria-label="Copy pip install command"
+                    onclick="copyToClipboard()"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();copyToClipboard();}"
+                    title="Copy to clipboard">📋</span>
             </div>
 
             <div>
                 <!-- Primary Action: The Demo (Visual Proof + Lead Gen) -->
-                <a href="demo.html" class="btn">View Live Demo</a>
+                <a href="demo.html" class="btn">Run Live Simulation</a>
                 <span style="margin: 0 15px; color: #555;">or</span>
                 <!-- Secondary Action: Trust/Source Point Docs to GitHub README -->
-                <a href="https://github.com/Lab700xOrg/aisbom#readme" target="_blank" style="color: #fff; text-decoration: underline;">Read the Docs</a>
+                <a href="https://github.com/Lab700xOrg/aisbom#readme" target="_blank"
+                    style="color: #fff; text-decoration: underline;">Read the Docs</a>
             </div>
         </div>
 
         <div class="terminal-window">
             <div class="terminal-header">
-                <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
                 <span style="margin-left: 10px; color: #666;">user@dev-machine:~/project-alpha</span>
             </div>
             <div class="terminal-body" id="terminal-content"></div>
@@ -246,20 +472,25 @@
     <section class="comparison-section">
         <div class="container">
             <h2 style="font-size: 2rem; text-align: center;">Why "Generic" Security Tools Miss the Mark</h2>
-            <p style="text-align: center; color: var(--text-dim); margin-top: 10px;">AI Models are binary artifacts, not just text files. Traditional scanners are blind to them.</p>
+            <p style="text-align: center; color: var(--text-dim); margin-top: 10px;">AI Models are binary artifacts, not
+                just text files. Traditional scanners are blind to them.</p>
 
             <div class="comp-grid">
                 <!-- Competitor View -->
                 <div class="comp-card bad">
                     <span class="comp-badge">Standard SBOM</span>
                     <h3 style="color: #fff; margin-bottom: 10px;">Surface Level Scan</h3>
-                    <p style="font-size: 0.9rem; color: #888;">Only scans text manifests. Misses the actual compiled model risks.</p>
-                    
+                    <p style="font-size: 0.9rem; color: #888;">Only scans text manifests. Misses the actual compiled
+                        model risks.</p>
+
                     <div class="file-tree">
-                        <div class="file-row"><span>📄 requirements.txt</span> <span class="status-check">✔ Clean</span></div>
+                        <div class="file-row"><span>📄 requirements.txt</span> <span class="status-check">✔ Clean</span>
+                        </div>
                         <div class="file-row"><span>📄 main.py</span> <span class="status-check">✔ Clean</span></div>
-                        <div class="file-row"><span>📦 model.pt (1.2GB)</span> <span class="status-miss">⚠ Ignored (Binary)</span></div>
-                        <div class="file-row"><span>📦 dataset.pkl</span> <span class="status-miss">⚠ Ignored (Binary)</span></div>
+                        <div class="file-row"><span>📦 model.pt (1.2GB)</span> <span class="status-miss">⚠ Ignored
+                                (Binary)</span></div>
+                        <div class="file-row"><span>📦 dataset.pkl</span> <span class="status-miss">⚠ Ignored
+                                (Binary)</span></div>
                     </div>
                 </div>
 
@@ -267,14 +498,20 @@
                 <div class="comp-card good">
                     <span class="comp-badge">AI_SBOM Deep Scan</span>
                     <h3 style="color: #fff; margin-bottom: 10px;">Artifact Introspection</h3>
-                    <p style="font-size: 0.9rem; color: #888;">Decompiles tensors and inspects serialized data structures for risks.</p>
-                    
+                    <p style="font-size: 0.9rem; color: #888;">Decompiles tensors and inspects serialized data
+                        structures for risks.</p>
+
                     <div class="file-tree">
-                        <div class="file-row"><span>📄 requirements.txt</span> <span class="status-check">✔ Clean</span></div>
+                        <div class="file-row"><span>📄 requirements.txt</span> <span class="status-check">✔ Clean</span>
+                        </div>
                         <div class="file-row"><span>📄 main.py</span> <span class="status-check">✔ Clean</span></div>
-                        <div class="file-row"><span>📦 model.pt (1.2GB)</span> <span class="status-alert">⚠ MALWARE DETECTED</span></div>
-                        <div class="file-row" style="padding-left: 20px; font-size: 0.8rem; color: var(--primary-accent);">↳ Found: embedded os.system() call</div>
-                        <div class="file-row"><span>📦 dataset.pkl</span> <span class="status-alert">⚠ LICENSE CONFLICT</span></div>
+                        <div class="file-row"><span>📦 model.pt (1.2GB)</span> <span class="status-alert">⚠ MALWARE
+                                DETECTED</span></div>
+                        <div class="file-row"
+                            style="padding-left: 20px; font-size: 0.8rem; color: var(--primary-accent);">↳ Found:
+                            embedded os.system() call</div>
+                        <div class="file-row"><span>📦 dataset.pkl</span> <span class="status-alert">⚠ LICENSE
+                                CONFLICT</span></div>
                     </div>
                 </div>
             </div>
@@ -301,21 +538,25 @@
         <div class="container">
             <h2 style="font-size: 2rem;">Infrastructure, <span class="text-purple">Not Paperwork.</span></h2>
             <p style="color: var(--text-dim); max-width: 600px; margin-top: 10px;">
-                Spreadsheets don't scale. We integrate directly into your training pipeline to create a dynamic, immutable record of truth.
+                Spreadsheets don't scale. We integrate directly into your training pipeline to create a dynamic,
+                immutable record of truth.
             </p>
 
             <div class="grid">
                 <div class="card">
-                    <h3>01. Pickle Bomb Detection</h3>
-                    <p>We <strong>sandbox</strong> unpickling processes to detect arbitrary code execution (ACE) risks in downloaded models *before* they load into memory.</p>
+                    <h3>01. Remote Streaming</h3>
+                    <p>Audit models on Hugging Face (hf://) without downloading terabytes of weights. We use HTTP Range
+                        requests to inspect headers and signatures over the wire.</p>
                 </div>
                 <div class="card">
-                    <h3>02. Dataset Lineage</h3>
-                    <p>Accidentally trained on a <span class="highlight">CC-BY-NC</span> dataset? We map the hash of your training data to the final model artifact.</p>
+                    <h3>02. Drift Detection</h3>
+                    <p>Stop silent changes. Run <span class="highlight">aisbom diff</span> production.json
+                        candidate.json to detect drift in model hashes, licenses, or dependencies between commits.</p>
                 </div>
                 <div class="card">
-                    <h3>03. EU AI Act Annex IV</h3>
-                    <p>Auto-generate the required technical documentation for High-Risk AI systems. Export directly to PDF for auditors.</p>
+                    <h3>03. Strict Mode Policy</h3>
+                    <p>Move beyond blocklists. Use <span class="highlight">--strict</span> to enforce an allowlist-only
+                        policy, flagging any unknown import or library as a CRITICAL risk.</p>
                 </div>
             </div>
         </div>
@@ -330,17 +571,15 @@
 
     <script>
         const terminalContent = document.getElementById('terminal-content');
-        
+
         const lines = [
-            { text: "$ aisbom scan ./models/credit_scorer_v2.pt", delay: 800 },
-            { text: "Analyzing artifacts...", delay: 400, color: "#888" },
-            { text: "✓ Found PyTorch v2.4.1", delay: 200, color: "#27c93f" },
-            { text: "✓ Found Hugging Face Transformers v4.40.0", delay: 200, color: "#27c93f" },
+            { text: "$ aisbom scan hf://google-bert/bert-base-uncased", delay: 800 },
+            { text: "Connecting to Hugging Face Hub...", delay: 400, color: "#888" },
+            { text: "✓ Streamed headers (2.1MB) - No download required", delay: 200, color: "#27c93f" },
+            { text: "✓ Parsed GGUF Metadata & License", delay: 200, color: "#27c93f" },
             { text: "⚠ WARNING: License Conflict Detected", delay: 400, color: "#ffbd2e" },
-            { text: "   > Dataset 'open-fin-data' is CC-BY-NC (Non-Commercial)", delay: 100, color: "#d4d4d4" },
-            { text: "   > Deployment config is set to 'PROD'", delay: 100, color: "#d4d4d4" },
-            { text: "Generating CycloneDX JSON...", delay: 400, color: "#888" },
-            { text: "Done. Report saved to ./sbom.json (24kb)", delay: 100, color: "#00ffcc" },
+            { text: " > License: 'cc-by-nc-4.0' (Non-Commercial)", delay: 100, color: "#d4d4d4" },
+            { text: "Done. Report saved to ./sbom.json", delay: 100, color: "#00ffcc" },
             { text: "$ _", delay: 2000 }
         ];
 
@@ -364,7 +603,7 @@
                 const div = document.getElementById(`line-${lineIndex}`);
                 div.textContent += currentLine.text.charAt(charIndex);
                 charIndex++;
-                if (charIndex < currentLine.text.length) { setTimeout(typeLine, 50); } 
+                if (charIndex < currentLine.text.length) { setTimeout(typeLine, 50); }
                 else { charIndex = 0; lineIndex++; setTimeout(typeLine, currentLine.delay); }
             } else {
                 const div = document.getElementById(`line-${lineIndex}`);
@@ -394,4 +633,5 @@
         }
     </script>
 </body>
+
 </html>

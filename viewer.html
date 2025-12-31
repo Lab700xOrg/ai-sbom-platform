@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCFJXD07TN"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-YCFJXD07TN');
+        gtag('config', 'G-YCFJXD07TN');
     </script>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIsbom | Artifact Viewer</title>
-    
+
     <!-- Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+        integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -27,18 +30,23 @@
             --sidebar-bg: #0a0a0a;
             --panel-bg: #111;
             --border-color: #333;
-            --primary-accent: #00ffcc; 
+            --primary-accent: #00ffcc;
             --secondary-accent: #bd00ff;
             --danger: #ff5f56;
             --warning: #ffbd2e;
             --success: #27c93f;
             --text-main: #e0e0e0;
             --text-dim: #888;
-            --font-mono: 'Courier New', Courier, monospace; 
+            --font-mono: 'Courier New', Courier, monospace;
         }
+
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             background-color: var(--bg-color);
@@ -46,398 +54,681 @@
             font-family: 'JetBrains Mono', var(--font-mono);
             height: 100vh;
             display: flex;
+            flex-direction: column;
             overflow: hidden;
         }
 
+        /* Unified Header & App Container */
+        header {
+            padding: 15px 30px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Button override for consistency */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--primary-accent);
+            color: var(--primary-accent);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            /* Match specific sizing */
+        }
+
+        .btn:hover {
+            background: var(--primary-accent);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px var(--primary-accent);
+        }
+
         /* Layout */
-        .sidebar { width: 250px; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; }
-        .main-content { flex: 1; display: flex; flex-direction: column; padding: 30px; overflow-y: auto; position: relative; }
-        
+        .sidebar {
+            width: 250px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            overflow-y: auto;
+            position: relative;
+        }
+
         /* Components */
-        .logo { font-size: 1.2rem; font-weight: 700; margin-bottom: 40px; }
-        .logo span { color: var(--primary-accent); }
-        .logo a { text-decoration: none; color: inherit; }
-        .nav-item { padding: 10px; margin-bottom: 5px; border-radius: 4px; cursor: pointer; color: var(--text-dim); transition: 0.2s; display: flex; align-items: center; gap: 10px; }
-        .nav-item:hover, .nav-item.active { background: #222; color: #fff; }
-        .nav-item.active { border-left: 2px solid var(--primary-accent); padding-left: 8px; }
-        .panel { background: var(--panel-bg); border: 1px solid var(--border-color); border-radius: 6px; display: flex; flex-direction: column; overflow: hidden; margin-bottom: 20px; }
-        .panel-header { padding: 10px 15px; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border-color); font-size: 0.8rem; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-        
-        .header-box { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        .badge { padding: 4px 8px; border-radius: 3px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; border: 1px solid transparent;}
-        .badge-pass { background: rgba(39, 201, 63, 0.1); color: var(--success); border-color: var(--success); }
-        .badge-fail { background: rgba(255, 95, 86, 0.1); color: var(--danger); border-color: var(--danger); }
-        .badge-warn { background: rgba(255, 189, 46, 0.1); color: var(--warning); border-color: var(--warning); }
-        .btn-action { background: var(--primary-accent); color: #000; border: none; cursor: pointer; padding: 6px 12px; font-weight: bold; font-family: inherit; }
-        .btn-outline { background: transparent; border: 1px solid #444; color: #ccc; cursor: pointer; padding: 6px 12px; font-family: inherit; font-size: 0.8rem; margin-right: 10px; transition: 0.2s;}
-        .btn-outline:hover { border-color: var(--primary-accent); color: #fff; }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .logo span {
+            color: var(--primary-accent);
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--text-dim);
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: #222;
+            color: #fff;
+        }
+
+        .nav-item.active {
+            border-left: 2px solid var(--primary-accent);
+            padding-left: 8px;
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .panel-header {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+        }
+
+        .badge-pass {
+            background: rgba(39, 201, 63, 0.1);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .badge-fail {
+            background: rgba(255, 95, 86, 0.1);
+            color: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .badge-warn {
+            background: rgba(255, 189, 46, 0.1);
+            color: var(--warning);
+            border-color: var(--warning);
+        }
+
+        .btn-action {
+            background: var(--primary-accent);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-family: inherit;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #444;
+            color: #ccc;
+            cursor: pointer;
+            padding: 6px 12px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            margin-right: 10px;
+            transition: 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-accent);
+            color: #fff;
+        }
 
         /* KPI & Charts */
-        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 20px;}
-        .kpi-card { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; }
-        .kpi-title { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 10px; }
-        .kpi-value { font-size: 2rem; font-weight: bold; color: #fff; }
-        
-        .chart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; height: 300px; margin-bottom: 30px; }
-        .chart-panel { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; display: flex; flex-direction: column; height: 100%; min-width: 0; overflow: hidden; }
-        .chart-container { flex: 1; position: relative; min-height: 0; width: 100%; }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .kpi-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .kpi-title {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            height: 300px;
+            margin-bottom: 30px;
+        }
+
+        .chart-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .chart-container {
+            flex: 1;
+            position: relative;
+            min-height: 0;
+            width: 100%;
+        }
 
         /* DROP ZONE (Specific to Viewer) */
         .drop-zone {
-            border: 2px dashed #333; border-radius: 8px; padding: 40px; text-align: center; cursor: pointer; transition: 0.3s;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; height: 300px;
+            border: 2px dashed #333;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
         }
-        .drop-zone:hover, .drop-zone.dragover { border-color: var(--primary-accent); background: rgba(0, 255, 204, 0.05); }
-        .hidden { display: none !important; }
+
+        .drop-zone:hover,
+        .drop-zone.dragover {
+            border-color: var(--primary-accent);
+            background: rgba(0, 255, 204, 0.05);
+        }
+
+        .hidden {
+            display: none !important;
+        }
 
         /* Table */
-        .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        .data-table th { text-align: left; padding: 12px 15px; border-bottom: 1px solid #333; color: var(--text-dim); font-size: 0.75rem; text-transform: uppercase; }
-        .data-table td { padding: 12px 15px; border-bottom: 1px solid #222; }
-        .data-table tr:hover { background: rgba(255,255,255,0.02); }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #333;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #222;
+        }
+
+        .data-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
 
         @media (max-width: 900px) {
-            .kpi-grid, .chart-grid { grid-template-columns: 1fr; }
-            .sidebar { display: none; } 
+
+            .kpi-grid,
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="sidebar">
-        <div>
-            <div class="logo"><a href="index.html">AI<span>_SBOM</span></a></div>
-            <div class="nav-item active"><span>👁️</span> Local Viewer</div>
-            <div class="nav-item"><a href="demo.html" style="text-decoration:none; color:inherit;"><span>⚡</span> Live Demo</a></div>
-            <div class="nav-item"><a href="https://github.com/Lab700xOrg/aisbom" target="_blank" style="text-decoration:none; color:inherit;"><span>📦</span> Get CLI</a></div>
-        </div>
-        <div style="font-size: 0.7rem; color: #555;">
-            Mode: Offline / Client-Side<br>
-            Version: v1.2
-        </div>
-    </div>
-
-    <div class="main-content">
-        
-        <div class="header-box">
+    <!-- Unified Header -->
+    <header>
+        <nav>
+            <div class="logo" style="margin-bottom:0; font-size:1.5rem;"><a href="index.html"
+                    style="text-decoration:none; color:inherit;">AI<span>_SBOM</span></a></div>
             <div>
-                <h1 style="font-size: 1.5rem;">Artifact Viewer</h1>
-                <p style="color: var(--text-dim); font-size: 0.9rem;">
-                    <span style="color: var(--success);">● Client-Side Only.</span> No data is uploaded to our servers.
-                </p>
+                <a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
+                    style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">GitHub</a>
+                <a href="viewer.html"
+                    style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">Viewer <span
+                        style="background: var(--primary-accent); color: #000; padding: 2px 4px; border-radius: 2px; font-size: 0.6rem; vertical-align: top; font-weight: bold;">NEW</span></a>
+                <button onclick="trackLead('viewer_nav')" class="btn"
+                    style="padding: 8px 16px; font-size: 0.8rem; cursor: pointer;">Request Platform Invite</button>
             </div>
+        </nav>
+    </header>
+
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
             <div>
-                 <button class="btn-outline" onclick="generateReport()" id="btn-report" style="opacity: 0.5; cursor: not-allowed;">📄 Download Report</button>
-                 <!-- THE UPSELL -->
-                <button class="btn-action" onclick="trackLead('viewer_header')">Request Cloud Access</button>
+                <!-- Logo Removed -->
+                <div class="nav-item active"><span>👁️</span> Local Viewer</div>
+                <div class="nav-item"><a href="demo.html" style="text-decoration:none; color:inherit;"><span>⚡</span>
+                        Live
+                        Demo</a></div>
+                <div class="nav-item"><a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
+                        style="text-decoration:none; color:inherit;"><span>📦</span> Get CLI</a></div>
+            </div>
+            <div style="font-size: 0.7rem; color: #555;">
+                Mode: Offline / Client-Side<br>
+                Version: v1.2
             </div>
         </div>
 
-        <!-- STATE 1: UPLOAD -->
-        <div id="upload-state">
-            <div class="drop-zone" id="drop-area">
-                <div style="font-size: 3rem; margin-bottom: 10px;">📂</div>
-                <h3 style="color: #fff; margin-bottom: 10px;">Drag & Drop your sbom.json here</h3>
-                <p style="color: #888; margin-bottom: 20px;">Or click to browse files</p>
-                <input type="file" id="fileElem" accept=".json" style="display:none" onchange="handleFiles(this.files)">
-                <button class="btn-outline" onclick="document.getElementById('fileElem').click()">Select File</button>
-                <div style="margin-top: 20px; font-size: 0.8rem; color: #555;">Supports CycloneDX v1.5 / v1.6</div>
+        <div class="main-content">
+
+            <div class="header-box">
+                <div>
+                    <h1 style="font-size: 1.5rem;">Artifact Viewer</h1>
+                    <p style="color: var(--text-dim); font-size: 0.9rem;">
+                        <span style="color: var(--success);">● Client-Side Only.</span> No data is uploaded to our
+                        servers.
+                    </p>
+                </div>
+                <div>
+                    <button class="btn-outline" onclick="generateReport()" id="btn-report"
+                        style="opacity: 0.5; cursor: not-allowed;">📄 Download Report</button>
+                </div>
             </div>
+
+            <!-- STATE 1: UPLOAD -->
+            <div id="upload-state">
+                <div class="drop-zone" id="drop-area">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">📂</div>
+                    <h3 style="color: #fff; margin-bottom: 10px;">Drag & Drop your sbom.json here</h3>
+                    <p style="color: #888; margin-bottom: 20px;">Or click to browse files</p>
+                    <input type="file" id="fileElem" accept=".json" style="display:none"
+                        onchange="handleFiles(this.files)">
+                    <button class="btn-outline" onclick="document.getElementById('fileElem').click()">Select
+                        File</button>
+                    <div style="margin-top: 20px; font-size: 0.8rem; color: #555;">Supports CycloneDX v1.5 / v1.6</div>
+                </div>
+            </div>
+
+            <!-- STATE 2: DASHBOARD (Hidden initially) -->
+            <div id="dashboard-state" class="hidden">
+
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-title">Total Components</div>
+                        <div class="kpi-value" id="kpi-total">0</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">AI Models Found</div>
+                        <div class="kpi-value" id="kpi-models" style="color: var(--primary-accent)">0</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Critical Risks</div>
+                        <div class="kpi-value" id="kpi-critical" style="color: var(--danger)">0</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Legal Warnings</div>
+                        <div class="kpi-value" id="kpi-legal" style="color: var(--warning)">0</div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="chart-grid">
+                    <div class="chart-panel">
+                        <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
+                            <span>Component Distribution</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="typeChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
+                            <span>Risk Breakdown</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="riskChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail Table -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <span>Artifact Details</span>
+                        <button class="btn-outline" style="padding: 2px 8px; font-size: 0.7rem;"
+                            onclick="location.reload()">Upload New</button>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Version</th>
+                                    <th>Risk Assessment</th>
+                                    <th>Legal / License</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <!-- Populated via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <!-- STATE 2: DASHBOARD (Hidden initially) -->
-        <div id="dashboard-state" class="hidden">
-            
-            <!-- KPI Cards -->
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-title">Total Components</div>
-                    <div class="kpi-value" id="kpi-total">0</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-title">AI Models Found</div>
-                    <div class="kpi-value" id="kpi-models" style="color: var(--primary-accent)">0</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-title">Critical Risks</div>
-                    <div class="kpi-value" id="kpi-critical" style="color: var(--danger)">0</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-title">Legal Warnings</div>
-                    <div class="kpi-value" id="kpi-legal" style="color: var(--warning)">0</div>
-                </div>
-            </div>
+        <script>
 
-            <!-- Charts -->
-            <div class="chart-grid">
-                <div class="chart-panel">
-                    <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
-                        <span>Component Distribution</span>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="typeChart"></canvas>
-                    </div>
-                </div>
-                <div class="chart-panel">
-                    <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
-                        <span>Risk Breakdown</span>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="riskChart"></canvas>
-                    </div>
-                </div>
-            </div>
+            function trackLead(source) {
+                // 1. Fire GA4 Event
+                if (typeof gtag === 'function') {
+                    gtag('event', 'click_waitlist', {
+                        'event_category': 'conversion',
+                        'event_label': source // e.g., 'viewer_header' or 'viewer_upsell'
+                    });
+                }
+                // 2. Open Form
+                window.open('https://tally.so/r/rj5MoM', '_blank');
+            }
 
-            <!-- Detail Table -->
-            <div class="panel">
-                <div class="panel-header">
-                    <span>Artifact Details</span>
-                    <button class="btn-outline" style="padding: 2px 8px; font-size: 0.7rem;" onclick="location.reload()">Upload New</button>
-                </div>
-                <div style="overflow-x: auto;">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Version</th>
-                                <th>Risk Assessment</th>
-                                <th>Legal / License</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body">
-                            <!-- Populated via JS -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+            // --- DRAG & DROP LOGIC ---
+            const dropArea = document.getElementById('drop-area');
 
-    </div>
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, preventDefaults, false);
+            });
 
-    <script>
-        
-        function trackLead(source) {
-            // 1. Fire GA4 Event
-            if (typeof gtag === 'function') {
-                gtag('event', 'click_waitlist', {
-                    'event_category': 'conversion',
-                    'event_label': source // e.g., 'viewer_header' or 'viewer_upsell'
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
+            });
+
+            dropArea.addEventListener('drop', handleDrop, false);
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                handleFiles(files);
+            }
+
+            function handleFiles(files) {
+                const file = files && files[0];
+                if (file && (file.type === "application/json" || file.name.endsWith('.json'))) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        try {
+                            const json = JSON.parse(e.target.result);
+                            renderDashboard(json);
+                        } catch (err) {
+                            alert("Invalid JSON file: " + err);
+                        }
+                    };
+                    reader.readAsText(file);
+                } else if (file) {
+                    alert("Please upload a valid .json file");
+                }
+                gtag('event', 'file_upload', {
+                    'event_category': 'usage',
+                    'event_label': 'sbom_viewer'
                 });
             }
-            // 2. Open Form
-            window.open('https://tally.so/r/rj5MoM', '_blank');
-        }
 
-        // --- DRAG & DROP LOGIC ---
-        const dropArea = document.getElementById('drop-area');
+            // --- PARSING & RENDERING LOGIC ---
+            let globalData = null; // Store for PDF generation
+            let typeChartInstance = null;
+            let riskChartInstance = null;
 
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, preventDefaults, false);
-        });
+            function renderDashboard(data) {
+                globalData = data;
 
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
+                // 1. Hide Upload, Show Dashboard
+                document.getElementById('upload-state').classList.add('hidden');
+                document.getElementById('dashboard-state').classList.remove('hidden');
+                document.getElementById('btn-report').style.opacity = "1";
+                document.getElementById('btn-report').style.cursor = "pointer";
 
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
-        });
-
-        dropArea.addEventListener('drop', handleDrop, false);
-
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            handleFiles(files);
-        }
-
-        function handleFiles(files) {
-            const file = files && files[0];
-            if (file && (file.type === "application/json" || file.name.endsWith('.json'))) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    try {
-                        const json = JSON.parse(e.target.result);
-                        renderDashboard(json);
-                    } catch (err) {
-                        alert("Invalid JSON file: " + err);
-                    }
+                // 2. Parse Components
+                const components = data.components || [];
+                let counts = {
+                    total: components.length,
+                    models: 0,
+                    libs: 0,
+                    critical: 0,
+                    legal: 0,
+                    low: 0
                 };
-                reader.readAsText(file);
-            } else if (file) {
-                alert("Please upload a valid .json file");
-            }
-            gtag('event', 'file_upload', {
-                'event_category': 'usage',
-                'event_label': 'sbom_viewer'
-            });
-        }
 
-        // --- PARSING & RENDERING LOGIC ---
-        let globalData = null; // Store for PDF generation
-        let typeChartInstance = null;
-        let riskChartInstance = null;
+                const tbody = document.getElementById('table-body');
+                tbody.innerHTML = '';
 
-        function renderDashboard(data) {
-            globalData = data;
-            
-            // 1. Hide Upload, Show Dashboard
-            document.getElementById('upload-state').classList.add('hidden');
-            document.getElementById('dashboard-state').classList.remove('hidden');
-            document.getElementById('btn-report').style.opacity = "1";
-            document.getElementById('btn-report').style.cursor = "pointer";
+                components.forEach(comp => {
+                    // Determine Type
+                    let typeIcon = "📦";
+                    if (comp.type === 'machine-learning-model') {
+                        counts.models++;
+                        typeIcon = "🧠 Model";
+                    } else {
+                        counts.libs++;
+                        typeIcon = "📚 Lib";
+                    }
 
-            // 2. Parse Components
-            const components = data.components || [];
-            let counts = {
-                total: components.length,
-                models: 0,
-                libs: 0,
-                critical: 0,
-                legal: 0,
-                low: 0
-            };
+                    // Parse Description for Risk (Matches your CLI output)
+                    // Example: "Security: CRITICAL (RCE Detected) | Legal: LOW..."
+                    let riskHtml = '<span class="badge badge-pass">LOW</span>';
+                    let legalHtml = '<span class="badge" style="color: #888">UNKNOWN</span>';
 
-            const tbody = document.getElementById('table-body');
-            tbody.innerHTML = '';
+                    const desc = comp.description || "";
 
-            components.forEach(comp => {
-                // Determine Type
-                let typeIcon = "📦";
-                if(comp.type === 'machine-learning-model') {
-                    counts.models++;
-                    typeIcon = "🧠 Model";
-                } else {
-                    counts.libs++;
-                    typeIcon = "📚 Lib";
-                }
+                    // Security Check
+                    if (desc.includes("CRITICAL") || desc.includes("HIGH")) {
+                        counts.critical++;
+                        riskHtml = `<span class="badge badge-fail">CRITICAL</span>`;
+                    } else if (desc.includes("MEDIUM")) {
+                        riskHtml = `<span class="badge badge-warn">MEDIUM</span>`;
+                    }
 
-                // Parse Description for Risk (Matches your CLI output)
-                // Example: "Security: CRITICAL (RCE Detected) | Legal: LOW..."
-                let riskHtml = '<span class="badge badge-pass">LOW</span>';
-                let legalHtml = '<span class="badge" style="color: #888">UNKNOWN</span>';
-                
-                const desc = comp.description || "";
-                
-                // Security Check
-                if (desc.includes("CRITICAL") || desc.includes("HIGH")) {
-                    counts.critical++;
-                    riskHtml = `<span class="badge badge-fail">CRITICAL</span>`;
-                } else if (desc.includes("MEDIUM")) {
-                    riskHtml = `<span class="badge badge-warn">MEDIUM</span>`;
-                }
+                    // Legal Check
+                    if (desc.includes("LEGAL RISK")) {
+                        counts.legal++;
+                        legalHtml = `<span class="badge badge-fail">RESTRICTED</span>`;
+                    } else if (desc.includes("Legal:")) {
+                        // Try to extract license text if present
+                        legalHtml = '<span class="badge badge-pass">OK</span>';
+                    }
 
-                // Legal Check
-                if (desc.includes("LEGAL RISK")) {
-                    counts.legal++;
-                    legalHtml = `<span class="badge badge-fail">RESTRICTED</span>`;
-                } else if (desc.includes("Legal:")) {
-                    // Try to extract license text if present
-                    legalHtml = '<span class="badge badge-pass">OK</span>';
-                }
-
-                // Render Row
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
+                    // Render Row
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
                     <td style="color: #fff; font-weight: bold;">${comp.name}</td>
                     <td>${typeIcon}</td>
                     <td>${comp.version || "N/A"}</td>
                     <td>${riskHtml} <span style="font-size:0.7rem; color:#666; margin-left:5px">${desc.split('|')[0] || ''}</span></td>
                     <td>${legalHtml}</td>
                 `;
-                tbody.appendChild(tr);
-            });
+                    tbody.appendChild(tr);
+                });
 
-            // 3. Update KPIs
-            document.getElementById('kpi-total').innerText = counts.total;
-            document.getElementById('kpi-models').innerText = counts.models;
-            document.getElementById('kpi-critical').innerText = counts.critical;
-            document.getElementById('kpi-legal').innerText = counts.legal;
+                // 3. Update KPIs
+                document.getElementById('kpi-total').innerText = counts.total;
+                document.getElementById('kpi-models').innerText = counts.models;
+                document.getElementById('kpi-critical').innerText = counts.critical;
+                document.getElementById('kpi-legal').innerText = counts.legal;
 
-            // 4. Render Charts
-            renderCharts(counts);
-        }
+                // 4. Render Charts
+                renderCharts(counts);
+            }
 
-        function renderCharts(counts) {
-            if (typeChartInstance) typeChartInstance.destroy();
-            if (riskChartInstance) riskChartInstance.destroy();
+            function renderCharts(counts) {
+                if (typeChartInstance) typeChartInstance.destroy();
+                if (riskChartInstance) riskChartInstance.destroy();
 
-            typeChartInstance = new Chart(document.getElementById('typeChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['ML Models', 'Libraries'],
-                    datasets: [{
-                        data: [counts.models, counts.libs],
-                        backgroundColor: ['#00ffcc', '#333333'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'right', labels: { color: '#ccc', font: { family: 'Courier New' } } } }
-                }
-            });
-
-            riskChartInstance = new Chart(document.getElementById('riskChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Critical', 'Legal Risk', 'Safe'],
-                    datasets: [{
-                        label: 'Count',
-                        data: [counts.critical, counts.legal, counts.total - counts.critical - counts.legal],
-                        backgroundColor: ['#ff5f56', '#ffbd2e', '#27c93f'],
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { grid: { color: '#222' }, ticks: { color: '#888' } },
-                        x: { grid: { display: false }, ticks: { color: '#888' } }
+                typeChartInstance = new Chart(document.getElementById('typeChart'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['ML Models', 'Libraries'],
+                        datasets: [{
+                            data: [counts.models, counts.libs],
+                            backgroundColor: ['#00ffcc', '#333333'],
+                            borderWidth: 0
+                        }]
                     },
-                    plugins: { legend: { display: false } }
-                }
-            });
-        }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'right', labels: { color: '#ccc', font: { family: 'Courier New' } } } }
+                    }
+                });
 
-        // --- PDF REPORT (Client Side) ---
-        function generateReport() {
-            if(!globalData) return;
-            const jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
-            if (!jsPDFCtor) { alert("Report generator is still loading. Please try again in a moment."); return; }
-            const doc = new jsPDFCtor();
-            
-            // Header
-            doc.setFillColor(10, 10, 10); doc.rect(0, 0, 210, 40, "F");
-            doc.setFont("helvetica", "bold"); doc.setTextColor(0, 255, 204); doc.setFontSize(22); doc.text("AI_SBOM Analysis", 15, 20);
-            doc.setTextColor(255, 255, 255); doc.setFontSize(10); doc.text(new Date().toLocaleString(), 15, 30);
+                riskChartInstance = new Chart(document.getElementById('riskChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Critical', 'Legal Risk', 'Safe'],
+                        datasets: [{
+                            label: 'Count',
+                            data: [counts.critical, counts.legal, counts.total - counts.critical - counts.legal],
+                            backgroundColor: ['#ff5f56', '#ffbd2e', '#27c93f'],
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: { grid: { color: '#222' }, ticks: { color: '#888' } },
+                            x: { grid: { display: false }, ticks: { color: '#888' } }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
 
-            // Table data
-            const rows = globalData.components.map(c => [
-                c.name, 
-                c.type, 
-                c.version || '-',
-                (c.description || "").includes("CRITICAL") ? "FAIL" : "PASS"
-            ]);
+            // --- PDF REPORT (Client Side) ---
+            function generateReport() {
+                if (!globalData) return;
+                const jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
+                if (!jsPDFCtor) { alert("Report generator is still loading. Please try again in a moment."); return; }
+                const doc = new jsPDFCtor();
 
-            if (typeof doc.autoTable !== 'function') { alert("Report table renderer is still loading. Please try again in a moment."); return; }
-            doc.autoTable({
-                startY: 50,
-                head: [['Component', 'Type', 'Version', 'Status']],
-                body: rows,
-                theme: 'grid',
-                headStyles: { fillColor: [0, 0, 0], textColor: [0, 255, 204] }
-            });
+                // Header
+                doc.setFillColor(10, 10, 10); doc.rect(0, 0, 210, 40, "F");
+                doc.setFont("helvetica", "bold"); doc.setTextColor(0, 255, 204); doc.setFontSize(22); doc.text("AI_SBOM Analysis", 15, 20);
+                doc.setTextColor(255, 255, 255); doc.setFontSize(10); doc.text(new Date().toLocaleString(), 15, 30);
 
-            doc.save("aisbom_report.pdf");
-        }
-    </script>
+                // Table data
+                const rows = globalData.components.map(c => [
+                    c.name,
+                    c.type,
+                    c.version || '-',
+                    (c.description || "").includes("CRITICAL") ? "FAIL" : "PASS"
+                ]);
+
+                if (typeof doc.autoTable !== 'function') { alert("Report table renderer is still loading. Please try again in a moment."); return; }
+                doc.autoTable({
+                    startY: 50,
+                    head: [['Component', 'Type', 'Version', 'Status']],
+                    body: rows,
+                    theme: 'grid',
+                    headStyles: { fillColor: [0, 0, 0], textColor: [0, 255, 204] }
+                });
+
+                doc.save("aisbom_report.pdf");
+            }
+        </script>
 </body>
+
 </html>

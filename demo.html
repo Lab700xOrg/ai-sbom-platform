@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCFJXD07TN"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'G-YCFJXD07TN');
+        gtag('config', 'G-YCFJXD07TN');
     </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIsbom | Enterprise Platform</title>
-    
+
     <!-- Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"
+        integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA=="
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -26,18 +29,23 @@
             --sidebar-bg: #0a0a0a;
             --panel-bg: #111;
             --border-color: #333;
-            --primary-accent: #00ffcc; 
+            --primary-accent: #00ffcc;
             --secondary-accent: #bd00ff;
             --danger: #ff5f56;
             --warning: #ffbd2e;
             --success: #27c93f;
             --text-main: #e0e0e0;
             --text-dim: #888;
-            --font-mono: 'Courier New', Courier, monospace; 
+            --font-mono: 'Courier New', Courier, monospace;
         }
+
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             background-color: var(--bg-color);
@@ -45,7 +53,57 @@
             font-family: 'JetBrains Mono', var(--font-mono);
             height: 100vh;
             display: flex;
+            flex-direction: column;
             overflow: hidden;
+        }
+
+        /* Unified Header & App Container */
+        header {
+            padding: 15px 30px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .app-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Button override for consistency */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--primary-accent);
+            color: var(--primary-accent);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            /* Match specific sizing */
+        }
+
+        .btn:hover {
+            background: var(--primary-accent);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px var(--primary-accent);
         }
 
         /* --- Sidebar --- */
@@ -58,9 +116,21 @@
             flex-direction: column;
             justify-content: space-between;
         }
-        .logo { font-size: 1.2rem; font-weight: 700; margin-bottom: 40px; }
-        .logo span { color: var(--primary-accent); }
-        .logo a { text-decoration: none; color: inherit; }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        .logo span {
+            color: var(--primary-accent);
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: inherit;
+        }
 
         .nav-item {
             padding: 10px;
@@ -73,8 +143,17 @@
             align-items: center;
             gap: 10px;
         }
-        .nav-item:hover, .nav-item.active { background: #222; color: #fff; }
-        .nav-item.active { border-left: 2px solid var(--primary-accent); padding-left: 8px; }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: #222;
+            color: #fff;
+        }
+
+        .nav-item.active {
+            border-left: 2px solid var(--primary-accent);
+            padding-left: 8px;
+        }
 
         /* --- Main Layout --- */
         .main-content {
@@ -85,25 +164,41 @@
             overflow-y: auto;
             position: relative;
         }
-        
+
         .header-box {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
         }
-        
-        .spa-section { 
-            display: none; 
-            height: 100%; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 20px; 
+
+        .spa-section {
+            display: none;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
-        
-        .spa-section:not(.active) { display: none !important; }
-        .spa-section.active { animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .spa-section:not(.active) {
+            display: none !important;
+        }
+
+        .spa-section.active {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         /* --- Components --- */
         .panel {
@@ -115,318 +210,912 @@
             overflow: hidden;
             margin-bottom: 20px;
         }
-        .badge { padding: 4px 8px; border-radius: 3px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; border: 1px solid transparent;}
-        .badge-pass { background: rgba(39, 201, 63, 0.1); color: var(--success); border-color: var(--success); }
-        .badge-fail { background: rgba(255, 95, 86, 0.1); color: var(--danger); border-color: var(--danger); }
-        .badge-warn { background: rgba(255, 189, 46, 0.1); color: var(--warning); border-color: var(--warning); }
-        .btn-action { background: var(--primary-accent); color: #000; border: none; cursor: pointer; padding: 6px 12px; font-weight: bold; font-family: inherit; }
-        .btn-action:hover { box-shadow: 0 0 10px var(--primary-accent); }
-        .btn-outline { background: transparent; border: 1px solid #444; color: #ccc; cursor: pointer; padding: 6px 12px; font-family: inherit; font-size: 0.8rem; margin-right: 10px; transition: 0.2s;}
-        .btn-outline:hover { border-color: var(--primary-accent); color: #fff; }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 1px solid transparent;
+        }
+
+        .badge-pass {
+            background: rgba(39, 201, 63, 0.1);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .badge-fail {
+            background: rgba(255, 95, 86, 0.1);
+            color: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .badge-warn {
+            background: rgba(255, 189, 46, 0.1);
+            color: var(--warning);
+            border-color: var(--warning);
+        }
+
+        .btn-action {
+            background: var(--primary-accent);
+            color: #000;
+            border: none;
+            cursor: pointer;
+            padding: 6px 12px;
+            font-weight: bold;
+            font-family: inherit;
+        }
+
+        .btn-action:hover {
+            box-shadow: 0 0 10px var(--primary-accent);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #444;
+            color: #ccc;
+            cursor: pointer;
+            padding: 6px 12px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            margin-right: 10px;
+            transition: 0.2s;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-accent);
+            color: #fff;
+        }
 
         /* --- Dashboard Specific --- */
-        .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        .kpi-card { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; }
-        .kpi-title { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 10px; }
-        .kpi-value { font-size: 2rem; font-weight: bold; color: #fff; }
-        .kpi-sub { font-size: 0.75rem; color: var(--success); margin-top: 5px; }
-        .kpi-sub.neg { color: var(--danger); }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
 
-        .chart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; height: 350px; margin-bottom: 30px; }
-        .chart-panel { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; display: flex; flex-direction: column; height: 100%; min-width: 0; overflow: hidden; }
-        .chart-container { flex: 1; position: relative; min-height: 0; width: 100%; }
+        .kpi-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .kpi-title {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .kpi-sub {
+            font-size: 0.75rem;
+            color: var(--success);
+            margin-top: 5px;
+        }
+
+        .kpi-sub.neg {
+            color: var(--danger);
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            height: 350px;
+            margin-bottom: 30px;
+        }
+
+        .chart-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .chart-container {
+            flex: 1;
+            position: relative;
+            min-height: 0;
+            width: 100%;
+        }
 
         /* --- Settings/JSON Modal Styles --- */
         .settings-panel {
-            width: 500px; background: #0f0f0f; border: 1px solid #333; border-radius: 8px; box-shadow: 0 20px 50px #000; display: flex; flex-direction: column;
+            width: 500px;
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px #000;
+            display: flex;
+            flex-direction: column;
         }
+
         .json-viewer-panel {
-            width: 700px; background: #0f0f0f; border: 1px solid #333; border-radius: 8px; box-shadow: 0 20px 50px #000; display: flex; flex-direction: column;
+            width: 700px;
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px #000;
+            display: flex;
+            flex-direction: column;
         }
-        .settings-header { padding: 20px; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: center; }
-        .settings-header h3 { font-size: 1.1rem; color: #fff; }
-        .settings-body { padding: 20px; max-height: 400px; overflow-y: auto; }
-        .settings-footer { padding: 20px; border-top: 1px solid #222; display: flex; justify-content: flex-end; gap: 10px; background: #0a0a0a; border-radius: 0 0 8px 8px; }
-        
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; color: #888; font-size: 0.8rem; margin-bottom: 8px; }
-        .form-input { width: 100%; background: #000; border: 1px solid #333; color: #fff; padding: 10px; font-family: inherit; font-size: 0.9rem; border-radius: 4px; }
-        .form-input:focus { border-color: var(--primary-accent); outline: none; }
-        
-        .checkbox-group label { display: flex; align-items: center; gap: 10px; color: #ccc; font-size: 0.9rem; margin-bottom: 8px; cursor: pointer; }
-        .checkbox-group input { accent-color: var(--primary-accent); }
+
+        .settings-header {
+            padding: 20px;
+            border-bottom: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .settings-header h3 {
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .settings-body {
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .settings-footer {
+            padding: 20px;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            background: #0a0a0a;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #888;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            background: #000;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px;
+            font-family: inherit;
+            font-size: 0.9rem;
+            border-radius: 4px;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-accent);
+            outline: none;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input {
+            accent-color: var(--primary-accent);
+        }
 
         /* --- Other Styles --- */
-        .integ-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .integ-card { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 25px; border-radius: 6px; position: relative; transition: 0.2s; }
-        .integ-card:hover { border-color: #555; transform: translateY(-2px); }
-        .integ-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .integ-icon { width: 40px; height: 40px; background: #222; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-        .integ-status { width: 10px; height: 10px; border-radius: 50%; background: #333; margin-left: auto; box-shadow: 0 0 0 2px var(--panel-bg); }
-        .integ-status.active { background: var(--success); box-shadow: 0 0 8px var(--success); }
-        .playground-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100%; }
-        .panel-header { padding: 10px 15px; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border-color); font-size: 0.8rem; font-weight: bold; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;}
-        .upload-zone { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px dashed #333; margin: 20px; border-radius: 6px; transition: 0.3s; cursor: pointer;}
-        .sample-file { background: #222; padding: 10px 15px; margin: 5px; border: 1px solid #444; border-radius: 4px; cursor: pointer; display: flex; align-items: center; gap: 10px; width: 280px; transition: 0.2s; }
-        .sample-file:hover { border-color: var(--primary-accent); }
-        .console { background: #000; padding: 15px; font-size: 0.8rem; color: #aaa; height: 200px; overflow-y: auto; border-top: 1px solid var(--border-color); }
-        .log-entry { margin-bottom: 5px; } .log-success { color: var(--success); } .log-error { color: var(--danger); } .log-warn { color: var(--warning); }
-        .report-content { padding: 20px; display: none; overflow-y: auto; }
-        .report-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #222; }
-        .json-dump { background: #080808; padding: 15px; border-radius: 4px; color: #ccc; font-size: 0.75rem; overflow-x: auto; white-space: pre; margin-top: 20px; border: 1px solid #333; }
-        .history-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        .history-table th { text-align: left; padding: 15px; border-bottom: 1px solid #333; color: var(--text-dim); font-size: 0.8rem; text-transform: uppercase; }
-        .history-table td { padding: 15px; border-bottom: 1px solid #222; }
-        .history-table tr:hover { background: rgba(255,255,255,0.02); }
-        .policy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 20px; }
-        .policy-card { background: var(--panel-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; }
-        .policy-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
-        .toggle-switch { width: 40px; height: 20px; background: #333; border-radius: 10px; position: relative; cursor: pointer; transition: 0.3s; }
-        .toggle-switch::after { content:''; position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; background: #fff; border-radius: 50%; transition: 0.3s; }
-        .toggle-switch.on { background: var(--primary-accent); }
-        .toggle-switch.on::after { left: 22px; background: #000; }
-        .code-block { background: #000; padding: 10px; font-size: 0.8rem; color: #aaa; border-radius: 4px; margin-top: 15px; font-family: 'Courier New', Courier, monospace; }
-        .yaml-key { color: var(--secondary-accent); } .yaml-val { color: var(--success); }
-        
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(2px); z-index: 999; display: none; align-items: center; justify-content: center; }
-        .terminal-modal { width: 600px; background: #0f0f0f; border: 1px solid #333; border-radius: 8px; box-shadow: 0 20px 50px #000; overflow: hidden; }
-        .tm-header { background: #1a1a1a; padding: 10px; border-bottom: 1px solid #333; font-size: 0.8rem; display: flex; gap: 8px;}
-        .dot { width: 10px; height: 10px; border-radius: 50%; background: #555; }
-        .tm-body { padding: 20px; font-family: 'Courier New', monospace; font-size: 0.85rem; color: #ccc; min-height: 200px; }
+        .integ-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .integ-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 6px;
+            position: relative;
+            transition: 0.2s;
+        }
+
+        .integ-card:hover {
+            border-color: #555;
+            transform: translateY(-2px);
+        }
+
+        .integ-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .integ-icon {
+            width: 40px;
+            height: 40px;
+            background: #222;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .integ-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #333;
+            margin-left: auto;
+            box-shadow: 0 0 0 2px var(--panel-bg);
+        }
+
+        .integ-status.active {
+            background: var(--success);
+            box-shadow: 0 0 8px var(--success);
+        }
+
+        .playground-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .panel-header {
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .upload-zone {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed #333;
+            margin: 20px;
+            border-radius: 6px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .sample-file {
+            background: #222;
+            padding: 10px 15px;
+            margin: 5px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 280px;
+            transition: 0.2s;
+        }
+
+        .sample-file:hover {
+            border-color: var(--primary-accent);
+        }
+
+        .console {
+            background: #000;
+            padding: 15px;
+            font-size: 0.8rem;
+            color: #aaa;
+            height: 200px;
+            overflow-y: auto;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+        }
+
+        .log-success {
+            color: var(--success);
+        }
+
+        .log-error {
+            color: var(--danger);
+        }
+
+        .log-warn {
+            color: var(--warning);
+        }
+
+        .report-content {
+            padding: 20px;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .report-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        .json-dump {
+            background: #080808;
+            padding: 15px;
+            border-radius: 4px;
+            color: #ccc;
+            font-size: 0.75rem;
+            overflow-x: auto;
+            white-space: pre;
+            margin-top: 20px;
+            border: 1px solid #333;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .history-table th {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #333;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .history-table td {
+            padding: 15px;
+            border-bottom: 1px solid #222;
+        }
+
+        .history-table tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .policy-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .policy-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .toggle-switch {
+            width: 40px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            left: 2px;
+            top: 2px;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .toggle-switch.on {
+            background: var(--primary-accent);
+        }
+
+        .toggle-switch.on::after {
+            left: 22px;
+            background: #000;
+        }
+
+        .code-block {
+            background: #000;
+            padding: 10px;
+            font-size: 0.8rem;
+            color: #aaa;
+            border-radius: 4px;
+            margin-top: 15px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .yaml-key {
+            color: var(--secondary-accent);
+        }
+
+        .yaml-val {
+            color: var(--success);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(2px);
+            z-index: 999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .terminal-modal {
+            width: 600px;
+            background: #0f0f0f;
+            border: 1px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px #000;
+            overflow: hidden;
+        }
+
+        .tm-header {
+            background: #1a1a1a;
+            padding: 10px;
+            border-bottom: 1px solid #333;
+            font-size: 0.8rem;
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #555;
+        }
+
+        .tm-body {
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #ccc;
+            min-height: 200px;
+        }
 
         @media (max-width: 900px) {
-            .playground-grid, .kpi-grid, .chart-grid { grid-template-columns: 1fr; }
-            .sidebar { display: none; } 
+
+            .playground-grid,
+            .kpi-grid,
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <div>
-            <div class="logo"><a href="index.html">AI<span>_SBOM</span></a></div>
-            
-            <!-- 1. Switch to Utility App -->
-            <div class="nav-item">
-                <a href="viewer.html" style="text-decoration:none; color:inherit; display:block; width:100%;">
-                    <span>👁️</span> Local Viewer
-                </a>
+    <!-- Unified Header -->
+    <header>
+        <nav>
+            <div class="logo" style="margin-bottom:0; font-size:1.5rem;"><a href="index.html"
+                    style="text-decoration:none; color:inherit;">AI<span>_SBOM</span></a></div>
+            <div>
+                <a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
+                    style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">GitHub</a>
+                <a href="viewer.html"
+                    style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">Viewer <span
+                        style="background: var(--primary-accent); color: #000; padding: 2px 4px; border-radius: 2px; font-size: 0.6rem; vertical-align: top; font-weight: bold;">NEW</span></a>
+                <button onclick="trackLead('landing_nav')" class="btn"
+                    style="padding: 8px 16px; font-size: 0.8rem; cursor: pointer;">Request Platform Invite</button>
             </div>
-            
-            <div style="margin: 15px 0; border-bottom: 1px solid #222;"></div>
+        </nav>
+    </header>
 
-            <!-- 2. Main Demo Views -->
-            <!-- Maps to #dashboard (Executive View) -->
-            <div class="nav-item active" role="button" tabindex="0" onclick="nav('dashboard', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('dashboard', this);}">
-                <span>📊</span> Dashboard
-            </div>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div>
+                <!-- Logo Removed -->
 
-            <!-- Maps to #scanner (Interactive Simulation) -->
-            <div class="nav-item" role="button" tabindex="0" onclick="nav('scanner', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('scanner', this);}">
-                <span>⚡</span> Scanner
-            </div>
-            
-            <!-- 3. Sub-Features -->
-            <div class="nav-item" role="button" tabindex="0" onclick="nav('history', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('history', this);}">
-                <span>📜</span> History
-            </div>
-            <div class="nav-item" role="button" tabindex="0" onclick="nav('policies', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('policies', this);}">
-                <span>🛡️</span> Policies
-            </div>
-            <div class="nav-item" role="button" tabindex="0" onclick="nav('integrations', this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('integrations', this);}">
-                <span>🔌</span> Integrations
-            </div>
+                <!-- 1. Switch to Utility App -->
+                <div class="nav-item">
+                    <a href="viewer.html" style="text-decoration:none; color:inherit; display:block; width:100%;">
+                        <span>👁️</span> Local Viewer
+                    </a>
+                </div>
 
-            <div style="margin: 15px 0; border-bottom: 1px solid #222;"></div>
+                <div style="margin: 15px 0; border-bottom: 1px solid #222;"></div>
 
-            <!-- 4. External -->
-            <div class="nav-item">
-                <a href="https://github.com/Lab700xOrg/aisbom" target="_blank" style="text-decoration:none; color:inherit; display:block; width:100%;">
-                    <span>📦</span> Get CLI
-                </a>
+                <!-- 2. Main Demo Views -->
+                <!-- Maps to #dashboard (Executive View) -->
+                <div class="nav-item active" role="button" tabindex="0" onclick="nav('dashboard', this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('dashboard', this);}">
+                    <span>📊</span> Dashboard
+                </div>
+
+                <!-- Maps to #scanner (Interactive Simulation) -->
+                <div class="nav-item" role="button" tabindex="0" onclick="nav('scanner', this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('scanner', this);}">
+                    <span>⚡</span> Scanner
+                </div>
+
+                <!-- 3. Sub-Features -->
+                <div class="nav-item" role="button" tabindex="0" onclick="nav('history', this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('history', this);}">
+                    <span>📜</span> History
+                </div>
+                <div class="nav-item" role="button" tabindex="0" onclick="nav('policies', this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('policies', this);}">
+                    <span>🛡️</span> Policies
+                </div>
+                <div class="nav-item" role="button" tabindex="0" onclick="nav('integrations', this)"
+                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('integrations', this);}">
+                    <span>🔌</span> Integrations
+                </div>
+
+                <div style="margin: 15px 0; border-bottom: 1px solid #222;"></div>
+
+                <!-- 4. External -->
+                <div class="nav-item">
+                    <a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
+                        style="text-decoration:none; color:inherit; display:block; width:100%;">
+                        <span>📦</span> Get CLI
+                    </a>
+                </div>
+            </div>
+            <div style="font-size: 0.7rem; color: #555;">
+                User: demo_admin<br>
+                Org: acme_corp_ml
             </div>
         </div>
-        <div style="font-size: 0.7rem; color: #555;">
-            User: demo_admin<br>
-            Org: acme_corp_ml
-        </div>
-    </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        
-        <!-- SECTION: Dashboard -->
-        <div id="dashboard" class="spa-section active">
-            <div class="header-box">
-                <div>
-                    <h1 style="font-size: 1.5rem;">Executive Overview</h1>
-                    <p style="color: var(--text-dim); font-size: 0.9rem;">Real-time risk posture and compliance metrics.</p>
-                </div>
-                <div>
-                     <button class="btn-outline" onclick="generateReport()">📄 Download PDF Report</button>
-                     <button class="btn-action" onclick="trackLead('demo_dashboard')">Request Cloud Access</button>
-                     <!--<button class="btn-action" onclick="openSettings()">Global Settings</button>-->
-                </div>
-            </div>
+        <!-- Main Content -->
+        <div class="main-content">
 
-            <!-- KPI Cards -->
-            <div class="kpi-grid">
-                <div class="kpi-card">
-                    <div class="kpi-title">Compliance Score</div>
-                    <div class="kpi-value" style="color: var(--primary-accent)">92%</div>
-                    <div class="kpi-sub">↑ 4% this week</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-title">Models Monitored</div>
-                    <div class="kpi-value">142</div>
-                    <div class="kpi-sub">12 New added</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-title">Critical Vulnerabilities</div>
-                    <div class="kpi-value" style="color: var(--danger)">3</div>
-                    <div class="kpi-sub neg">Requires Attention</div>
-                </div>
-                <div class="kpi-card">
-                    <div class="kpi-title">Policy Blocks (30d)</div>
-                    <div class="kpi-value">28</div>
-                    <div class="kpi-sub">Prevented deployments</div>
-                </div>
-            </div>
-
-            <!-- Charts -->
-            <div class="chart-grid">
-                <div class="chart-panel">
-                    <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
-                        <span>Vulnerability Trend (30 Days)</span>
+            <!-- SECTION: Dashboard -->
+            <div id="dashboard" class="spa-section active">
+                <div class="header-box">
+                    <div>
+                        <h1 style="font-size: 1.5rem;">Executive Overview</h1>
+                        <p style="color: var(--text-dim); font-size: 0.9rem;">Real-time risk posture and compliance
+                            metrics.
+                        </p>
                     </div>
-                    <div class="chart-container">
-                        <canvas id="trendChart"></canvas>
+                    <div>
+                        <button class="btn-outline" onclick="generateReport()">📄 Download PDF Report</button>
+                        <!--<button class="btn-action" onclick="openSettings()">Global Settings</button>-->
                     </div>
                 </div>
-                <div class="chart-panel">
-                    <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
-                        <span>Risk Distribution</span>
-                    </div>
-                    <div class="chart-container">
-                        <canvas id="riskChart"></canvas>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Recent Violations Table -->
-            <div class="panel" style="flex: 1;"> 
-                <div class="panel-header"><span>Recent Critical Violations</span></div>
-                <table class="history-table">
-                    <thead><tr><th>Time</th><th>Model</th><th>Issue</th><th>Severity</th><th>Owner</th></tr></thead>
-                    <tbody>
-                        <tr><td>Today 14:02</td><td style="color: #fff">fraud_detect_v2.pkl</td><td>CVE-2024-1102</td><td><span style="color: var(--danger)">CRITICAL</span></td><td>DataTeam_A</td></tr>
-                        <tr><td>Today 09:15</td><td style="color: #fff">credit_score_v4.pt</td><td>License Conflict</td><td><span style="color: var(--danger)">CRITICAL</span></td><td>FinOps</td></tr>
-                        <tr><td>Yesterday</td><td style="color: #fff">chatbot_support.onnx</td><td>Prompt Injection</td><td><span style="color: var(--warning)">HIGH</span></td><td>CX_Eng</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- SECTION: Scanner -->
-        <div id="scanner" class="spa-section">
-            <div class="header-box">
-                <div><h1 style="font-size: 1.5rem;">Artifact Inspector</h1><p style="color: var(--text-dim); font-size: 0.9rem;">Upload a model file to generate a compliance report.</p></div>
-                <button class="badge" style="background:transparent; color: var(--text-dim); border: 1px solid #333; cursor: pointer;" onclick="location.reload()">Reset Session</button>
-            </div>
-            <div class="playground-grid">
-                <div class="panel">
-                    <div class="panel-header"><span>SOURCE INPUT</span><span style="color: var(--primary-accent)">● Ready</span></div>
-                    <div class="upload-zone">
-                        <p style="margin-bottom: 20px; color: #fff;">Select simulation:</p>
-                        <div class="sample-file" onclick="runSimulation('clean')"><span class="file-icon">📄</span><div><div style="color: #fff;">chatbot_lite_v1.onnx</div><div style="font-size: 0.7rem; color: #666;">245 MB • ONNX Runtime</div></div></div>
-                        <div class="sample-file" onclick="runSimulation('dirty')"><span class="file-icon">📄</span><div><div style="color: #fff;">finance_credit.pt</div><div style="font-size: 0.7rem; color: #666;">1.2 GB • PyTorch</div></div></div>
+                <!-- KPI Cards -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-title">Compliance Score</div>
+                        <div class="kpi-value" style="color: var(--primary-accent)">92%</div>
+                        <div class="kpi-sub">↑ 4% this week</div>
                     </div>
-                    <div class="console" id="console-output"><div class="log-entry">> System initialized. Waiting for input...</div></div>
-                </div>
-                <div class="panel">
-                    <div class="panel-header"><span>SBOM REPORT</span><span id="scan-status" style="color: #666">Waiting...</span></div>
-                    <div id="report-placeholder" style="flex: 1; display: flex; align-items: center; justify-content: center; color: #444;">Select a file to view report</div>
-                    <div id="report-view" class="report-content">
-                        <div class="report-row"><span>Status</span><span id="badge-status" class="badge badge-pass">PASS</span></div>
-                        <div class="report-row"><span>Framework</span><span style="color: #fff;" id="r-framework">-</span></div>
-                        <div class="report-row"><span>License</span><span style="color: #fff;" id="r-license">-</span></div>
-                        <div class="report-row"><span>Vulns</span><span style="color: #fff;" id="r-vuln">-</span></div>
-                        <div class="json-dump" id="json-output"></div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Models Monitored</div>
+                        <div class="kpi-value">142</div>
+                        <div class="kpi-sub">12 New added</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Critical Vulnerabilities</div>
+                        <div class="kpi-value" style="color: var(--danger)">3</div>
+                        <div class="kpi-sub neg">Requires Attention</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-title">Policy Blocks (30d)</div>
+                        <div class="kpi-value">28</div>
+                        <div class="kpi-sub">Prevented deployments</div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- SECTION: History -->
-        <div id="history" class="spa-section">
-            <div class="header-box">
-                <div><h1 style="font-size: 1.5rem;">Audit Logs</h1><p style="color: var(--text-dim); font-size: 0.9rem;">Immutable record of all artifact scans.</p></div>
-                <button class="btn-action" onclick="exportCSV()">Export CSV</button>
-            </div>
-            <div class="panel" style="height: auto;">
-                <table class="history-table">
-                    <thead><tr><th>Timestamp</th><th>Artifact Name</th><th>Trigger</th><th>Risks Found</th><th>Status</th><th>Action</th></tr></thead>
-                    <tbody id="history-table-body">
-                        <!-- Populated via JS -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                <!-- Charts -->
+                <div class="chart-grid">
+                    <div class="chart-panel">
+                        <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
+                            <span>Vulnerability Trend (30 Days)</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="trendChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-panel">
+                        <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
+                            <span>Risk Distribution</span>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="riskChart"></canvas>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- SECTION: Policies -->
-        <div id="policies" class="spa-section">
-            <div class="header-box"><div><h1 style="font-size: 1.5rem;">Governance Policies</h1><p style="color: var(--text-dim); font-size: 0.9rem;">Define guardrails compiled to OPA Rego.</p></div><button onclick="simulateSync()" class="btn-action">Sync to Agent</button></div>
-            <div class="policy-grid">
-                <div class="policy-card">
-                    <div class="policy-header"><h3 style="color: #fff">License Contamination</h3><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></div>
-                    <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Block deployment if dependencies contain copy-left licenses.</p>
-                    <div class="code-block"><span class="yaml-key">policy_id:</span> <span class="yaml-val">"lic-001"</span><br><span class="yaml-key">enforcement:</span> <span class="yaml-val">"BLOCK"</span></div>
-                </div>
-                <div class="policy-card">
-                    <div class="policy-header"><h3 style="color: #fff">Pickle Executable Risk</h3><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></div>
-                    <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Flag PyTorch files with potential code execution.</p>
-                    <div class="code-block"><span class="yaml-key">policy_id:</span> <span class="yaml-val">"sec-099"</span><br><span class="yaml-key">scan_depth:</span> <span class="yaml-val">"DEEP"</span></div>
-                </div>
-                <div class="policy-card">
-                    <div class="policy-header"><h3 style="color: #fff">EU AI Act Transparency</h3><div class="toggle-switch" onclick="this.classList.toggle('on')"></div></div>
-                    <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Require Training Dataset Hash and Energy Consumption metrics in SBOM.</p>
-                    <div class="code-block"><span class="yaml-key">policy_id:</span> <span class="yaml-val">"eu-act-04"</span><br><span class="yaml-key">fields:</span> <span class="yaml-val">["hash", "co2"]</span></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SECTION: Integrations -->
-        <div id="integrations" class="spa-section">
-             <div class="header-box"><div><h1 style="font-size: 1.5rem;">Integrations</h1><p style="color: var(--text-dim); font-size: 0.9rem;">Connect your Model Registries and CI/CD pipelines.</p></div></div>
-            <div class="integ-grid">
-                <div class="integ-card">
-                    <div class="integ-status active"></div>
-                    <div class="integ-header"><div class="integ-icon" style="color: #fff">🐙</div><div><h3 style="color: #fff; font-size: 1rem;">GitHub Actions</h3><div style="font-size: 0.75rem; color: #666">CI/CD Guardrails</div></div></div>
-                    <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Automatically blocks Pull Requests if the generated SBOM violates policy.</p>
-                    <button class="btn-action" style="background: transparent; border: 1px solid #333; color: #fff; width: 100%; opacity: 0.5; cursor: default;">Connected</button>
-                </div>
-                <div class="integ-card" id="card-hf">
-                    <div class="integ-status" id="status-hf"></div>
-                    <div class="integ-header"><div class="integ-icon" style="color: #ffbd2e">🤗</div><div><h3 style="color: #fff; font-size: 1rem;">Hugging Face</h3><div style="font-size: 0.75rem; color: #666">Model Hub Scanner</div></div></div>
-                    <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Scan private and public models before they are downloaded to local envs.</p>
-                    <button class="btn-action" id="btn-hf" style="width: 100%;" onclick="connectIntegration('hf')">Connect</button>
-                </div>
-                <div class="integ-card" id="card-slack">
-                    <div class="integ-status" id="status-slack"></div>
-                    <div class="integ-header"><div class="integ-icon" style="color: #E01E5A">#</div><div><h3 style="color: #fff; font-size: 1rem;">Slack Alerts</h3><div style="font-size: 0.75rem; color: #666">Ops Notification</div></div></div>
-                    <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Receive real-time alerts when scans detect critical CVEs or License issues.</p>
-                    <button class="btn-action" id="btn-slack" style="width: 100%;" onclick="connectIntegration('slack')">Connect</button>
+                <!-- Recent Violations Table -->
+                <div class="panel" style="flex: 1;">
+                    <div class="panel-header"><span>Recent Critical Violations</span></div>
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Model</th>
+                                <th>Issue</th>
+                                <th>Severity</th>
+                                <th>Owner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Today 14:02</td>
+                                <td style="color: #fff">fraud_detect_v2.pkl</td>
+                                <td>CVE-2024-1102</td>
+                                <td><span style="color: var(--danger)">CRITICAL</span></td>
+                                <td>DataTeam_A</td>
+                            </tr>
+                            <tr>
+                                <td>Today 09:15</td>
+                                <td style="color: #fff">credit_score_v4.pt</td>
+                                <td>License Conflict</td>
+                                <td><span style="color: var(--danger)">CRITICAL</span></td>
+                                <td>FinOps</td>
+                            </tr>
+                            <tr>
+                                <td>Yesterday</td>
+                                <td style="color: #fff">chatbot_support.onnx</td>
+                                <td>Prompt Injection</td>
+                                <td><span style="color: var(--warning)">HIGH</span></td>
+                                <td>CX_Eng</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
 
-    </div>
+            <!-- SECTION: Scanner -->
+            <div id="scanner" class="spa-section">
+                <div class="header-box">
+                    <div>
+                        <h1 style="font-size: 1.5rem;">Artifact Inspector</h1>
+                        <p style="color: var(--text-dim); font-size: 0.9rem;">Upload a model file to generate a
+                            compliance
+                            report.</p>
+                    </div>
+                    <button class="badge"
+                        style="background:transparent; color: var(--text-dim); border: 1px solid #333; cursor: pointer;"
+                        onclick="location.reload()">Reset Session</button>
+                </div>
+                <div class="playground-grid">
+                    <div class="panel">
+                        <div class="panel-header"><span>SOURCE INPUT</span><span style="color: var(--primary-accent)">●
+                                Ready</span></div>
+                        <div class="upload-zone">
+                            <p style="margin-bottom: 20px; color: #fff;">Select simulation:</p>
+                            <div class="sample-file" onclick="runSimulation('clean')"><span class="file-icon">📄</span>
+                                <div>
+                                    <div style="color: #fff;">chatbot_lite_v1.onnx</div>
+                                    <div style="font-size: 0.7rem; color: #666;">245 MB • ONNX Runtime</div>
+                                </div>
+                            </div>
+                            <div class="sample-file" onclick="runSimulation('dirty')"><span class="file-icon">📄</span>
+                                <div>
+                                    <div style="color: #fff;">finance_credit.pt</div>
+                                    <div style="font-size: 0.7rem; color: #666;">1.2 GB • PyTorch</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="console" id="console-output">
+                            <div class="log-entry">> System initialized. Waiting for input...</div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header"><span>SBOM REPORT</span><span id="scan-status"
+                                style="color: #666">Waiting...</span></div>
+                        <div id="report-placeholder"
+                            style="flex: 1; display: flex; align-items: center; justify-content: center; color: #444;">
+                            Select a file to view report</div>
+                        <div id="report-view" class="report-content">
+                            <div class="report-row"><span>Status</span><span id="badge-status"
+                                    class="badge badge-pass">PASS</span></div>
+                            <div class="report-row"><span>Framework</span><span style="color: #fff;"
+                                    id="r-framework">-</span></div>
+                            <div class="report-row"><span>License</span><span style="color: #fff;"
+                                    id="r-license">-</span>
+                            </div>
+                            <div class="report-row"><span>Vulns</span><span style="color: #fff;" id="r-vuln">-</span>
+                            </div>
+                            <div class="json-dump" id="json-output"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: History -->
+            <div id="history" class="spa-section">
+                <div class="header-box">
+                    <div>
+                        <h1 style="font-size: 1.5rem;">Audit Logs</h1>
+                        <p style="color: var(--text-dim); font-size: 0.9rem;">Immutable record of all artifact scans.
+                        </p>
+                    </div>
+                    <button class="btn-action" onclick="exportCSV()">Export CSV</button>
+                </div>
+                <div class="panel" style="height: auto;">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Artifact Name</th>
+                                <th>Trigger</th>
+                                <th>Risks Found</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SECTION: Policies -->
+            <div id="policies" class="spa-section">
+                <div class="header-box">
+                    <div>
+                        <h1 style="font-size: 1.5rem;">Governance Policies</h1>
+                        <p style="color: var(--text-dim); font-size: 0.9rem;">Define guardrails compiled to OPA Rego.
+                        </p>
+                    </div><button onclick="simulateSync()" class="btn-action">Sync to Agent</button>
+                </div>
+                <div class="policy-grid">
+                    <div class="policy-card">
+                        <div class="policy-header">
+                            <h3 style="color: #fff">License Contamination</h3>
+                            <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+                        </div>
+                        <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Block deployment if
+                            dependencies
+                            contain copy-left licenses.</p>
+                        <div class="code-block"><span class="yaml-key">policy_id:</span> <span
+                                class="yaml-val">"lic-001"</span><br><span class="yaml-key">enforcement:</span> <span
+                                class="yaml-val">"BLOCK"</span></div>
+                    </div>
+                    <div class="policy-card">
+                        <div class="policy-header">
+                            <h3 style="color: #fff">Pickle Executable Risk</h3>
+                            <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+                        </div>
+                        <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Flag PyTorch files with
+                            potential
+                            code execution.</p>
+                        <div class="code-block"><span class="yaml-key">policy_id:</span> <span
+                                class="yaml-val">"sec-099"</span><br><span class="yaml-key">scan_depth:</span> <span
+                                class="yaml-val">"DEEP"</span></div>
+                    </div>
+                    <div class="policy-card">
+                        <div class="policy-header">
+                            <h3 style="color: #fff">EU AI Act Transparency</h3>
+                            <div class="toggle-switch" onclick="this.classList.toggle('on')"></div>
+                        </div>
+                        <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Require Training Dataset Hash
+                            and
+                            Energy Consumption metrics in SBOM.</p>
+                        <div class="code-block"><span class="yaml-key">policy_id:</span> <span
+                                class="yaml-val">"eu-act-04"</span><br><span class="yaml-key">fields:</span> <span
+                                class="yaml-val">["hash", "co2"]</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: Integrations -->
+            <div id="integrations" class="spa-section">
+                <div class="header-box">
+                    <div>
+                        <h1 style="font-size: 1.5rem;">Integrations</h1>
+                        <p style="color: var(--text-dim); font-size: 0.9rem;">Connect your Model Registries and CI/CD
+                            pipelines.</p>
+                    </div>
+                </div>
+                <div class="integ-grid">
+                    <div class="integ-card">
+                        <div class="integ-status active"></div>
+                        <div class="integ-header">
+                            <div class="integ-icon" style="color: #fff">🐙</div>
+                            <div>
+                                <h3 style="color: #fff; font-size: 1rem;">GitHub Actions</h3>
+                                <div style="font-size: 0.75rem; color: #666">CI/CD Guardrails</div>
+                            </div>
+                        </div>
+                        <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Automatically blocks Pull
+                            Requests
+                            if the generated SBOM violates policy.</p>
+                        <button class="btn-action"
+                            style="background: transparent; border: 1px solid #333; color: #fff; width: 100%; opacity: 0.5; cursor: default;">Connected</button>
+                    </div>
+                    <div class="integ-card" id="card-hf">
+                        <div class="integ-status" id="status-hf"></div>
+                        <div class="integ-header">
+                            <div class="integ-icon" style="color: #ffbd2e">🤗</div>
+                            <div>
+                                <h3 style="color: #fff; font-size: 1rem;">Hugging Face</h3>
+                                <div style="font-size: 0.75rem; color: #666">Model Hub Scanner</div>
+                            </div>
+                        </div>
+                        <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Scan private and public models
+                            before they are downloaded to local envs.</p>
+                        <button class="btn-action" id="btn-hf" style="width: 100%;"
+                            onclick="connectIntegration('hf')">Connect</button>
+                    </div>
+                    <div class="integ-card" id="card-slack">
+                        <div class="integ-status" id="status-slack"></div>
+                        <div class="integ-header">
+                            <div class="integ-icon" style="color: #E01E5A">#</div>
+                            <div>
+                                <h3 style="color: #fff; font-size: 1rem;">Slack Alerts</h3>
+                                <div style="font-size: 0.75rem; color: #666">Ops Notification</div>
+                            </div>
+                        </div>
+                        <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Receive real-time alerts when
+                            scans
+                            detect critical CVEs or License issues.</p>
+                        <button class="btn-action" id="btn-slack" style="width: 100%;"
+                            onclick="connectIntegration('slack')">Connect</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> <!-- End app-container -->
 
     <!-- SYNC MODAL -->
     <div class="modal-overlay" id="sync-modal">
         <div class="terminal-modal">
-            <div class="tm-header"><div class="dot" style="background:#ff5f56"></div><div class="dot" style="background:#ffbd2e"></div><div class="dot" style="background:#27c93f"></div><span style="margin-left:10px; color:#666">agent-sync --dry-run=false</span></div>
+            <div class="tm-header">
+                <div class="dot" style="background:#ff5f56"></div>
+                <div class="dot" style="background:#ffbd2e"></div>
+                <div class="dot" style="background:#27c93f"></div><span style="margin-left:10px; color:#666">agent-sync
+                    --dry-run=false</span>
+            </div>
             <div class="tm-body" id="sync-logs"></div>
         </div>
     </div>
@@ -436,7 +1125,8 @@
         <div class="settings-panel">
             <div class="settings-header">
                 <h3>Global Configuration</h3>
-                <button onclick="closeSettings()" style="background:none; border:none; color:#666; cursor:pointer; font-size: 1.2rem;">&times;</button>
+                <button onclick="closeSettings()"
+                    style="background:none; border:none; color:#666; cursor:pointer; font-size: 1.2rem;">&times;</button>
             </div>
             <div class="settings-body">
                 <div class="form-group">
@@ -454,11 +1144,12 @@
                 <div class="form-group">
                     <label>API Access Token (Owner)</label>
                     <div style="display:flex; gap: 10px;">
-                        <input type="password" class="form-input" value="sk_live_59384_xxxxxxxx" readonly style="color: #888;">
+                        <input type="password" class="form-input" value="sk_live_59384_xxxxxxxx" readonly
+                            style="color: #888;">
                         <button class="btn-outline">Regenerate</button>
                     </div>
                 </div>
-                 <div class="form-group">
+                <div class="form-group">
                     <label>Audit Log Retention</label>
                     <select class="form-input">
                         <option>90 Days</option>
@@ -479,13 +1170,17 @@
         <div class="json-viewer-panel">
             <div class="settings-header">
                 <h3>Artifact SBOM Inspector</h3>
-                <button onclick="closeJsonModal()" style="background:none; border:none; color:#666; cursor:pointer; font-size: 1.2rem;">&times;</button>
+                <button onclick="closeJsonModal()"
+                    style="background:none; border:none; color:#666; cursor:pointer; font-size: 1.2rem;">&times;</button>
             </div>
-            <div class="settings-body" style="background: #000; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00ffcc;">
+            <div class="settings-body"
+                style="background: #000; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00ffcc;">
                 <pre id="json-modal-content" style="white-space: pre-wrap; word-wrap: break-word;"></pre>
             </div>
             <div class="settings-footer">
-                <button class="btn-outline" onclick="navigator.clipboard.writeText(document.getElementById('json-modal-content').innerText); alert('Copied!')">Copy to Clipboard</button>
+                <button class="btn-outline"
+                    onclick="navigator.clipboard.writeText(document.getElementById('json-modal-content').innerText); alert('Copied!')">Copy
+                    to Clipboard</button>
                 <button class="btn-action" onclick="closeJsonModal()">Close</button>
             </div>
         </div>
@@ -494,29 +1189,29 @@
     <script>
         // --- HISTORY DATA (Source of Truth) ---
         const historyLog = [
-            { 
-                id: 1, time: "2025-12-01 14:32:01", artifact: "fraud_detect_v2.pkl", trigger: "CI/CD #8502", 
+            {
+                id: 1, time: "2025-12-01 14:32:01", artifact: "fraud_detect_v2.pkl", trigger: "CI/CD #8502",
                 risk: "2 Critical", riskHtml: '<span style="color: var(--danger)">2 Critical</span>',
-                status: "BLOCKED", statusClass: "badge-fail", 
-                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-12-01T14:32:01Z" }, "vulnerabilities": [{ "id": "CVE-2024-1102", "severity": "CRITICAL" }] } 
+                status: "BLOCKED", statusClass: "badge-fail",
+                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-12-01T14:32:01Z" }, "vulnerabilities": [{ "id": "CVE-2024-1102", "severity": "CRITICAL" }] }
             },
-            { 
-                id: 2, time: "2025-12-01 10:15:45", artifact: "recommendation_eng.onnx", trigger: "Registry Hook", 
+            {
+                id: 2, time: "2025-12-01 10:15:45", artifact: "recommendation_eng.onnx", trigger: "Registry Hook",
                 risk: "0 Found", riskHtml: '0 Found',
-                status: "PASSED", statusClass: "badge-pass", 
-                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-12-01T10:15:45Z" }, "components": [{ "name": "onnx-runtime", "version": "1.16.3" }] } 
+                status: "PASSED", statusClass: "badge-pass",
+                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-12-01T10:15:45Z" }, "components": [{ "name": "onnx-runtime", "version": "1.16.3" }] }
             },
-            { 
-                id: 3, time: "2025-11-30 18:22:11", artifact: "nlp_summarizer_v3.pt", trigger: "Manual CLI", 
+            {
+                id: 3, time: "2025-11-30 18:22:11", artifact: "nlp_summarizer_v3.pt", trigger: "Manual CLI",
                 risk: "0 Found", riskHtml: '0 Found',
-                status: "PASSED", statusClass: "badge-pass", 
-                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-11-30T18:22:11Z" }, "components": [{ "name": "transformers", "version": "4.35.2" }] } 
+                status: "PASSED", statusClass: "badge-pass",
+                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-11-30T18:22:11Z" }, "components": [{ "name": "transformers", "version": "4.35.2" }] }
             },
-            { 
-                id: 4, time: "2025-11-30 12:10:45", artifact: "customer_segment_v4.pt", trigger: "Manual CLI", 
+            {
+                id: 4, time: "2025-11-30 12:10:45", artifact: "customer_segment_v4.pt", trigger: "Manual CLI",
                 risk: "1 Warning", riskHtml: '<span style="color: var(--warning)">1 Warning</span>',
-                status: "FLAGGED", statusClass: "badge-warn", 
-                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-11-30T12:10:45Z" }, "warnings": [{ "msg": "Use of deprecated optimizer" }] } 
+                status: "FLAGGED", statusClass: "badge-warn",
+                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-11-30T12:10:45Z" }, "warnings": [{ "msg": "Use of deprecated optimizer" }] }
             }
         ];
 
@@ -537,7 +1232,7 @@
                 tbody.appendChild(tr);
             });
         }
-        
+
         // Call on load
         document.addEventListener('DOMContentLoaded', renderHistoryTable);
 
@@ -563,7 +1258,7 @@
         // --- JSON View Logic ---
         function viewJson(id) {
             const entry = historyLog.find(r => r.id === id);
-            if(entry) {
+            if (entry) {
                 const jsonStr = JSON.stringify(entry.json, null, 2);
                 document.getElementById('json-modal-content').innerText = jsonStr;
                 document.getElementById('json-modal').style.display = 'flex';
@@ -574,7 +1269,7 @@
         }
 
         // --- CHARTS Logic (Dashboard) ---
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             if (typeof Chart === 'undefined') { console.error("Chart.js failed to load."); return; }
 
             const ctxTrend = document.getElementById('trendChart');
@@ -600,8 +1295,8 @@
                         maintainAspectRatio: false,
                         plugins: { legend: { display: false } },
                         scales: {
-                            y: { grid: { color: '#222' }, ticks: { color: '#888', font: {family: 'JetBrains Mono'} } },
-                            x: { grid: { color: '#222' }, ticks: { color: '#888', font: {family: 'JetBrains Mono'} } }
+                            y: { grid: { color: '#222' }, ticks: { color: '#888', font: { family: 'JetBrains Mono' } } },
+                            x: { grid: { color: '#222' }, ticks: { color: '#888', font: { family: 'JetBrains Mono' } } }
                         }
                     }
                 });
@@ -624,11 +1319,11 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         cutout: '70%',
-                        plugins: { 
-                            legend: { 
-                                position: 'right', 
-                                labels: { color: '#ccc', boxWidth: 10, font: { family: 'JetBrains Mono', size: 10 } } 
-                            } 
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: { color: '#ccc', boxWidth: 10, font: { family: 'JetBrains Mono', size: 10 } }
+                            }
                         }
                     }
                 });
@@ -643,14 +1338,14 @@
             doc.setFillColor(10, 10, 10); doc.rect(0, 0, 210, 40, "F");
             doc.setFont("helvetica", "bold"); doc.setTextColor(0, 255, 204); doc.setFontSize(22); doc.text("AI_SBOM", 15, 20);
             doc.setTextColor(200, 200, 200); doc.setFontSize(10); doc.text("EXECUTIVE COMPLIANCE SUMMARY", 15, 30); doc.text(`Generated: ${new Date().toLocaleDateString()}`, 150, 30);
-            
+
             doc.setTextColor(0, 0, 0); doc.setFontSize(14); doc.setFont("helvetica", "bold"); doc.text("1. Business Risk Overview", 15, 55);
             doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("Aggregated risk data from 142 AI models deployed across Acme Corp.", 15, 62);
-            
+
             doc.setDrawColor(200, 200, 200); doc.rect(15, 70, 55, 30); doc.rect(75, 70, 55, 30); doc.rect(135, 70, 55, 30);
             doc.text("Models Deployed", 20, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.text("142", 20, 90);
             doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("Critical Vulnerabilities", 80, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.setTextColor(255, 50, 50); doc.text("3", 80, 90);
-            doc.setTextColor(0,0,0); doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("EU AI Act Readiness", 140, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.setTextColor(255, 180, 40); doc.text("78%", 140, 90);
+            doc.setTextColor(0, 0, 0); doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("EU AI Act Readiness", 140, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.setTextColor(255, 180, 40); doc.text("78%", 140, 90);
 
             doc.setTextColor(0, 0, 0); doc.setFontSize(14); doc.text("2. Critical Action Items", 15, 120);
             if (typeof doc.autoTable !== 'function') { alert("Report table renderer is still loading. Please try again in a moment."); return; }
@@ -686,7 +1381,7 @@
         function connectIntegration(id) {
             const btn = document.getElementById('btn-' + id);
             const status = document.getElementById('status-' + id);
-            if(btn.innerText === "Connect") {
+            if (btn.innerText === "Connect") {
                 btn.innerText = "Authenticating..."; btn.style.opacity = "0.7";
                 setTimeout(() => { btn.innerText = "Connected"; btn.style.background = "transparent"; btn.style.border = "1px solid #333"; btn.style.color = "#fff"; btn.style.cursor = "default"; status.classList.add('active'); }, 1500);
             }
@@ -694,10 +1389,10 @@
 
         // --- Sync Logic ---
         function simulateSync() {
-            const modal = document.getElementById('sync-modal'); const logs = document.getElementById('sync-logs'); modal.style.display = 'flex'; logs.innerHTML = ''; 
+            const modal = document.getElementById('sync-modal'); const logs = document.getElementById('sync-logs'); modal.style.display = 'flex'; logs.innerHTML = '';
             const steps = [{ text: "> Initializing Agent Sync...", delay: 200 }, { text: "> Diffing local config vs remote cluster...", delay: 800 }, { text: "> Detected 2 policy changes in 'lic-001'", delay: 400, color: "#ffbd2e" }, { text: "> Compiling Rego policies...", delay: 600 }, { text: "> Pushing to Production (us-east-1)...", delay: 800 }, { text: "> SUCCESS: Policy version v.14.2 active.", delay: 200, color: "#27c93f" }];
             let cumulativeDelay = 0;
-            steps.forEach(step => { cumulativeDelay += step.delay; setTimeout(() => { const div = document.createElement('div'); div.textContent = step.text; div.style.marginBottom = "5px"; if(step.color) div.style.color = step.color; logs.appendChild(div); logs.scrollTop = logs.scrollHeight; }, cumulativeDelay); });
+            steps.forEach(step => { cumulativeDelay += step.delay; setTimeout(() => { const div = document.createElement('div'); div.textContent = step.text; div.style.marginBottom = "5px"; if (step.color) div.style.color = step.color; logs.appendChild(div); logs.scrollTop = logs.scrollHeight; }, cumulativeDelay); });
             setTimeout(() => { modal.style.display = 'none'; }, cumulativeDelay + 2000);
         }
 
@@ -728,4 +1423,5 @@
         }
     </script>
 </body>
+
 </html>
