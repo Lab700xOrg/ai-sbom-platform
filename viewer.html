@@ -554,7 +554,8 @@
                     reader.onload = function (e) {
                         try {
                             const json = JSON.parse(e.target.result);
-                            renderDashboard(json);
+                            const components = normalizeData(json);
+                            renderDashboard(components);
                         } catch (err) {
                             alert("Invalid JSON file: " + err);
                         }
@@ -569,13 +570,44 @@
                 });
             }
 
+            // --- NORMALIZATION LOGIC ---
+            function normalizeData(json) {
+                // 1. CycloneDX
+                if (json.bomFormat === 'CycloneDX' || json.components) {
+                    return json.components || [];
+                }
+
+                // 2. SPDX 2.2 / 2.3
+                if (json.spdxVersion && json.packages) {
+                    return json.packages.map(pkg => {
+                        // Heuristic for Type Detection
+                        // AISBOM CLI puts metadata in description/comment
+                        let type = 'library';
+                        const desc = pkg.description || pkg.comment || "";
+
+                        if (desc.includes("Risk:") || desc.includes("Framework:") || desc.includes("Model")) {
+                            type = 'machine-learning-model';
+                        }
+
+                        return {
+                            name: pkg.name,
+                            version: pkg.versionInfo,
+                            type: type,
+                            description: desc // Critical for Risk Parsing logic downstream
+                        };
+                    });
+                }
+
+                return [];
+            }
+
             // --- PARSING & RENDERING LOGIC ---
             let globalData = null; // Store for PDF generation
             let typeChartInstance = null;
             let riskChartInstance = null;
 
-            function renderDashboard(data) {
-                globalData = data;
+            function renderDashboard(components) {
+                globalData = { components: components };
 
                 // 1. Hide Upload, Show Dashboard
                 document.getElementById('upload-state').classList.add('hidden');
@@ -584,7 +616,7 @@
                 document.getElementById('btn-report').style.cursor = "pointer";
 
                 // 2. Parse Components
-                const components = data.components || [];
+                // const components is now passed in as argument
                 let counts = {
                     total: components.length,
                     models: 0,
