@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="AI_SBOM inspects AI model artifacts, tensors, and training lineage to generate deep SBOMs and compliance evidence.">
+    <link rel="icon" href="assets/aisbom_logo_terminal.png">
     <title>AIsbom | The Supply Chain for Artificial Intelligence</title>
     <style>
         :root {
@@ -118,6 +119,14 @@
             font-size: 1.5rem;
             font-weight: 700;
             letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
         }
 
         .logo span {
@@ -407,7 +416,10 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo">AI<span>_SBOM</span></div>
+                <div class="logo">
+                    <img src="assets/aisbom_logo_terminal.png" alt="AIsbom Logo">
+                    <div>AI<span>_SBOM</span></div>
+                </div>
                 <div>
                     <a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
                         style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">GitHub</a>
