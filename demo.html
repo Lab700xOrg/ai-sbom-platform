@@ -742,12 +742,12 @@
         <nav>
             <div class="logo" style="margin-bottom:0; font-size:1.5rem; display:flex; align-items:center; gap:10px;">
                 <img src="assets/aisbom_logo_terminal.png" alt="AIsbom Logo" style="height:30px; width:auto;">
-                <a href="index.html" style="text-decoration:none; color:inherit;">AI<span>_SBOM</span></a>
+                <a href="/" style="text-decoration:none; color:inherit;">AI<span>_SBOM</span></a>
             </div>
             <div>
                 <a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
                     style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">GitHub</a>
-                <a href="viewer.html"
+                <a href="viewer"
                     style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">Viewer <span
                         style="background: var(--primary-accent); color: #000; padding: 2px 4px; border-radius: 2px; font-size: 0.6rem; vertical-align: top; font-weight: bold;">NEW</span></a>
                 <button onclick="trackLead('landing_nav')" class="btn"
@@ -756,15 +756,15 @@
         </nav>
     </header>
 
-    <div class="app-container">
+    <main class="app-container">
         <!-- Sidebar -->
-        <div class="sidebar">
+        <aside class="sidebar">
             <div>
                 <!-- Logo Removed -->
 
                 <!-- 1. Switch to Utility App -->
                 <div class="nav-item">
-                    <a href="viewer.html" style="text-decoration:none; color:inherit; display:block; width:100%;">
+                    <a href="viewer" style="text-decoration:none; color:inherit; display:block; width:100%;">
                         <span>👁️</span> Local Viewer
                     </a>
                 </div>
@@ -773,460 +773,474 @@
 
                 <!-- 2. Main Demo Views -->
                 <!-- Maps to #dashboard (Executive View) -->
-                <div class="nav-item active" role="button" tabindex="0" onclick="nav('dashboard', this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('dashboard', this);}">
-                    <span>📊</span> Dashboard
-                </div>
+                <nav>
+                    <div class="nav-item active" role="button" tabindex="0" onclick="nav('dashboard', this)"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('dashboard', this);}">
+                        <span>📊</span> Dashboard
+                    </div>
 
-                <!-- Maps to #scanner (Interactive Simulation) -->
-                <div class="nav-item" role="button" tabindex="0" onclick="nav('scanner', this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('scanner', this);}">
-                    <span>⚡</span> Scanner
-                </div>
+                    <!-- Maps to #scanner (Interactive Simulation) -->
+                    <div class="nav-item" role="button" tabindex="0" onclick="nav('scanner', this)"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('scanner', this);}">
+                        <span>⚡</span> Scanner
+                    </div>
 
-                <!-- 3. Sub-Features -->
-                <div class="nav-item" role="button" tabindex="0" onclick="nav('history', this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('history', this);}">
-                    <span>📜</span> History
-                </div>
-                <div class="nav-item" role="button" tabindex="0" onclick="nav('policies', this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('policies', this);}">
-                    <span>🛡️</span> Policies
-                </div>
-                <div class="nav-item" role="button" tabindex="0" onclick="nav('integrations', this)"
-                    onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('integrations', this);}">
-                    <span>🔌</span> Integrations
-                </div>
+                    <!-- 3. Sub-Features -->
+                    <div class="nav-item" role="button" tabindex="0" onclick="nav('history', this)"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('history', this);}">
+                        <span>📜</span> History
+                    </div>
+                    <div class="nav-item" role="button" tabindex="0" onclick="nav('policies', this)"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('policies', this);}">
+                        <span>🛡️</span> Policies
+                    </div>
+                    <div class="nav-item" role="button" tabindex="0" onclick="nav('integrations', this)"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();nav('integrations', this);}">
+                        <span>🔌</span> Integrations
+                    </div>
 
-                <div style="margin: 15px 0; border-bottom: 1px solid #222;"></div>
+                    <div style="margin: 15px 0; border-bottom: 1px solid #222;"></div>
 
-                <!-- 4. External -->
-                <div class="nav-item">
-                    <a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
-                        style="text-decoration:none; color:inherit; display:block; width:100%;">
-                        <span>📦</span> Get CLI
-                    </a>
-                </div>
+                    <!-- 4. External -->
+                    <div class="nav-item">
+                        <a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
+                            style="text-decoration:none; color:inherit; display:block; width:100%;">
+                            <span>📦</span> Get CLI
+                        </a>
+                    </div>
             </div>
             <div style="font-size: 0.7rem; color: #555;">
                 User: demo_admin<br>
                 Org: acme_corp_ml
             </div>
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-content">
-
-            <!-- SECTION: Dashboard -->
-            <div id="dashboard" class="spa-section active">
-                <div class="header-box">
-                    <div>
-                        <h1 style="font-size: 1.5rem;">Executive Overview</h1>
-                        <p style="color: var(--text-dim); font-size: 0.9rem;">Real-time risk posture and compliance
-                            metrics.
-                        </p>
-                    </div>
-                    <div>
-                        <button class="btn-outline" onclick="generateReport()">📄 Download PDF Report</button>
-                        <!--<button class="btn-action" onclick="openSettings()">Global Settings</button>-->
-                    </div>
-                </div>
-
-                <!-- KPI Cards -->
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-title">Compliance Score</div>
-                        <div class="kpi-value" style="color: var(--primary-accent)">92%</div>
-                        <div class="kpi-sub">↑ 4% this week</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-title">Models Monitored</div>
-                        <div class="kpi-value">142</div>
-                        <div class="kpi-sub">12 New added</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-title">Critical Vulnerabilities</div>
-                        <div class="kpi-value" style="color: var(--danger)">3</div>
-                        <div class="kpi-sub neg">Requires Attention</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-title">Policy Blocks (30d)</div>
-                        <div class="kpi-value">28</div>
-                        <div class="kpi-sub">Prevented deployments</div>
-                    </div>
-                </div>
-
-                <!-- Charts -->
-                <div class="chart-grid">
-                    <div class="chart-panel">
-                        <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
-                            <span>Vulnerability Trend (30 Days)</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="trendChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="chart-panel">
-                        <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
-                            <span>Risk Distribution</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="riskChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Violations Table -->
-                <div class="panel" style="flex: 1;">
-                    <div class="panel-header"><span>Recent Critical Violations</span></div>
-                    <table class="history-table">
-                        <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Model</th>
-                                <th>Issue</th>
-                                <th>Severity</th>
-                                <th>Owner</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Today 14:02</td>
-                                <td style="color: #fff">fraud_detect_v2.pkl</td>
-                                <td>CVE-2024-1102</td>
-                                <td><span style="color: var(--danger)">CRITICAL</span></td>
-                                <td>DataTeam_A</td>
-                            </tr>
-                            <tr>
-                                <td>Today 09:15</td>
-                                <td style="color: #fff">credit_score_v4.pt</td>
-                                <td>License Conflict</td>
-                                <td><span style="color: var(--danger)">CRITICAL</span></td>
-                                <td>FinOps</td>
-                            </tr>
-                            <tr>
-                                <td>Yesterday</td>
-                                <td style="color: #fff">chatbot_support.onnx</td>
-                                <td>Prompt Injection</td>
-                                <td><span style="color: var(--warning)">HIGH</span></td>
-                                <td>CX_Eng</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
 
-            <!-- SECTION: Scanner -->
-            <div id="scanner" class="spa-section">
-                <div class="header-box">
-                    <div>
-                        <h2 style="font-size: 1.5rem;">Artifact Inspector</h2>
-                        <p style="color: var(--text-dim); font-size: 0.9rem;">Upload a model file to generate a
-                            compliance
-                            report.</p>
+            <!-- Main Content -->
+            <div class="main-content">
+
+                <!-- SECTION: Dashboard -->
+                <div id="dashboard" class="spa-section active">
+                    <div class="header-box">
+                        <div>
+                            <h1 style="font-size: 1.5rem;">Executive Overview</h1>
+                            <p style="color: var(--text-dim); font-size: 0.9rem;">Real-time risk posture and compliance
+                                metrics.
+                            </p>
+                        </div>
+                        <div>
+                            <button class="btn-outline" onclick="generateReport()">📄 Download PDF Report</button>
+                            <!--<button class="btn-action" onclick="openSettings()">Global Settings</button>-->
+                        </div>
                     </div>
-                    <button class="badge"
-                        style="background:transparent; color: var(--text-dim); border: 1px solid #333; cursor: pointer;"
-                        onclick="location.reload()">Reset Session</button>
+
+                    <!-- KPI Cards -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-title">Compliance Score</div>
+                            <div class="kpi-value" style="color: var(--primary-accent)">92%</div>
+                            <div class="kpi-sub">↑ 4% this week</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Models Monitored</div>
+                            <div class="kpi-value">142</div>
+                            <div class="kpi-sub">12 New added</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Critical Vulnerabilities</div>
+                            <div class="kpi-value" style="color: var(--danger)">3</div>
+                            <div class="kpi-sub neg">Requires Attention</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Policy Blocks (30d)</div>
+                            <div class="kpi-value">28</div>
+                            <div class="kpi-sub">Prevented deployments</div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="chart-grid">
+                        <div class="chart-panel">
+                            <div class="panel-header"
+                                style="background: transparent; border: none; padding: 0 0 10px 0;">
+                                <span>Vulnerability Trend (30 Days)</span>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="trendChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-panel">
+                            <div class="panel-header"
+                                style="background: transparent; border: none; padding: 0 0 10px 0;">
+                                <span>Risk Distribution</span>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="riskChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Violations Table -->
+                    <div class="panel" style="flex: 1;">
+                        <div class="panel-header"><span>Recent Critical Violations</span></div>
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Model</th>
+                                    <th>Issue</th>
+                                    <th>Severity</th>
+                                    <th>Owner</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Today 14:02</td>
+                                    <td style="color: #fff">fraud_detect_v2.pkl</td>
+                                    <td>CVE-2024-1102</td>
+                                    <td><span style="color: var(--danger)">CRITICAL</span></td>
+                                    <td>DataTeam_A</td>
+                                </tr>
+                                <tr>
+                                    <td>Today 09:15</td>
+                                    <td style="color: #fff">credit_score_v4.pt</td>
+                                    <td>License Conflict</td>
+                                    <td><span style="color: var(--danger)">CRITICAL</span></td>
+                                    <td>FinOps</td>
+                                </tr>
+                                <tr>
+                                    <td>Yesterday</td>
+                                    <td style="color: #fff">chatbot_support.onnx</td>
+                                    <td>Prompt Injection</td>
+                                    <td><span style="color: var(--warning)">HIGH</span></td>
+                                    <td>CX_Eng</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="playground-grid">
-                    <div class="panel">
-                        <div class="panel-header"><span>SOURCE INPUT</span><span style="color: var(--primary-accent)">●
-                                Ready</span></div>
-                        <div class="upload-zone">
-                            <p style="margin-bottom: 20px; color: #fff;">Select simulation:</p>
-                            <div class="sample-file" onclick="runSimulation('clean')"><span class="file-icon">📄</span>
-                                <div>
-                                    <div style="color: #fff;">chatbot_lite_v1.onnx</div>
-                                    <div style="font-size: 0.7rem; color: #666;">245 MB • ONNX Runtime</div>
+
+                <!-- SECTION: Scanner -->
+                <div id="scanner" class="spa-section">
+                    <div class="header-box">
+                        <div>
+                            <h2 style="font-size: 1.5rem;">Artifact Inspector</h2>
+                            <p style="color: var(--text-dim); font-size: 0.9rem;">Upload a model file to generate a
+                                compliance
+                                report.</p>
+                        </div>
+                        <button class="badge"
+                            style="background:transparent; color: var(--text-dim); border: 1px solid #333; cursor: pointer;"
+                            onclick="location.reload()">Reset Session</button>
+                    </div>
+                    <div class="playground-grid">
+                        <div class="panel">
+                            <div class="panel-header"><span>SOURCE INPUT</span><span
+                                    style="color: var(--primary-accent)">●
+                                    Ready</span></div>
+                            <div class="upload-zone">
+                                <p style="margin-bottom: 20px; color: #fff;">Select simulation:</p>
+                                <div class="sample-file" onclick="runSimulation('clean')"><span
+                                        class="file-icon">📄</span>
+                                    <div>
+                                        <div style="color: #fff;">chatbot_lite_v1.onnx</div>
+                                        <div style="font-size: 0.7rem; color: #666;">245 MB • ONNX Runtime</div>
+                                    </div>
+                                </div>
+                                <div class="sample-file" onclick="runSimulation('dirty')"><span
+                                        class="file-icon">📄</span>
+                                    <div>
+                                        <div style="color: #fff;">finance_credit.pt</div>
+                                        <div style="font-size: 0.7rem; color: #666;">1.2 GB • PyTorch</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="sample-file" onclick="runSimulation('dirty')"><span class="file-icon">📄</span>
+                            <div class="console" id="console-output">
+                                <div class="log-entry">> System initialized. Waiting for input...</div>
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <div class="panel-header"><span>SBOM REPORT</span><span id="scan-status"
+                                    style="color: #666">Waiting...</span></div>
+                            <div id="report-placeholder"
+                                style="flex: 1; display: flex; align-items: center; justify-content: center; color: #444;">
+                                Select a file to view report</div>
+                            <div id="report-view" class="report-content">
+                                <div class="report-row"><span>Status</span><span id="badge-status"
+                                        class="badge badge-pass">PASS</span></div>
+                                <div class="report-row"><span>Framework</span><span style="color: #fff;"
+                                        id="r-framework">-</span></div>
+                                <div class="report-row"><span>License</span><span style="color: #fff;"
+                                        id="r-license">-</span>
+                                </div>
+                                <div class="report-row"><span>Vulns</span><span style="color: #fff;"
+                                        id="r-vuln">-</span>
+                                </div>
+                                <div class="json-dump" id="json-output"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION: History -->
+                <div id="history" class="spa-section">
+                    <div class="header-box">
+                        <div>
+                            <h2 style="font-size: 1.5rem;">Audit Logs</h2>
+                            <p style="color: var(--text-dim); font-size: 0.9rem;">Immutable record of all artifact
+                                scans.
+                            </p>
+                        </div>
+                        <button class="btn-action" onclick="exportCSV()">Export CSV</button>
+                    </div>
+                    <div class="panel" style="height: auto;">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>Artifact Name</th>
+                                    <th>Trigger</th>
+                                    <th>Risks Found</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-table-body">
+                                <!-- Populated via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SECTION: Policies -->
+                <div id="policies" class="spa-section">
+                    <div class="header-box">
+                        <div>
+                            <h2 style="font-size: 1.5rem;">Governance Policies</h2>
+                            <p style="color: var(--text-dim); font-size: 0.9rem;">Define guardrails compiled to OPA
+                                Rego.
+                            </p>
+                        </div><button onclick="simulateSync()" class="btn-action">Sync to Agent</button>
+                    </div>
+                    <div class="policy-grid">
+                        <div class="policy-card">
+                            <div class="policy-header">
+                                <h3 style="color: #fff">License Contamination</h3>
+                                <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+                            </div>
+                            <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Block deployment if
+                                dependencies
+                                contain copy-left licenses.</p>
+                            <div class="code-block"><span class="yaml-key">policy_id:</span> <span
+                                    class="yaml-val">"lic-001"</span><br><span class="yaml-key">enforcement:</span>
+                                <span class="yaml-val">"BLOCK"</span></div>
+                        </div>
+                        <div class="policy-card">
+                            <div class="policy-header">
+                                <h3 style="color: #fff">Pickle Executable Risk</h3>
+                                <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+                            </div>
+                            <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Flag PyTorch files with
+                                potential
+                                code execution.</p>
+                            <div class="code-block"><span class="yaml-key">policy_id:</span> <span
+                                    class="yaml-val">"sec-099"</span><br><span class="yaml-key">scan_depth:</span> <span
+                                    class="yaml-val">"DEEP"</span></div>
+                        </div>
+                        <div class="policy-card">
+                            <div class="policy-header">
+                                <h3 style="color: #fff">EU AI Act Transparency</h3>
+                                <div class="toggle-switch" onclick="this.classList.toggle('on')"></div>
+                            </div>
+                            <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Require Training Dataset
+                                Hash
+                                and
+                                Energy Consumption metrics in SBOM.</p>
+                            <div class="code-block"><span class="yaml-key">policy_id:</span> <span
+                                    class="yaml-val">"eu-act-04"</span><br><span class="yaml-key">fields:</span> <span
+                                    class="yaml-val">["hash", "co2"]</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION: Integrations -->
+                <div id="integrations" class="spa-section">
+                    <div class="header-box">
+                        <div>
+                            <h2 style="font-size: 1.5rem;">Integrations</h2>
+                            <p style="color: var(--text-dim); font-size: 0.9rem;">Connect your Model Registries and
+                                CI/CD
+                                pipelines.</p>
+                        </div>
+                    </div>
+                    <div class="integ-grid">
+                        <div class="integ-card">
+                            <div class="integ-status active"></div>
+                            <div class="integ-header">
+                                <div class="integ-icon" style="color: #fff">🐙</div>
                                 <div>
-                                    <div style="color: #fff;">finance_credit.pt</div>
-                                    <div style="font-size: 0.7rem; color: #666;">1.2 GB • PyTorch</div>
+                                    <h3 style="color: #fff; font-size: 1rem;">GitHub Actions</h3>
+                                    <div style="font-size: 0.75rem; color: #666">CI/CD Guardrails</div>
                                 </div>
                             </div>
+                            <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Automatically blocks Pull
+                                Requests
+                                if the generated SBOM violates policy.</p>
+                            <button class="btn-action"
+                                style="background: transparent; border: 1px solid #333; color: #fff; width: 100%; opacity: 0.5; cursor: default;">Connected</button>
                         </div>
-                        <div class="console" id="console-output">
-                            <div class="log-entry">> System initialized. Waiting for input...</div>
-                        </div>
-                    </div>
-                    <div class="panel">
-                        <div class="panel-header"><span>SBOM REPORT</span><span id="scan-status"
-                                style="color: #666">Waiting...</span></div>
-                        <div id="report-placeholder"
-                            style="flex: 1; display: flex; align-items: center; justify-content: center; color: #444;">
-                            Select a file to view report</div>
-                        <div id="report-view" class="report-content">
-                            <div class="report-row"><span>Status</span><span id="badge-status"
-                                    class="badge badge-pass">PASS</span></div>
-                            <div class="report-row"><span>Framework</span><span style="color: #fff;"
-                                    id="r-framework">-</span></div>
-                            <div class="report-row"><span>License</span><span style="color: #fff;"
-                                    id="r-license">-</span>
+                        <div class="integ-card" id="card-hf">
+                            <div class="integ-status" id="status-hf"></div>
+                            <div class="integ-header">
+                                <div class="integ-icon" style="color: #ffbd2e">🤗</div>
+                                <div>
+                                    <h3 style="color: #fff; font-size: 1rem;">Hugging Face</h3>
+                                    <div style="font-size: 0.75rem; color: #666">Model Hub Scanner</div>
+                                </div>
                             </div>
-                            <div class="report-row"><span>Vulns</span><span style="color: #fff;" id="r-vuln">-</span>
+                            <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Scan private and public
+                                models
+                                before they are downloaded to local envs.</p>
+                            <button class="btn-action" id="btn-hf" style="width: 100%;"
+                                onclick="connectIntegration('hf')">Connect</button>
+                        </div>
+                        <div class="integ-card" id="card-slack">
+                            <div class="integ-status" id="status-slack"></div>
+                            <div class="integ-header">
+                                <div class="integ-icon" style="color: #E01E5A">#</div>
+                                <div>
+                                    <h3 style="color: #fff; font-size: 1rem;">Slack Alerts</h3>
+                                    <div style="font-size: 0.75rem; color: #666">Ops Notification</div>
+                                </div>
                             </div>
-                            <div class="json-dump" id="json-output"></div>
+                            <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Receive real-time alerts
+                                when
+                                scans
+                                detect critical CVEs or License issues.</p>
+                            <button class="btn-action" id="btn-slack" style="width: 100%;"
+                                onclick="connectIntegration('slack')">Connect</button>
                         </div>
                     </div>
+                </div>
+
+            </div>
+            </div> <!-- End app-container -->
+
+            <!-- SYNC MODAL -->
+            <div class="modal-overlay" id="sync-modal">
+                <div class="terminal-modal">
+                    <div class="tm-header">
+                        <div class="dot" style="background:#ff5f56"></div>
+                        <div class="dot" style="background:#ffbd2e"></div>
+                        <div class="dot" style="background:#27c93f"></div><span
+                            style="margin-left:10px; color:#666">agent-sync
+                            --dry-run=false</span>
+                    </div>
+                    <div class="tm-body" id="sync-logs"></div>
                 </div>
             </div>
 
-            <!-- SECTION: History -->
-            <div id="history" class="spa-section">
-                <div class="header-box">
-                    <div>
-                        <h2 style="font-size: 1.5rem;">Audit Logs</h2>
-                        <p style="color: var(--text-dim); font-size: 0.9rem;">Immutable record of all artifact scans.
-                        </p>
+            <!-- SETTINGS MODAL -->
+            <div class="modal-overlay" id="settings-modal">
+                <div class="settings-panel">
+                    <div class="settings-header">
+                        <h3>Global Configuration</h3>
+                        <button onclick="closeSettings()"
+                            style="background:none; border:none; color:#666; cursor:pointer; font-size: 1.2rem;">&times;</button>
                     </div>
-                    <button class="btn-action" onclick="exportCSV()">Export CSV</button>
-                </div>
-                <div class="panel" style="height: auto;">
-                    <table class="history-table">
-                        <thead>
-                            <tr>
-                                <th>Timestamp</th>
-                                <th>Artifact Name</th>
-                                <th>Trigger</th>
-                                <th>Risks Found</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="history-table-body">
-                            <!-- Populated via JS -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- SECTION: Policies -->
-            <div id="policies" class="spa-section">
-                <div class="header-box">
-                    <div>
-                        <h2 style="font-size: 1.5rem;">Governance Policies</h2>
-                        <p style="color: var(--text-dim); font-size: 0.9rem;">Define guardrails compiled to OPA Rego.
-                        </p>
-                    </div><button onclick="simulateSync()" class="btn-action">Sync to Agent</button>
-                </div>
-                <div class="policy-grid">
-                    <div class="policy-card">
-                        <div class="policy-header">
-                            <h3 style="color: #fff">License Contamination</h3>
-                            <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+                    <div class="settings-body">
+                        <div class="form-group">
+                            <label>Organization Name</label>
+                            <input type="text" class="form-input" value="Acme Corp ML" />
                         </div>
-                        <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Block deployment if
-                            dependencies
-                            contain copy-left licenses.</p>
-                        <div class="code-block"><span class="yaml-key">policy_id:</span> <span
-                                class="yaml-val">"lic-001"</span><br><span class="yaml-key">enforcement:</span> <span
-                                class="yaml-val">"BLOCK"</span></div>
-                    </div>
-                    <div class="policy-card">
-                        <div class="policy-header">
-                            <h3 style="color: #fff">Pickle Executable Risk</h3>
-                            <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
-                        </div>
-                        <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Flag PyTorch files with
-                            potential
-                            code execution.</p>
-                        <div class="code-block"><span class="yaml-key">policy_id:</span> <span
-                                class="yaml-val">"sec-099"</span><br><span class="yaml-key">scan_depth:</span> <span
-                                class="yaml-val">"DEEP"</span></div>
-                    </div>
-                    <div class="policy-card">
-                        <div class="policy-header">
-                            <h3 style="color: #fff">EU AI Act Transparency</h3>
-                            <div class="toggle-switch" onclick="this.classList.toggle('on')"></div>
-                        </div>
-                        <p style="color: #888; font-size: 0.85rem; margin-bottom: 10px;">Require Training Dataset Hash
-                            and
-                            Energy Consumption metrics in SBOM.</p>
-                        <div class="code-block"><span class="yaml-key">policy_id:</span> <span
-                                class="yaml-val">"eu-act-04"</span><br><span class="yaml-key">fields:</span> <span
-                                class="yaml-val">["hash", "co2"]</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SECTION: Integrations -->
-            <div id="integrations" class="spa-section">
-                <div class="header-box">
-                    <div>
-                        <h2 style="font-size: 1.5rem;">Integrations</h2>
-                        <p style="color: var(--text-dim); font-size: 0.9rem;">Connect your Model Registries and CI/CD
-                            pipelines.</p>
-                    </div>
-                </div>
-                <div class="integ-grid">
-                    <div class="integ-card">
-                        <div class="integ-status active"></div>
-                        <div class="integ-header">
-                            <div class="integ-icon" style="color: #fff">🐙</div>
-                            <div>
-                                <h3 style="color: #fff; font-size: 1rem;">GitHub Actions</h3>
-                                <div style="font-size: 0.75rem; color: #666">CI/CD Guardrails</div>
+                        <div class="form-group">
+                            <label>Active Compliance Frameworks</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" checked> EU AI Act (Tier 2)</label>
+                                <label><input type="checkbox" checked> NIST AI RMF 1.0</label>
+                                <label><input type="checkbox"> ISO/IEC 42001</label>
                             </div>
                         </div>
-                        <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Automatically blocks Pull
-                            Requests
-                            if the generated SBOM violates policy.</p>
-                        <button class="btn-action"
-                            style="background: transparent; border: 1px solid #333; color: #fff; width: 100%; opacity: 0.5; cursor: default;">Connected</button>
-                    </div>
-                    <div class="integ-card" id="card-hf">
-                        <div class="integ-status" id="status-hf"></div>
-                        <div class="integ-header">
-                            <div class="integ-icon" style="color: #ffbd2e">🤗</div>
-                            <div>
-                                <h3 style="color: #fff; font-size: 1rem;">Hugging Face</h3>
-                                <div style="font-size: 0.75rem; color: #666">Model Hub Scanner</div>
+                        <div class="form-group">
+                            <label>API Access Token (Owner)</label>
+                            <div style="display:flex; gap: 10px;">
+                                <input type="password" class="form-input" value="sk_live_59384_xxxxxxxx" readonly
+                                    style="color: #888;">
+                                <button class="btn-outline">Regenerate</button>
                             </div>
                         </div>
-                        <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Scan private and public models
-                            before they are downloaded to local envs.</p>
-                        <button class="btn-action" id="btn-hf" style="width: 100%;"
-                            onclick="connectIntegration('hf')">Connect</button>
-                    </div>
-                    <div class="integ-card" id="card-slack">
-                        <div class="integ-status" id="status-slack"></div>
-                        <div class="integ-header">
-                            <div class="integ-icon" style="color: #E01E5A">#</div>
-                            <div>
-                                <h3 style="color: #fff; font-size: 1rem;">Slack Alerts</h3>
-                                <div style="font-size: 0.75rem; color: #666">Ops Notification</div>
-                            </div>
+                        <div class="form-group">
+                            <label>Audit Log Retention</label>
+                            <select class="form-input">
+                                <option>90 Days</option>
+                                <option selected>1 Year</option>
+                                <option>7 Years (HIPAA)</option>
+                            </select>
                         </div>
-                        <p style="color: #888; font-size: 0.8rem; margin-bottom: 20px;">Receive real-time alerts when
-                            scans
-                            detect critical CVEs or License issues.</p>
-                        <button class="btn-action" id="btn-slack" style="width: 100%;"
-                            onclick="connectIntegration('slack')">Connect</button>
+                    </div>
+                    <div class="settings-footer">
+                        <button class="btn-outline" onclick="closeSettings()">Cancel</button>
+                        <button class="btn-action" id="save-settings-btn" onclick="saveSettings()">Save Changes</button>
                     </div>
                 </div>
             </div>
 
-        </div>
-    </div> <!-- End app-container -->
-
-    <!-- SYNC MODAL -->
-    <div class="modal-overlay" id="sync-modal">
-        <div class="terminal-modal">
-            <div class="tm-header">
-                <div class="dot" style="background:#ff5f56"></div>
-                <div class="dot" style="background:#ffbd2e"></div>
-                <div class="dot" style="background:#27c93f"></div><span style="margin-left:10px; color:#666">agent-sync
-                    --dry-run=false</span>
-            </div>
-            <div class="tm-body" id="sync-logs"></div>
-        </div>
-    </div>
-
-    <!-- SETTINGS MODAL -->
-    <div class="modal-overlay" id="settings-modal">
-        <div class="settings-panel">
-            <div class="settings-header">
-                <h3>Global Configuration</h3>
-                <button onclick="closeSettings()"
-                    style="background:none; border:none; color:#666; cursor:pointer; font-size: 1.2rem;">&times;</button>
-            </div>
-            <div class="settings-body">
-                <div class="form-group">
-                    <label>Organization Name</label>
-                    <input type="text" class="form-input" value="Acme Corp ML" />
-                </div>
-                <div class="form-group">
-                    <label>Active Compliance Frameworks</label>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox" checked> EU AI Act (Tier 2)</label>
-                        <label><input type="checkbox" checked> NIST AI RMF 1.0</label>
-                        <label><input type="checkbox"> ISO/IEC 42001</label>
+            <!-- JSON VIEWER MODAL (NEW) -->
+            <div class="modal-overlay" id="json-modal">
+                <div class="json-viewer-panel">
+                    <div class="settings-header">
+                        <h3>Artifact SBOM Inspector</h3>
+                        <button onclick="closeJsonModal()"
+                            style="background:none; border:none; color:#666; cursor:pointer; font-size: 1.2rem;">&times;</button>
+                    </div>
+                    <div class="settings-body"
+                        style="background: #000; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00ffcc;">
+                        <pre id="json-modal-content" style="white-space: pre-wrap; word-wrap: break-word;"></pre>
+                    </div>
+                    <div class="settings-footer">
+                        <button class="btn-outline"
+                            onclick="navigator.clipboard.writeText(document.getElementById('json-modal-content').innerText); alert('Copied!')">Copy
+                            to Clipboard</button>
+                        <button class="btn-action" onclick="closeJsonModal()">Close</button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>API Access Token (Owner)</label>
-                    <div style="display:flex; gap: 10px;">
-                        <input type="password" class="form-input" value="sk_live_59384_xxxxxxxx" readonly
-                            style="color: #888;">
-                        <button class="btn-outline">Regenerate</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Audit Log Retention</label>
-                    <select class="form-input">
-                        <option>90 Days</option>
-                        <option selected>1 Year</option>
-                        <option>7 Years (HIPAA)</option>
-                    </select>
-                </div>
             </div>
-            <div class="settings-footer">
-                <button class="btn-outline" onclick="closeSettings()">Cancel</button>
-                <button class="btn-action" id="save-settings-btn" onclick="saveSettings()">Save Changes</button>
-            </div>
-        </div>
-    </div>
 
-    <!-- JSON VIEWER MODAL (NEW) -->
-    <div class="modal-overlay" id="json-modal">
-        <div class="json-viewer-panel">
-            <div class="settings-header">
-                <h3>Artifact SBOM Inspector</h3>
-                <button onclick="closeJsonModal()"
-                    style="background:none; border:none; color:#666; cursor:pointer; font-size: 1.2rem;">&times;</button>
-            </div>
-            <div class="settings-body"
-                style="background: #000; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00ffcc;">
-                <pre id="json-modal-content" style="white-space: pre-wrap; word-wrap: break-word;"></pre>
-            </div>
-            <div class="settings-footer">
-                <button class="btn-outline"
-                    onclick="navigator.clipboard.writeText(document.getElementById('json-modal-content').innerText); alert('Copied!')">Copy
-                    to Clipboard</button>
-                <button class="btn-action" onclick="closeJsonModal()">Close</button>
-            </div>
-        </div>
-    </div>
+            <script>
+                // --- HISTORY DATA (Source of Truth) ---
+                const historyLog = [
+                    {
+                        id: 1, time: "2025-12-01 14:32:01", artifact: "fraud_detect_v2.pkl", trigger: "CI/CD #8502",
+                        risk: "2 Critical", riskHtml: '<span style="color: var(--danger)">2 Critical</span>',
+                        status: "BLOCKED", statusClass: "badge-fail",
+                        json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-12-01T14:32:01Z" }, "vulnerabilities": [{ "id": "CVE-2024-1102", "severity": "CRITICAL" }] }
+                    },
+                    {
+                        id: 2, time: "2025-12-01 10:15:45", artifact: "recommendation_eng.onnx", trigger: "Registry Hook",
+                        risk: "0 Found", riskHtml: '0 Found',
+                        status: "PASSED", statusClass: "badge-pass",
+                        json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-12-01T10:15:45Z" }, "components": [{ "name": "onnx-runtime", "version": "1.16.3" }] }
+                    },
+                    {
+                        id: 3, time: "2025-11-30 18:22:11", artifact: "nlp_summarizer_v3.pt", trigger: "Manual CLI",
+                        risk: "0 Found", riskHtml: '0 Found',
+                        status: "PASSED", statusClass: "badge-pass",
+                        json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-11-30T18:22:11Z" }, "components": [{ "name": "transformers", "version": "4.35.2" }] }
+                    },
+                    {
+                        id: 4, time: "2025-11-30 12:10:45", artifact: "customer_segment_v4.pt", trigger: "Manual CLI",
+                        risk: "1 Warning", riskHtml: '<span style="color: var(--warning)">1 Warning</span>',
+                        status: "FLAGGED", statusClass: "badge-warn",
+                        json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-11-30T12:10:45Z" }, "warnings": [{ "msg": "Use of deprecated optimizer" }] }
+                    }
+                ];
 
-    <script>
-        // --- HISTORY DATA (Source of Truth) ---
-        const historyLog = [
-            {
-                id: 1, time: "2025-12-01 14:32:01", artifact: "fraud_detect_v2.pkl", trigger: "CI/CD #8502",
-                risk: "2 Critical", riskHtml: '<span style="color: var(--danger)">2 Critical</span>',
-                status: "BLOCKED", statusClass: "badge-fail",
-                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-12-01T14:32:01Z" }, "vulnerabilities": [{ "id": "CVE-2024-1102", "severity": "CRITICAL" }] }
-            },
-            {
-                id: 2, time: "2025-12-01 10:15:45", artifact: "recommendation_eng.onnx", trigger: "Registry Hook",
-                risk: "0 Found", riskHtml: '0 Found',
-                status: "PASSED", statusClass: "badge-pass",
-                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-12-01T10:15:45Z" }, "components": [{ "name": "onnx-runtime", "version": "1.16.3" }] }
-            },
-            {
-                id: 3, time: "2025-11-30 18:22:11", artifact: "nlp_summarizer_v3.pt", trigger: "Manual CLI",
-                risk: "0 Found", riskHtml: '0 Found',
-                status: "PASSED", statusClass: "badge-pass",
-                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-11-30T18:22:11Z" }, "components": [{ "name": "transformers", "version": "4.35.2" }] }
-            },
-            {
-                id: 4, time: "2025-11-30 12:10:45", artifact: "customer_segment_v4.pt", trigger: "Manual CLI",
-                risk: "1 Warning", riskHtml: '<span style="color: var(--warning)">1 Warning</span>',
-                status: "FLAGGED", statusClass: "badge-warn",
-                json: { "bomFormat": "CycloneDX", "metadata": { "timestamp": "2025-11-30T12:10:45Z" }, "warnings": [{ "msg": "Use of deprecated optimizer" }] }
-            }
-        ];
-
-        // --- Render History Table ---
-        function renderHistoryTable() {
-            const tbody = document.getElementById('history-table-body');
-            tbody.innerHTML = '';
-            historyLog.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
+                // --- Render History Table ---
+                function renderHistoryTable() {
+                    const tbody = document.getElementById('history-table-body');
+                    tbody.innerHTML = '';
+                    historyLog.forEach(row => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
                     <td>${row.time}</td>
                     <td style="color: #fff">${row.artifact}</td>
                     <td>${row.trigger}</td>
@@ -1234,199 +1248,199 @@
                     <td><span class="badge ${row.statusClass}">${row.status}</span></td>
                     <td><a href="#" style="color: var(--primary-accent)" onclick="viewJson(${row.id}); return false;">View JSON</a></td>
                 `;
-                tbody.appendChild(tr);
-            });
-        }
+                        tbody.appendChild(tr);
+                    });
+                }
 
-        // Call on load
-        document.addEventListener('DOMContentLoaded', renderHistoryTable);
+                // Call on load
+                document.addEventListener('DOMContentLoaded', renderHistoryTable);
 
-        // --- CSV Export Logic ---
-        function exportCSV() {
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "Timestamp,Artifact Name,Trigger,Risks Found,Status\r\n"; // Header
+                // --- CSV Export Logic ---
+                function exportCSV() {
+                    let csvContent = "data:text/csv;charset=utf-8,";
+                    csvContent += "Timestamp,Artifact Name,Trigger,Risks Found,Status\r\n"; // Header
 
-            historyLog.forEach(row => {
-                const rowStr = `${row.time},${row.artifact},${row.trigger},${row.risk},${row.status}`;
-                csvContent += rowStr + "\r\n";
-            });
+                    historyLog.forEach(row => {
+                        const rowStr = `${row.time},${row.artifact},${row.trigger},${row.risk},${row.status}`;
+                        csvContent += rowStr + "\r\n";
+                    });
 
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "aisbom_audit_log.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
+                    const encodedUri = encodeURI(csvContent);
+                    const link = document.createElement("a");
+                    link.setAttribute("href", encodedUri);
+                    link.setAttribute("download", "aisbom_audit_log.csv");
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
 
-        // --- JSON View Logic ---
-        function viewJson(id) {
-            const entry = historyLog.find(r => r.id === id);
-            if (entry) {
-                const jsonStr = JSON.stringify(entry.json, null, 2);
-                document.getElementById('json-modal-content').innerText = jsonStr;
-                document.getElementById('json-modal').style.display = 'flex';
-            }
-        }
-        function closeJsonModal() {
-            document.getElementById('json-modal').style.display = 'none';
-        }
-
-        // --- CHARTS Logic (Dashboard) ---
-        document.addEventListener('DOMContentLoaded', function () {
-            if (typeof Chart === 'undefined') { console.error("Chart.js failed to load."); return; }
-
-            const ctxTrend = document.getElementById('trendChart');
-            if (ctxTrend) {
-                new Chart(ctxTrend.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: ['Nov 01', 'Nov 05', 'Nov 10', 'Nov 15', 'Nov 20', 'Nov 25', 'Dec 01'],
-                        datasets: [{
-                            label: 'Detected Vulnerabilities',
-                            data: [12, 10, 8, 15, 7, 5, 3],
-                            borderColor: '#00ffcc',
-                            backgroundColor: 'rgba(0, 255, 204, 0.1)',
-                            borderWidth: 2,
-                            tension: 0.4,
-                            fill: true,
-                            pointBackgroundColor: '#050505',
-                            pointBorderColor: '#00ffcc'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { grid: { color: '#222' }, ticks: { color: '#888', font: { family: 'JetBrains Mono' } } },
-                            x: { grid: { color: '#222' }, ticks: { color: '#888', font: { family: 'JetBrains Mono' } } }
-                        }
+                // --- JSON View Logic ---
+                function viewJson(id) {
+                    const entry = historyLog.find(r => r.id === id);
+                    if (entry) {
+                        const jsonStr = JSON.stringify(entry.json, null, 2);
+                        document.getElementById('json-modal-content').innerText = jsonStr;
+                        document.getElementById('json-modal').style.display = 'flex';
                     }
-                });
-            }
+                }
+                function closeJsonModal() {
+                    document.getElementById('json-modal').style.display = 'none';
+                }
 
-            const ctxRisk = document.getElementById('riskChart');
-            if (ctxRisk) {
-                new Chart(ctxRisk.getContext('2d'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Low', 'Medium', 'High', 'Critical'],
-                        datasets: [{
-                            data: [65, 20, 12, 3],
-                            backgroundColor: ['#27c93f', '#00ffcc', '#ffbd2e', '#ff5f56'],
-                            borderWidth: 0,
-                            hoverOffset: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        cutout: '70%',
-                        plugins: {
-                            legend: {
-                                position: 'right',
-                                labels: { color: '#ccc', boxWidth: 10, font: { family: 'JetBrains Mono', size: 10 } }
+                // --- CHARTS Logic (Dashboard) ---
+                document.addEventListener('DOMContentLoaded', function () {
+                    if (typeof Chart === 'undefined') { console.error("Chart.js failed to load."); return; }
+
+                    const ctxTrend = document.getElementById('trendChart');
+                    if (ctxTrend) {
+                        new Chart(ctxTrend.getContext('2d'), {
+                            type: 'line',
+                            data: {
+                                labels: ['Nov 01', 'Nov 05', 'Nov 10', 'Nov 15', 'Nov 20', 'Nov 25', 'Dec 01'],
+                                datasets: [{
+                                    label: 'Detected Vulnerabilities',
+                                    data: [12, 10, 8, 15, 7, 5, 3],
+                                    borderColor: '#00ffcc',
+                                    backgroundColor: 'rgba(0, 255, 204, 0.1)',
+                                    borderWidth: 2,
+                                    tension: 0.4,
+                                    fill: true,
+                                    pointBackgroundColor: '#050505',
+                                    pointBorderColor: '#00ffcc'
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: { legend: { display: false } },
+                                scales: {
+                                    y: { grid: { color: '#222' }, ticks: { color: '#888', font: { family: 'JetBrains Mono' } } },
+                                    x: { grid: { color: '#222' }, ticks: { color: '#888', font: { family: 'JetBrains Mono' } } }
+                                }
                             }
-                        }
+                        });
+                    }
+
+                    const ctxRisk = document.getElementById('riskChart');
+                    if (ctxRisk) {
+                        new Chart(ctxRisk.getContext('2d'), {
+                            type: 'doughnut',
+                            data: {
+                                labels: ['Low', 'Medium', 'High', 'Critical'],
+                                datasets: [{
+                                    data: [65, 20, 12, 3],
+                                    backgroundColor: ['#27c93f', '#00ffcc', '#ffbd2e', '#ff5f56'],
+                                    borderWidth: 0,
+                                    hoverOffset: 4
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                cutout: '70%',
+                                plugins: {
+                                    legend: {
+                                        position: 'right',
+                                        labels: { color: '#ccc', boxWidth: 10, font: { family: 'JetBrains Mono', size: 10 } }
+                                    }
+                                }
+                            }
+                        });
                     }
                 });
-            }
-        });
 
-        // --- Executive Report ---
-        function generateReport() {
-            const jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
-            if (!jsPDFCtor) { alert("Report generator is still loading. Please try again in a moment."); return; }
-            const doc = new jsPDFCtor();
-            doc.setFillColor(10, 10, 10); doc.rect(0, 0, 210, 40, "F");
-            doc.setFont("helvetica", "bold"); doc.setTextColor(0, 255, 204); doc.setFontSize(22); doc.text("AI_SBOM", 15, 20);
-            doc.setTextColor(200, 200, 200); doc.setFontSize(10); doc.text("EXECUTIVE COMPLIANCE SUMMARY", 15, 30); doc.text(`Generated: ${new Date().toLocaleDateString()}`, 150, 30);
+                // --- Executive Report ---
+                function generateReport() {
+                    const jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
+                    if (!jsPDFCtor) { alert("Report generator is still loading. Please try again in a moment."); return; }
+                    const doc = new jsPDFCtor();
+                    doc.setFillColor(10, 10, 10); doc.rect(0, 0, 210, 40, "F");
+                    doc.setFont("helvetica", "bold"); doc.setTextColor(0, 255, 204); doc.setFontSize(22); doc.text("AI_SBOM", 15, 20);
+                    doc.setTextColor(200, 200, 200); doc.setFontSize(10); doc.text("EXECUTIVE COMPLIANCE SUMMARY", 15, 30); doc.text(`Generated: ${new Date().toLocaleDateString()}`, 150, 30);
 
-            doc.setTextColor(0, 0, 0); doc.setFontSize(14); doc.setFont("helvetica", "bold"); doc.text("1. Business Risk Overview", 15, 55);
-            doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("Aggregated risk data from 142 AI models deployed across Acme Corp.", 15, 62);
+                    doc.setTextColor(0, 0, 0); doc.setFontSize(14); doc.setFont("helvetica", "bold"); doc.text("1. Business Risk Overview", 15, 55);
+                    doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("Aggregated risk data from 142 AI models deployed across Acme Corp.", 15, 62);
 
-            doc.setDrawColor(200, 200, 200); doc.rect(15, 70, 55, 30); doc.rect(75, 70, 55, 30); doc.rect(135, 70, 55, 30);
-            doc.text("Models Deployed", 20, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.text("142", 20, 90);
-            doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("Critical Vulnerabilities", 80, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.setTextColor(255, 50, 50); doc.text("3", 80, 90);
-            doc.setTextColor(0, 0, 0); doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("EU AI Act Readiness", 140, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.setTextColor(255, 180, 40); doc.text("78%", 140, 90);
+                    doc.setDrawColor(200, 200, 200); doc.rect(15, 70, 55, 30); doc.rect(75, 70, 55, 30); doc.rect(135, 70, 55, 30);
+                    doc.text("Models Deployed", 20, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.text("142", 20, 90);
+                    doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("Critical Vulnerabilities", 80, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.setTextColor(255, 50, 50); doc.text("3", 80, 90);
+                    doc.setTextColor(0, 0, 0); doc.setFontSize(10); doc.setFont("helvetica", "normal"); doc.text("EU AI Act Readiness", 140, 80); doc.setFontSize(16); doc.setFont("helvetica", "bold"); doc.setTextColor(255, 180, 40); doc.text("78%", 140, 90);
 
-            doc.setTextColor(0, 0, 0); doc.setFontSize(14); doc.text("2. Critical Action Items", 15, 120);
-            if (typeof doc.autoTable !== 'function') { alert("Report table renderer is still loading. Please try again in a moment."); return; }
-            doc.autoTable({
-                startY: 125, head: [['Model Artifact', 'Risk Detected', 'Severity', 'Action']],
-                body: [["fraud_detect_v2.pkl", "CVE-2024-1102", "High", "Patching Required"], ["credit_score_v4.pt", "License Violation", "Critical", "Legal Review"], ["chatbot_support.onnx", "Prompt Injection", "Medium", "Update Weights"]],
-                theme: 'grid', headStyles: { fillColor: [20, 20, 20], textColor: [0, 255, 204] }, styles: { fontSize: 9 }
-            });
+                    doc.setTextColor(0, 0, 0); doc.setFontSize(14); doc.text("2. Critical Action Items", 15, 120);
+                    if (typeof doc.autoTable !== 'function') { alert("Report table renderer is still loading. Please try again in a moment."); return; }
+                    doc.autoTable({
+                        startY: 125, head: [['Model Artifact', 'Risk Detected', 'Severity', 'Action']],
+                        body: [["fraud_detect_v2.pkl", "CVE-2024-1102", "High", "Patching Required"], ["credit_score_v4.pt", "License Violation", "Critical", "Legal Review"], ["chatbot_support.onnx", "Prompt Injection", "Medium", "Update Weights"]],
+                        theme: 'grid', headStyles: { fillColor: [20, 20, 20], textColor: [0, 255, 204] }, styles: { fontSize: 9 }
+                    });
 
-            const finalY = doc.lastAutoTable.finalY + 20;
-            doc.setFontSize(14); doc.text("3. Regulatory Impact Statement", 15, finalY);
-            doc.setFontSize(10); doc.setFont("helvetica", "italic"); doc.text("Based on current scans, 2 models violate the 'eu-act-04' transparency policy regarding training dataset lineage.", 15, finalY + 10, { maxWidth: 180 });
-            doc.save("AIsbom_Executive_Report.pdf");
-        }
+                    const finalY = doc.lastAutoTable.finalY + 20;
+                    doc.setFontSize(14); doc.text("3. Regulatory Impact Statement", 15, finalY);
+                    doc.setFontSize(10); doc.setFont("helvetica", "italic"); doc.text("Based on current scans, 2 models violate the 'eu-act-04' transparency policy regarding training dataset lineage.", 15, finalY + 10, { maxWidth: 180 });
+                    doc.save("AIsbom_Executive_Report.pdf");
+                }
 
-        // --- Navigation ---
-        function nav(sectionId, element) {
-            document.querySelectorAll('.spa-section').forEach(el => el.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-        }
+                // --- Navigation ---
+                function nav(sectionId, element) {
+                    document.querySelectorAll('.spa-section').forEach(el => el.classList.remove('active'));
+                    document.getElementById(sectionId).classList.add('active');
+                    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+                    element.classList.add('active');
+                }
 
-        // --- Settings Modal Logic ---
-        function openSettings() { document.getElementById('settings-modal').style.display = 'flex'; }
-        function closeSettings() { document.getElementById('settings-modal').style.display = 'none'; }
-        function saveSettings() {
-            const btn = document.getElementById('save-settings-btn'); const originalText = btn.innerText; btn.innerText = "Saving..."; btn.style.opacity = "0.7";
-            setTimeout(() => { btn.innerText = "Saved!"; btn.style.background = "var(--success)"; btn.style.opacity = "1"; setTimeout(() => { closeSettings(); setTimeout(() => { btn.innerText = originalText; btn.style.background = "var(--primary-accent)"; }, 500); }, 800); }, 1000);
-        }
+                // --- Settings Modal Logic ---
+                function openSettings() { document.getElementById('settings-modal').style.display = 'flex'; }
+                function closeSettings() { document.getElementById('settings-modal').style.display = 'none'; }
+                function saveSettings() {
+                    const btn = document.getElementById('save-settings-btn'); const originalText = btn.innerText; btn.innerText = "Saving..."; btn.style.opacity = "0.7";
+                    setTimeout(() => { btn.innerText = "Saved!"; btn.style.background = "var(--success)"; btn.style.opacity = "1"; setTimeout(() => { closeSettings(); setTimeout(() => { btn.innerText = originalText; btn.style.background = "var(--primary-accent)"; }, 500); }, 800); }, 1000);
+                }
 
-        // --- Integration Logic ---
-        function connectIntegration(id) {
-            const btn = document.getElementById('btn-' + id);
-            const status = document.getElementById('status-' + id);
-            if (btn.innerText === "Connect") {
-                btn.innerText = "Authenticating..."; btn.style.opacity = "0.7";
-                setTimeout(() => { btn.innerText = "Connected"; btn.style.background = "transparent"; btn.style.border = "1px solid #333"; btn.style.color = "#fff"; btn.style.cursor = "default"; status.classList.add('active'); }, 1500);
-            }
-        }
+                // --- Integration Logic ---
+                function connectIntegration(id) {
+                    const btn = document.getElementById('btn-' + id);
+                    const status = document.getElementById('status-' + id);
+                    if (btn.innerText === "Connect") {
+                        btn.innerText = "Authenticating..."; btn.style.opacity = "0.7";
+                        setTimeout(() => { btn.innerText = "Connected"; btn.style.background = "transparent"; btn.style.border = "1px solid #333"; btn.style.color = "#fff"; btn.style.cursor = "default"; status.classList.add('active'); }, 1500);
+                    }
+                }
 
-        // --- Sync Logic ---
-        function simulateSync() {
-            const modal = document.getElementById('sync-modal'); const logs = document.getElementById('sync-logs'); modal.style.display = 'flex'; logs.innerHTML = '';
-            const steps = [{ text: "> Initializing Agent Sync...", delay: 200 }, { text: "> Diffing local config vs remote cluster...", delay: 800 }, { text: "> Detected 2 policy changes in 'lic-001'", delay: 400, color: "#ffbd2e" }, { text: "> Compiling Rego policies...", delay: 600 }, { text: "> Pushing to Production (us-east-1)...", delay: 800 }, { text: "> SUCCESS: Policy version v.14.2 active.", delay: 200, color: "#27c93f" }];
-            let cumulativeDelay = 0;
-            steps.forEach(step => { cumulativeDelay += step.delay; setTimeout(() => { const div = document.createElement('div'); div.textContent = step.text; div.style.marginBottom = "5px"; if (step.color) div.style.color = step.color; logs.appendChild(div); logs.scrollTop = logs.scrollHeight; }, cumulativeDelay); });
-            setTimeout(() => { modal.style.display = 'none'; }, cumulativeDelay + 2000);
-        }
+                // --- Sync Logic ---
+                function simulateSync() {
+                    const modal = document.getElementById('sync-modal'); const logs = document.getElementById('sync-logs'); modal.style.display = 'flex'; logs.innerHTML = '';
+                    const steps = [{ text: "> Initializing Agent Sync...", delay: 200 }, { text: "> Diffing local config vs remote cluster...", delay: 800 }, { text: "> Detected 2 policy changes in 'lic-001'", delay: 400, color: "#ffbd2e" }, { text: "> Compiling Rego policies...", delay: 600 }, { text: "> Pushing to Production (us-east-1)...", delay: 800 }, { text: "> SUCCESS: Policy version v.14.2 active.", delay: 200, color: "#27c93f" }];
+                    let cumulativeDelay = 0;
+                    steps.forEach(step => { cumulativeDelay += step.delay; setTimeout(() => { const div = document.createElement('div'); div.textContent = step.text; div.style.marginBottom = "5px"; if (step.color) div.style.color = step.color; logs.appendChild(div); logs.scrollTop = logs.scrollHeight; }, cumulativeDelay); });
+                    setTimeout(() => { modal.style.display = 'none'; }, cumulativeDelay + 2000);
+                }
 
-        // --- Scanner Logic ---
-        const consoleOut = document.getElementById('console-output'); const reportPlaceholder = document.getElementById('report-placeholder'); const reportView = document.getElementById('report-view');
-        const scenarios = {
-            clean: { file: "chatbot_lite_v1.onnx", logs: ["Extracting metadata...", "Verifying license headers...", "Scan Complete."], status: "COMPLIANT", framework: "ONNX Runtime 1.16", license: "Apache 2.0", vuln: "None", badgeClass: "badge-pass", json: { "bomFormat": "CycloneDX", "specVersion": "1.5", "components": [{ "type": "library", "name": "numpy", "version": "1.26.0" }] } },
-            dirty: { file: "finance_credit.pt", logs: ["Unpickling artifacts...", "ALERT: Found CVE-2020-13091", "ALERT: License Conflict"], status: "FAILED", framework: "PyTorch 1.13", license: "CC-BY-NC", vuln: "CRITICAL", badgeClass: "badge-fail", json: { "bomFormat": "CycloneDX", "vulnerabilities": [{ "id": "CVE-2020-13091", "severity": "critical" }] } }
-        };
-        function log(msg, type = '') { const div = document.createElement('div'); div.className = 'log-entry ' + type; div.textContent = '> ' + msg; consoleOut.appendChild(div); consoleOut.scrollTop = consoleOut.scrollHeight; }
-        function runSimulation(type) {
-            const data = scenarios[type]; reportView.style.display = 'none'; reportPlaceholder.style.display = 'flex'; reportPlaceholder.textContent = 'Scanning...'; consoleOut.innerHTML = ''; document.getElementById('scan-status').textContent = 'Scanning...'; document.getElementById('scan-status').style.color = '#fff';
-            log(`Initiating scan on ${data.file}...`);
-            let delay = 500; data.logs.forEach((msg) => { setTimeout(() => { let style = msg.includes("ALERT") ? 'log-error' : ''; log(msg, style); }, delay); delay += 500; });
-            setTimeout(() => { reportPlaceholder.style.display = 'none'; reportView.style.display = 'block'; document.getElementById('badge-status').textContent = data.status; document.getElementById('badge-status').className = `badge ${data.badgeClass}`; document.getElementById('r-framework').textContent = data.framework; document.getElementById('r-license').textContent = data.license; document.getElementById('r-vuln').textContent = data.vuln; document.getElementById('r-vuln').style.color = type === 'dirty' ? 'var(--danger)' : 'var(--text-main)'; document.getElementById('json-output').textContent = JSON.stringify(data.json, null, 2); document.getElementById('scan-status').textContent = 'Finished'; }, delay);
-        }
+                // --- Scanner Logic ---
+                const consoleOut = document.getElementById('console-output'); const reportPlaceholder = document.getElementById('report-placeholder'); const reportView = document.getElementById('report-view');
+                const scenarios = {
+                    clean: { file: "chatbot_lite_v1.onnx", logs: ["Extracting metadata...", "Verifying license headers...", "Scan Complete."], status: "COMPLIANT", framework: "ONNX Runtime 1.16", license: "Apache 2.0", vuln: "None", badgeClass: "badge-pass", json: { "bomFormat": "CycloneDX", "specVersion": "1.5", "components": [{ "type": "library", "name": "numpy", "version": "1.26.0" }] } },
+                    dirty: { file: "finance_credit.pt", logs: ["Unpickling artifacts...", "ALERT: Found CVE-2020-13091", "ALERT: License Conflict"], status: "FAILED", framework: "PyTorch 1.13", license: "CC-BY-NC", vuln: "CRITICAL", badgeClass: "badge-fail", json: { "bomFormat": "CycloneDX", "vulnerabilities": [{ "id": "CVE-2020-13091", "severity": "critical" }] } }
+                };
+                function log(msg, type = '') { const div = document.createElement('div'); div.className = 'log-entry ' + type; div.textContent = '> ' + msg; consoleOut.appendChild(div); consoleOut.scrollTop = consoleOut.scrollHeight; }
+                function runSimulation(type) {
+                    const data = scenarios[type]; reportView.style.display = 'none'; reportPlaceholder.style.display = 'flex'; reportPlaceholder.textContent = 'Scanning...'; consoleOut.innerHTML = ''; document.getElementById('scan-status').textContent = 'Scanning...'; document.getElementById('scan-status').style.color = '#fff';
+                    log(`Initiating scan on ${data.file}...`);
+                    let delay = 500; data.logs.forEach((msg) => { setTimeout(() => { let style = msg.includes("ALERT") ? 'log-error' : ''; log(msg, style); }, delay); delay += 500; });
+                    setTimeout(() => { reportPlaceholder.style.display = 'none'; reportView.style.display = 'block'; document.getElementById('badge-status').textContent = data.status; document.getElementById('badge-status').className = `badge ${data.badgeClass}`; document.getElementById('r-framework').textContent = data.framework; document.getElementById('r-license').textContent = data.license; document.getElementById('r-vuln').textContent = data.vuln; document.getElementById('r-vuln').style.color = type === 'dirty' ? 'var(--danger)' : 'var(--text-main)'; document.getElementById('json-output').textContent = JSON.stringify(data.json, null, 2); document.getElementById('scan-status').textContent = 'Finished'; }, delay);
+                }
 
-        function trackLead(source) {
-            // 1. Fire GA4 Event
-            if (typeof gtag === 'function') {
-                gtag('event', 'click_waitlist', {
-                    'event_category': 'conversion',
-                    'event_label': source // e.g., 'landing_header'
-                });
-            }
-            // 2. Open Form
-            window.open('https://tally.so/r/rj5MoM', '_blank');
-        }
-    </script>
+                function trackLead(source) {
+                    // 1. Fire GA4 Event
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'click_waitlist', {
+                            'event_category': 'conversion',
+                            'event_label': source // e.g., 'landing_header'
+                        });
+                    }
+                    // 2. Open Form
+                    window.open('https://tally.so/r/rj5MoM', '_blank');
+                }
+            </script>
 </body>
 
 </html>

@@ -377,12 +377,12 @@
         <nav>
             <div class="logo" style="margin-bottom:0; font-size:1.5rem; display:flex; align-items:center; gap:10px;">
                 <img src="assets/aisbom_logo_terminal.png" alt="AIsbom Logo" style="height:30px; width:auto;">
-                <a href="index.html" style="text-decoration:none; color:inherit;">AI<span>_SBOM</span></a>
+                <a href="/" style="text-decoration:none; color:inherit;">AI<span>_SBOM</span></a>
             </div>
             <div>
                 <a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
                     style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">GitHub</a>
-                <a href="viewer.html"
+                <a href="viewer"
                     style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">Viewer <span
                         style="background: var(--primary-accent); color: #000; padding: 2px 4px; border-radius: 2px; font-size: 0.6rem; vertical-align: top; font-weight: bold;">NEW</span></a>
                 <button onclick="trackLead('viewer_nav')" class="btn"
@@ -391,382 +391,384 @@
         </nav>
     </header>
 
-    <div class="app-container">
+    <main class="app-container">
         <!-- Sidebar -->
-        <div class="sidebar">
-            <div>
+        <aside class="sidebar">
+            <nav>
                 <!-- Logo Removed -->
                 <div class="nav-item active"><span>👁️</span> Local Viewer</div>
-                <div class="nav-item"><a href="demo.html" style="text-decoration:none; color:inherit;"><span>⚡</span>
+                <div class="nav-item"><a href="demo" style="text-decoration:none; color:inherit;"><span>⚡</span>
                         Live
                         Demo</a></div>
                 <div class="nav-item"><a href="https://github.com/Lab700xOrg/aisbom" target="_blank"
                         style="text-decoration:none; color:inherit;"><span>📦</span> Get CLI</a></div>
-            </div>
+            </nav>
             <div style="font-size: 0.7rem; color: #555;">
                 Mode: Offline / Client-Side<br>
                 Version: v1.2
             </div>
-        </div>
-
-        <div class="main-content">
-
-            <div class="header-box">
-                <div>
-                    <h1 style="font-size: 1.5rem;">Artifact Viewer</h1>
-                    <p style="color: var(--text-dim); font-size: 0.9rem;">
-                        <span style="color: var(--success);">● Client-Side Only.</span> No data is uploaded to our
-                        servers.
-                    </p>
-                </div>
-                <div>
-                    <button class="btn-outline" onclick="generateReport()" id="btn-report"
-                        style="opacity: 0.5; cursor: not-allowed;">📄 Download Report</button>
-                </div>
             </div>
 
-            <!-- STATE 1: UPLOAD -->
-            <div id="upload-state">
-                <div class="drop-zone" id="drop-area">
-                    <div style="font-size: 3rem; margin-bottom: 10px;">📂</div>
-                    <h3 style="color: #fff; margin-bottom: 10px;">Drag & Drop your sbom.json here</h3>
-                    <p style="color: #888; margin-bottom: 20px;">Or click to browse files</p>
-                    <input type="file" id="fileElem" accept=".json" style="display:none"
-                        onchange="handleFiles(this.files)">
-                    <button class="btn-outline" onclick="document.getElementById('fileElem').click()">Select
-                        File</button>
-                    <div style="margin-top: 20px; font-size: 0.8rem; color: #555;">Supports CycloneDX v1.5+ & SPDX
-                        2.2/2.3</div>
+            <div class="main-content">
+
+                <div class="header-box">
+                    <div>
+                        <h1 style="font-size: 1.5rem;">Artifact Viewer</h1>
+                        <p style="color: var(--text-dim); font-size: 0.9rem;">
+                            <span style="color: var(--success);">● Client-Side Only.</span> No data is uploaded to our
+                            servers.
+                        </p>
+                    </div>
+                    <div>
+                        <button class="btn-outline" onclick="generateReport()" id="btn-report"
+                            style="opacity: 0.5; cursor: not-allowed;">📄 Download Report</button>
+                    </div>
                 </div>
+
+                <!-- STATE 1: UPLOAD -->
+                <div id="upload-state">
+                    <div class="drop-zone" id="drop-area">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">📂</div>
+                        <h3 style="color: #fff; margin-bottom: 10px;">Drag & Drop your sbom.json here</h3>
+                        <p style="color: #888; margin-bottom: 20px;">Or click to browse files</p>
+                        <input type="file" id="fileElem" accept=".json" style="display:none"
+                            onchange="handleFiles(this.files)">
+                        <button class="btn-outline" onclick="document.getElementById('fileElem').click()">Select
+                            File</button>
+                        <div style="margin-top: 20px; font-size: 0.8rem; color: #555;">Supports CycloneDX v1.5+ & SPDX
+                            2.2/2.3</div>
+                    </div>
+                </div>
+
+                <!-- STATE 2: DASHBOARD (Hidden initially) -->
+                <div id="dashboard-state" class="hidden">
+
+                    <!-- KPI Cards -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-title">Total Components</div>
+                            <div class="kpi-value" id="kpi-total">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">AI Models Found</div>
+                            <div class="kpi-value" id="kpi-models" style="color: var(--primary-accent)">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Critical Risks</div>
+                            <div class="kpi-value" id="kpi-critical" style="color: var(--danger)">0</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-title">Legal Warnings</div>
+                            <div class="kpi-value" id="kpi-legal" style="color: var(--warning)">0</div>
+                        </div>
+                    </div>
+
+                    <!-- Charts -->
+                    <div class="chart-grid">
+                        <div class="chart-panel">
+                            <div class="panel-header"
+                                style="background: transparent; border: none; padding: 0 0 10px 0;">
+                                <span>Component Distribution</span>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="typeChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-panel">
+                            <div class="panel-header"
+                                style="background: transparent; border: none; padding: 0 0 10px 0;">
+                                <span>Risk Breakdown</span>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="riskChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detail Table -->
+                    <div class="panel">
+                        <div class="panel-header">
+                            <span>Artifact Details</span>
+                            <button class="btn-outline" style="padding: 2px 8px; font-size: 0.7rem;"
+                                onclick="location.reload()">Upload New</button>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Version</th>
+                                        <th>Risk Assessment</th>
+                                        <th>Legal / License</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-body">
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- STATE 2: DASHBOARD (Hidden initially) -->
-            <div id="dashboard-state" class="hidden">
+            <script>
 
-                <!-- KPI Cards -->
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-title">Total Components</div>
-                        <div class="kpi-value" id="kpi-total">0</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-title">AI Models Found</div>
-                        <div class="kpi-value" id="kpi-models" style="color: var(--primary-accent)">0</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-title">Critical Risks</div>
-                        <div class="kpi-value" id="kpi-critical" style="color: var(--danger)">0</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-title">Legal Warnings</div>
-                        <div class="kpi-value" id="kpi-legal" style="color: var(--warning)">0</div>
-                    </div>
-                </div>
-
-                <!-- Charts -->
-                <div class="chart-grid">
-                    <div class="chart-panel">
-                        <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
-                            <span>Component Distribution</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="typeChart"></canvas>
-                        </div>
-                    </div>
-                    <div class="chart-panel">
-                        <div class="panel-header" style="background: transparent; border: none; padding: 0 0 10px 0;">
-                            <span>Risk Breakdown</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="riskChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Detail Table -->
-                <div class="panel">
-                    <div class="panel-header">
-                        <span>Artifact Details</span>
-                        <button class="btn-outline" style="padding: 2px 8px; font-size: 0.7rem;"
-                            onclick="location.reload()">Upload New</button>
-                    </div>
-                    <div style="overflow-x: auto;">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Version</th>
-                                    <th>Risk Assessment</th>
-                                    <th>Legal / License</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-body">
-                                <!-- Populated via JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <script>
-
-            function trackLead(source) {
-                // 1. Fire GA4 Event
-                if (typeof gtag === 'function') {
-                    gtag('event', 'click_waitlist', {
-                        'event_category': 'conversion',
-                        'event_label': source // e.g., 'viewer_header' or 'viewer_upsell'
-                    });
+                function trackLead(source) {
+                    // 1. Fire GA4 Event
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'click_waitlist', {
+                            'event_category': 'conversion',
+                            'event_label': source // e.g., 'viewer_header' or 'viewer_upsell'
+                        });
+                    }
+                    // 2. Open Form
+                    window.open('https://tally.so/r/rj5MoM', '_blank');
                 }
-                // 2. Open Form
-                window.open('https://tally.so/r/rj5MoM', '_blank');
-            }
 
-            // --- DRAG & DROP LOGIC ---
-            const dropArea = document.getElementById('drop-area');
+                // --- DRAG & DROP LOGIC ---
+                const dropArea = document.getElementById('drop-area');
 
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                dropArea.addEventListener(eventName, preventDefaults, false);
-            });
-
-            function preventDefaults(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-
-            ['dragenter', 'dragover'].forEach(eventName => {
-                dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
-            });
-
-            ['dragleave', 'drop'].forEach(eventName => {
-                dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
-            });
-
-            dropArea.addEventListener('drop', handleDrop, false);
-
-            function handleDrop(e) {
-                const dt = e.dataTransfer;
-                const files = dt.files;
-                handleFiles(files);
-            }
-
-            function handleFiles(files) {
-                const file = files && files[0];
-                if (file && (file.type === "application/json" || file.name.endsWith('.json'))) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        try {
-                            const json = JSON.parse(e.target.result);
-                            const components = normalizeData(json);
-                            renderDashboard(components);
-                        } catch (err) {
-                            alert("Invalid JSON file: " + err);
-                        }
-                    };
-                    reader.readAsText(file);
-                } else if (file) {
-                    alert("Please upload a valid .json file");
-                }
-                gtag('event', 'file_upload', {
-                    'event_category': 'usage',
-                    'event_label': 'sbom_viewer'
+                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                    dropArea.addEventListener(eventName, preventDefaults, false);
                 });
-            }
 
-            // --- NORMALIZATION LOGIC ---
-            function normalizeData(json) {
-                // 1. CycloneDX
-                if (json.bomFormat === 'CycloneDX' || json.components) {
-                    return json.components || [];
+                function preventDefaults(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                 }
 
-                // 2. SPDX 2.2 / 2.3
-                if (json.spdxVersion && json.packages) {
-                    return json.packages.map(pkg => {
-                        // Heuristic for Type Detection
-                        // AISBOM CLI puts metadata in description/comment
-                        let type = 'library';
-                        const desc = pkg.description || pkg.comment || "";
+                ['dragenter', 'dragover'].forEach(eventName => {
+                    dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
+                });
 
-                        if (desc.includes("Risk:") || desc.includes("Framework:") || desc.includes("Model")) {
-                            type = 'machine-learning-model';
-                        }
+                ['dragleave', 'drop'].forEach(eventName => {
+                    dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
+                });
 
-                        return {
-                            name: pkg.name,
-                            version: pkg.versionInfo,
-                            type: type,
-                            description: desc // Critical for Risk Parsing logic downstream
+                dropArea.addEventListener('drop', handleDrop, false);
+
+                function handleDrop(e) {
+                    const dt = e.dataTransfer;
+                    const files = dt.files;
+                    handleFiles(files);
+                }
+
+                function handleFiles(files) {
+                    const file = files && files[0];
+                    if (file && (file.type === "application/json" || file.name.endsWith('.json'))) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            try {
+                                const json = JSON.parse(e.target.result);
+                                const components = normalizeData(json);
+                                renderDashboard(components);
+                            } catch (err) {
+                                alert("Invalid JSON file: " + err);
+                            }
                         };
+                        reader.readAsText(file);
+                    } else if (file) {
+                        alert("Please upload a valid .json file");
+                    }
+                    gtag('event', 'file_upload', {
+                        'event_category': 'usage',
+                        'event_label': 'sbom_viewer'
                     });
                 }
 
-                return [];
-            }
-
-            // --- PARSING & RENDERING LOGIC ---
-            let globalData = null; // Store for PDF generation
-            let typeChartInstance = null;
-            let riskChartInstance = null;
-
-            function renderDashboard(components) {
-                globalData = { components: components };
-
-                // 1. Hide Upload, Show Dashboard
-                document.getElementById('upload-state').classList.add('hidden');
-                document.getElementById('dashboard-state').classList.remove('hidden');
-                document.getElementById('btn-report').style.opacity = "1";
-                document.getElementById('btn-report').style.cursor = "pointer";
-
-                // 2. Parse Components
-                // const components is now passed in as argument
-                let counts = {
-                    total: components.length,
-                    models: 0,
-                    libs: 0,
-                    critical: 0,
-                    legal: 0,
-                    low: 0
-                };
-
-                const tbody = document.getElementById('table-body');
-                tbody.innerHTML = '';
-
-                components.forEach(comp => {
-                    // Determine Type
-                    let typeIcon = "📦";
-                    if (comp.type === 'machine-learning-model') {
-                        counts.models++;
-                        typeIcon = "🧠 Model";
-                    } else {
-                        counts.libs++;
-                        typeIcon = "📚 Lib";
+                // --- NORMALIZATION LOGIC ---
+                function normalizeData(json) {
+                    // 1. CycloneDX
+                    if (json.bomFormat === 'CycloneDX' || json.components) {
+                        return json.components || [];
                     }
 
-                    // Parse Description for Risk (Matches your CLI output)
-                    // Example: "Security: CRITICAL (RCE Detected) | Legal: LOW..."
-                    let riskHtml = '<span class="badge badge-pass">LOW</span>';
-                    let legalHtml = '<span class="badge" style="color: #888">UNKNOWN</span>';
+                    // 2. SPDX 2.2 / 2.3
+                    if (json.spdxVersion && json.packages) {
+                        return json.packages.map(pkg => {
+                            // Heuristic for Type Detection
+                            // AISBOM CLI puts metadata in description/comment
+                            let type = 'library';
+                            const desc = pkg.description || pkg.comment || "";
 
-                    const desc = comp.description || "";
+                            if (desc.includes("Risk:") || desc.includes("Framework:") || desc.includes("Model")) {
+                                type = 'machine-learning-model';
+                            }
 
-                    // Security Check
-                    if (desc.includes("CRITICAL") || desc.includes("HIGH")) {
-                        counts.critical++;
-                        riskHtml = `<span class="badge badge-fail">CRITICAL</span>`;
-                    } else if (desc.includes("MEDIUM")) {
-                        riskHtml = `<span class="badge badge-warn">MEDIUM</span>`;
+                            return {
+                                name: pkg.name,
+                                version: pkg.versionInfo,
+                                type: type,
+                                description: desc // Critical for Risk Parsing logic downstream
+                            };
+                        });
                     }
 
-                    // Legal Check
-                    if (desc.includes("LEGAL RISK")) {
-                        counts.legal++;
-                        legalHtml = `<span class="badge badge-fail">RESTRICTED</span>`;
-                    } else if (desc.includes("Legal:")) {
-                        // Try to extract license text if present
-                        legalHtml = '<span class="badge badge-pass">OK</span>';
-                    }
+                    return [];
+                }
 
-                    // Render Row
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
+                // --- PARSING & RENDERING LOGIC ---
+                let globalData = null; // Store for PDF generation
+                let typeChartInstance = null;
+                let riskChartInstance = null;
+
+                function renderDashboard(components) {
+                    globalData = { components: components };
+
+                    // 1. Hide Upload, Show Dashboard
+                    document.getElementById('upload-state').classList.add('hidden');
+                    document.getElementById('dashboard-state').classList.remove('hidden');
+                    document.getElementById('btn-report').style.opacity = "1";
+                    document.getElementById('btn-report').style.cursor = "pointer";
+
+                    // 2. Parse Components
+                    // const components is now passed in as argument
+                    let counts = {
+                        total: components.length,
+                        models: 0,
+                        libs: 0,
+                        critical: 0,
+                        legal: 0,
+                        low: 0
+                    };
+
+                    const tbody = document.getElementById('table-body');
+                    tbody.innerHTML = '';
+
+                    components.forEach(comp => {
+                        // Determine Type
+                        let typeIcon = "📦";
+                        if (comp.type === 'machine-learning-model') {
+                            counts.models++;
+                            typeIcon = "🧠 Model";
+                        } else {
+                            counts.libs++;
+                            typeIcon = "📚 Lib";
+                        }
+
+                        // Parse Description for Risk (Matches your CLI output)
+                        // Example: "Security: CRITICAL (RCE Detected) | Legal: LOW..."
+                        let riskHtml = '<span class="badge badge-pass">LOW</span>';
+                        let legalHtml = '<span class="badge" style="color: #888">UNKNOWN</span>';
+
+                        const desc = comp.description || "";
+
+                        // Security Check
+                        if (desc.includes("CRITICAL") || desc.includes("HIGH")) {
+                            counts.critical++;
+                            riskHtml = `<span class="badge badge-fail">CRITICAL</span>`;
+                        } else if (desc.includes("MEDIUM")) {
+                            riskHtml = `<span class="badge badge-warn">MEDIUM</span>`;
+                        }
+
+                        // Legal Check
+                        if (desc.includes("LEGAL RISK")) {
+                            counts.legal++;
+                            legalHtml = `<span class="badge badge-fail">RESTRICTED</span>`;
+                        } else if (desc.includes("Legal:")) {
+                            // Try to extract license text if present
+                            legalHtml = '<span class="badge badge-pass">OK</span>';
+                        }
+
+                        // Render Row
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
                     <td style="color: #fff; font-weight: bold;">${comp.name}</td>
                     <td>${typeIcon}</td>
                     <td>${comp.version || "N/A"}</td>
                     <td>${riskHtml} <span style="font-size:0.7rem; color:#666; margin-left:5px">${desc.split('|')[0] || ''}</span></td>
                     <td>${legalHtml}</td>
                 `;
-                    tbody.appendChild(tr);
-                });
+                        tbody.appendChild(tr);
+                    });
 
-                // 3. Update KPIs
-                document.getElementById('kpi-total').innerText = counts.total;
-                document.getElementById('kpi-models').innerText = counts.models;
-                document.getElementById('kpi-critical').innerText = counts.critical;
-                document.getElementById('kpi-legal').innerText = counts.legal;
+                    // 3. Update KPIs
+                    document.getElementById('kpi-total').innerText = counts.total;
+                    document.getElementById('kpi-models').innerText = counts.models;
+                    document.getElementById('kpi-critical').innerText = counts.critical;
+                    document.getElementById('kpi-legal').innerText = counts.legal;
 
-                // 4. Render Charts
-                renderCharts(counts);
-            }
+                    // 4. Render Charts
+                    renderCharts(counts);
+                }
 
-            function renderCharts(counts) {
-                if (typeChartInstance) typeChartInstance.destroy();
-                if (riskChartInstance) riskChartInstance.destroy();
+                function renderCharts(counts) {
+                    if (typeChartInstance) typeChartInstance.destroy();
+                    if (riskChartInstance) riskChartInstance.destroy();
 
-                typeChartInstance = new Chart(document.getElementById('typeChart'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['ML Models', 'Libraries'],
-                        datasets: [{
-                            data: [counts.models, counts.libs],
-                            backgroundColor: ['#00ffcc', '#333333'],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: { legend: { position: 'right', labels: { color: '#ccc', font: { family: 'Courier New' } } } }
-                    }
-                });
-
-                riskChartInstance = new Chart(document.getElementById('riskChart'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['Critical', 'Legal Risk', 'Safe'],
-                        datasets: [{
-                            label: 'Count',
-                            data: [counts.critical, counts.legal, counts.total - counts.critical - counts.legal],
-                            backgroundColor: ['#ff5f56', '#ffbd2e', '#27c93f'],
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: { grid: { color: '#222' }, ticks: { color: '#888' } },
-                            x: { grid: { display: false }, ticks: { color: '#888' } }
+                    typeChartInstance = new Chart(document.getElementById('typeChart'), {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['ML Models', 'Libraries'],
+                            datasets: [{
+                                data: [counts.models, counts.libs],
+                                backgroundColor: ['#00ffcc', '#333333'],
+                                borderWidth: 0
+                            }]
                         },
-                        plugins: { legend: { display: false } }
-                    }
-                });
-            }
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { position: 'right', labels: { color: '#ccc', font: { family: 'Courier New' } } } }
+                        }
+                    });
 
-            // --- PDF REPORT (Client Side) ---
-            function generateReport() {
-                if (!globalData) return;
-                const jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
-                if (!jsPDFCtor) { alert("Report generator is still loading. Please try again in a moment."); return; }
-                const doc = new jsPDFCtor();
+                    riskChartInstance = new Chart(document.getElementById('riskChart'), {
+                        type: 'bar',
+                        data: {
+                            labels: ['Critical', 'Legal Risk', 'Safe'],
+                            datasets: [{
+                                label: 'Count',
+                                data: [counts.critical, counts.legal, counts.total - counts.critical - counts.legal],
+                                backgroundColor: ['#ff5f56', '#ffbd2e', '#27c93f'],
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: { grid: { color: '#222' }, ticks: { color: '#888' } },
+                                x: { grid: { display: false }, ticks: { color: '#888' } }
+                            },
+                            plugins: { legend: { display: false } }
+                        }
+                    });
+                }
 
-                // Header
-                doc.setFillColor(10, 10, 10); doc.rect(0, 0, 210, 40, "F");
-                doc.setFont("helvetica", "bold"); doc.setTextColor(0, 255, 204); doc.setFontSize(22); doc.text("AI_SBOM Analysis", 15, 20);
-                doc.setTextColor(255, 255, 255); doc.setFontSize(10); doc.text(new Date().toLocaleString(), 15, 30);
+                // --- PDF REPORT (Client Side) ---
+                function generateReport() {
+                    if (!globalData) return;
+                    const jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
+                    if (!jsPDFCtor) { alert("Report generator is still loading. Please try again in a moment."); return; }
+                    const doc = new jsPDFCtor();
 
-                // Table data
-                const rows = globalData.components.map(c => [
-                    c.name,
-                    c.type,
-                    c.version || '-',
-                    (c.description || "").includes("CRITICAL") ? "FAIL" : "PASS"
-                ]);
+                    // Header
+                    doc.setFillColor(10, 10, 10); doc.rect(0, 0, 210, 40, "F");
+                    doc.setFont("helvetica", "bold"); doc.setTextColor(0, 255, 204); doc.setFontSize(22); doc.text("AI_SBOM Analysis", 15, 20);
+                    doc.setTextColor(255, 255, 255); doc.setFontSize(10); doc.text(new Date().toLocaleString(), 15, 30);
 
-                if (typeof doc.autoTable !== 'function') { alert("Report table renderer is still loading. Please try again in a moment."); return; }
-                doc.autoTable({
-                    startY: 50,
-                    head: [['Component', 'Type', 'Version', 'Status']],
-                    body: rows,
-                    theme: 'grid',
-                    headStyles: { fillColor: [0, 0, 0], textColor: [0, 255, 204] }
-                });
+                    // Table data
+                    const rows = globalData.components.map(c => [
+                        c.name,
+                        c.type,
+                        c.version || '-',
+                        (c.description || "").includes("CRITICAL") ? "FAIL" : "PASS"
+                    ]);
 
-                doc.save("aisbom_report.pdf");
-            }
-        </script>
+                    if (typeof doc.autoTable !== 'function') { alert("Report table renderer is still loading. Please try again in a moment."); return; }
+                    doc.autoTable({
+                        startY: 50,
+                        head: [['Component', 'Type', 'Version', 'Status']],
+                        body: rows,
+                        theme: 'grid',
+                        headStyles: { fillColor: [0, 0, 0], textColor: [0, 255, 204] }
+                    });
+
+                    doc.save("aisbom_report.pdf");
+                }
+            </script>
 </body>
 
 </html>
