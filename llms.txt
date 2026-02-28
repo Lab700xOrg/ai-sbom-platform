@@ -1,0 +1,17 @@
+# AIsbom: AI Supply Chain Security
+
+AIsbom provides a platform and CLI for generating software bills of materials directly from machine learning binary weights like PyTorch (.pt), Safetensors, and GGUF.
+
+## Platform Features
+
+### Artifact Inspector (Viewer)
+URL: https://aisbom.io/viewer.html
+Description: A client-side, local offline viewer for CycloneDX and SPDX files outputted by AIsbom CLI. It categorizes dependencies, machine learning models, and legal risks without uploading tensors.
+
+### Simulated Dashboard (Live Demo)
+URL: https://aisbom.io/demo.html
+Description: A browser-based functional demonstration of the commercial AIsbom Enterprise interface, showing compliance scores, automated rule processing, and policy-driven governance.
+
+## Key Open Source Project Links
+GitHub Repository: https://github.com/Lab700xOrg/aisbom
+PyPI Package: pip install aisbom-cli
