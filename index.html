@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -6,17 +6,19 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YCFJXD07TN"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
 
-        gtag('config', 'G-YCFJXD07TN');
+        gtag("config", "G-YCFJXD07TN");
     </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
-        content="AI_SBOM inspects AI model artifacts, tensors, and training lineage to generate deep SBOMs and compliance evidence.">
-    <link rel="icon" href="assets/aisbom_logo_terminal.png">
+        content="AI_SBOM inspects AI model artifacts, tensors, and training lineage to generate deep SBOMs and compliance evidence." />
+    <link rel="icon" href="assets/aisbom_logo_terminal.png" />
     <title>AIsbom | AI Supply Chain Security & ML Artifact Scanner</title>
     <style>
         :root {
@@ -29,11 +31,11 @@
             /* Cyber Purple */
             --text-main: #e0e0e0;
             --text-dim: #888;
-            --font-mono: 'Courier New', Courier, monospace;
+            --font-mono: "Courier New", Courier, monospace;
             --font-sans: system-ui, -apple-system, sans-serif;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+        @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap");
 
         * {
             margin: 0;
@@ -44,7 +46,7 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'JetBrains Mono', var(--font-mono);
+            font-family: "JetBrains Mono", var(--font-mono);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -99,7 +101,7 @@
         }
 
         /* Header */
-        header {
+        .site-header {
             padding: 20px 0;
             border-bottom: 1px solid var(--border-color);
             position: sticky;
@@ -109,7 +111,7 @@
             z-index: 100;
         }
 
-        nav {
+        .site-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -193,7 +195,9 @@
             flex: 1;
             background: #0f0f0f;
             border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px #333;
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 1px #333;
             overflow: hidden;
             font-size: 0.9rem;
             position: relative;
@@ -284,7 +288,7 @@
         }
 
         .file-tree {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: "JetBrains Mono", monospace;
             font-size: 0.9rem;
             margin-top: 20px;
         }
@@ -326,7 +330,9 @@
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid #222;
             padding: 30px;
-            transition: transform 0.2s, border-color 0.2s;
+            transition:
+                transform 0.2s,
+                border-color 0.2s;
         }
 
         .card:hover {
@@ -493,23 +499,32 @@
 </head>
 
 <body>
-
-    <header>
+    <header class="site-header">
         <div class="container">
-            <nav>
+            <nav class="site-nav">
                 <div class="logo">
                     <img src="assets/aisbom_logo_terminal.png"
-                        alt="AIsbom Logo - AI Supply Chain Security & Artifact Diagnostics">
+                        alt="AIsbom Logo - AI Supply Chain Security & Artifact Diagnostics" />
                     <div>AI<span>_SBOM</span></div>
                 </div>
                 <div>
                     <a href="https://github.com/Lab700xOrg/aisbom" target="_blank" rel="nofollow"
-                        style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">GitHub</a>
+                        style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem">GitHub</a>
                     <a href="viewer"
-                        style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem;">Viewer <span
-                            style="background: var(--primary-accent); color: #000; padding: 2px 4px; border-radius: 2px; font-size: 0.6rem; vertical-align: top; font-weight: bold;">NEW</span></a>
+                        style="color: #fff; text-decoration: none; margin-right: 20px; font-size: 0.9rem">Viewer
+                        <span style="
+                  background: var(--primary-accent);
+                  color: #000;
+                  padding: 2px 4px;
+                  border-radius: 2px;
+                  font-size: 0.6rem;
+                  vertical-align: top;
+                  font-weight: bold;
+                ">NEW</span></a>
                     <button onclick="trackLead('landing_nav')" class="btn"
-                        style="padding: 8px 16px; font-size: 0.8rem; cursor: pointer;">Request Platform Invite</button>
+                        style="padding: 8px 16px; font-size: 0.8rem; cursor: pointer">
+                        Request Platform Invite
+                    </button>
                 </div>
             </nav>
         </div>
@@ -518,19 +533,24 @@
     <main>
         <section class="container hero">
             <div class="hero-content">
-                <div
-                    style="margin-bottom: 10px; color: var(--secondary-accent); font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">
+                <div style="
+              margin-bottom: 10px;
+              color: var(--secondary-accent);
+              font-weight: bold;
+              text-transform: uppercase;
+              font-size: 0.8rem;
+              letter-spacing: 2px;
+            ">
                     v0.4.0 Release | AI Supply Chain Transparency
                 </div>
-                <h1 class="hero-title">The Supply Chain Record for <span class="text-accent">Artificial
-                        Intelligence.</span>
+                <h1 class="hero-title">
+                    The Supply Chain Record for <span class="text-accent">Artificial Intelligence.</span>
                 </h1>
                 <p class="hero-subtitle">
                     Detect Malware, License Risks, and <strong>Model Drift</strong> in your CI/CD pipeline. Support for
-                    PyTorch, Safetensors, and GGUF.
+                    PyTorch,
+                    Safetensors, and GGUF.
                 </p>
-
-
 
                 <div class="install-container">
                     <!-- Option 1: Standard -->
@@ -539,14 +559,17 @@
                         <div class="cmd-line">
                             <!-- Link to PyPI -->
                             <a href="https://pypi.org/project/aisbom-cli/" target="_blank" rel="nofollow"
-                                style="text-decoration: none; display: flex; align-items: center; flex-grow: 1;">
+                                style="text-decoration: none; display: flex; align-items: center; flex-grow: 1">
                                 <code>pip install aisbom-cli</code>
                             </a>
                             <!-- Click to Copy -->
                             <span class="copy-icon" role="button" tabindex="0" aria-label="Copy pip install command"
-                                onclick="copyToClipboard()"
-                                onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();copyToClipboard();}"
-                                title="Copy to clipboard">📋</span>
+                                onclick="copyToClipboard()" onkeydown="
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      copyToClipboard();
+                    }
+                  " title="Copy to clipboard">📋</span>
                         </div>
                     </div>
 
@@ -567,10 +590,10 @@
                 <div>
                     <!-- Primary Action: The Demo (Visual Proof + Lead Gen) -->
                     <a href="demo" class="btn">Run Live Simulation</a>
-                    <span style="margin: 0 15px; color: #555;">or</span>
+                    <span style="margin: 0 15px; color: #555">or</span>
                     <!-- Secondary Action: Trust/Source Point Docs to GitHub README -->
                     <a href="https://github.com/Lab700xOrg/aisbom#readme" target="_blank" rel="nofollow"
-                        style="color: #fff; text-decoration: underline;">Read the Docs</a>
+                        style="color: #fff; text-decoration: underline">Read the Docs</a>
                 </div>
             </div>
 
@@ -579,7 +602,7 @@
                     <div class="dot red"></div>
                     <div class="dot yellow"></div>
                     <div class="dot green"></div>
-                    <span style="margin-left: 10px; color: #666;">user@dev-machine:~/project-alpha</span>
+                    <span style="margin-left: 10px; color: #666">user@dev-machine:~/project-alpha</span>
                 </div>
                 <div class="terminal-body" id="terminal-content"></div>
             </div>
@@ -588,52 +611,57 @@
         <!-- NEW: DIFFERENTIATION SECTION -->
         <section class="comparison-section">
             <div class="container">
-                <h2 style="font-size: 2rem; text-align: center;">Why "Generic" Security Tools Miss the Mark</h2>
-                <p style="text-align: center; color: var(--text-dim); margin-top: 10px;">AI Models are binary artifacts,
-                    not
-                    just text files. Traditional scanners are blind to them.</p>
+                <h2 style="font-size: 2rem; text-align: center">Why "Generic" Security Tools Miss the Mark</h2>
+                <p style="text-align: center; color: var(--text-dim); margin-top: 10px">
+                    AI Models are binary artifacts, not just text files. Traditional scanners are blind to them.
+                </p>
 
                 <div class="comp-grid">
                     <!-- Competitor View -->
                     <div class="comp-card bad">
                         <span class="comp-badge">Standard SBOM</span>
-                        <h3 style="color: #fff; margin-bottom: 10px;">Surface Level Scan</h3>
-                        <p style="font-size: 0.9rem; color: #888;">Only scans text manifests. Misses the actual compiled
-                            model risks.</p>
+                        <h3 style="color: #fff; margin-bottom: 10px">Surface Level Scan</h3>
+                        <p style="font-size: 0.9rem; color: #888">
+                            Only scans text manifests. Misses the actual compiled model risks.
+                        </p>
 
                         <div class="file-tree">
                             <div class="file-row"><span>📄 requirements.txt</span> <span class="status-check">✔
-                                    Clean</span>
-                            </div>
+                                    Clean</span></div>
                             <div class="file-row"><span>📄 main.py</span> <span class="status-check">✔ Clean</span>
                             </div>
-                            <div class="file-row"><span>📦 model.pt (1.2GB)</span> <span class="status-miss">⚠ Ignored
-                                    (Binary)</span></div>
-                            <div class="file-row"><span>📦 dataset.pkl</span> <span class="status-miss">⚠ Ignored
-                                    (Binary)</span></div>
+                            <div class="file-row">
+                                <span>📦 model.pt (1.2GB)</span> <span class="status-miss">⚠ Ignored (Binary)</span>
+                            </div>
+                            <div class="file-row">
+                                <span>📦 dataset.pkl</span> <span class="status-miss">⚠ Ignored (Binary)</span>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Your View -->
                     <div class="comp-card good">
                         <span class="comp-badge">AI_SBOM Deep Scan</span>
-                        <h3 style="color: #fff; margin-bottom: 10px;">Artifact Introspection</h3>
-                        <p style="font-size: 0.9rem; color: #888;">Decompiles tensors and inspects serialized data
-                            structures for risks.</p>
+                        <h3 style="color: #fff; margin-bottom: 10px">Artifact Introspection</h3>
+                        <p style="font-size: 0.9rem; color: #888">
+                            Decompiles tensors and inspects serialized data structures for risks.
+                        </p>
 
                         <div class="file-tree">
                             <div class="file-row"><span>📄 requirements.txt</span> <span class="status-check">✔
-                                    Clean</span>
-                            </div>
+                                    Clean</span></div>
                             <div class="file-row"><span>📄 main.py</span> <span class="status-check">✔ Clean</span>
                             </div>
-                            <div class="file-row"><span>📦 model.pt (1.2GB)</span> <span class="status-alert">⚠ MALWARE
-                                    DETECTED</span></div>
+                            <div class="file-row">
+                                <span>📦 model.pt (1.2GB)</span> <span class="status-alert">⚠ MALWARE DETECTED</span>
+                            </div>
                             <div class="file-row"
-                                style="padding-left: 20px; font-size: 0.8rem; color: var(--primary-accent);">↳ Found:
-                                embedded os.system() call</div>
-                            <div class="file-row"><span>📦 dataset.pkl</span> <span class="status-alert">⚠ LICENSE
-                                    CONFLICT</span></div>
+                                style="padding-left: 20px; font-size: 0.8rem; color: var(--primary-accent)">
+                                ↳ Found: embedded os.system() call
+                            </div>
+                            <div class="file-row">
+                                <span>📦 dataset.pkl</span> <span class="status-alert">⚠ LICENSE CONFLICT</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -649,7 +677,8 @@
                 <div class="ticker-item">ONNX Runtime</div>
                 <div class="ticker-item">JAX/Flax</div>
                 <div class="ticker-item">Scikit-Learn</div>
-                <div class="ticker-item">PyTorch</div> <!-- Repeat for loop -->
+                <div class="ticker-item">PyTorch</div>
+                <!-- Repeat for loop -->
                 <div class="ticker-item">TensorFlow</div>
                 <div class="ticker-item">HuggingFace Safetensors</div>
                 <div class="ticker-item">ONNX Runtime</div>
@@ -658,30 +687,37 @@
 
         <section class="features">
             <div class="container">
-                <h2 style="font-size: 2rem;">Infrastructure, <span class="text-purple">Not Paperwork.</span></h2>
-                <p style="color: var(--text-dim); max-width: 600px; margin-top: 10px;">
+                <h2 style="font-size: 2rem">Infrastructure, <span class="text-purple">Not Paperwork.</span></h2>
+                <p style="color: var(--text-dim); max-width: 600px; margin-top: 10px">
                     Spreadsheets don't scale. We integrate directly into your training pipeline to create a dynamic,
-                    immutable record of truth.
+                    immutable
+                    record of truth.
                 </p>
 
                 <div class="grid">
                     <div class="card">
                         <h3>01. Remote Streaming</h3>
-                        <p>Audit models on Hugging Face (hf://) without downloading terabytes of weights. We use HTTP
+                        <p>
+                            Audit models on Hugging Face (hf://) without downloading terabytes of weights. We use HTTP
                             Range
-                            requests to inspect headers and signatures over the wire.</p>
+                            requests to inspect headers and signatures over the wire.
+                        </p>
                     </div>
                     <div class="card">
                         <h3>02. Drift Detection</h3>
-                        <p>Stop silent changes. Run <span class="highlight">aisbom diff</span> production.json
-                            candidate.json to detect drift in model hashes, licenses, or dependencies between commits.
+                        <p>
+                            Stop silent changes. Run <span class="highlight">aisbom diff</span> production.json
+                            candidate.json to
+                            detect drift in model hashes, licenses, or dependencies between commits.
                         </p>
                     </div>
                     <div class="card">
                         <h3>03. Strict Mode Policy</h3>
-                        <p>Move beyond blocklists. Use <span class="highlight">--strict</span> to enforce an
-                            allowlist-only
-                            policy, flagging any unknown import or library as a CRITICAL risk.</p>
+                        <p>
+                            Move beyond blocklists. Use <span class="highlight">--strict</span> to enforce an
+                            allowlist-only policy,
+                            flagging any unknown import or library as a CRITICAL risk.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -691,12 +727,12 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 AI_SBOM Built for builders.</p>
-            <p style="margin-top: 10px; opacity: 0.5;">Austin • San Francisco • Berlin • Tokyo</p>
+            <p style="margin-top: 10px; opacity: 0.5">Austin • San Francisco • Berlin • Tokyo</p>
         </div>
     </footer>
 
     <script>
-        const terminalContent = document.getElementById('terminal-content');
+        const terminalContent = document.getElementById("terminal-content");
 
         const lines = [
             { text: "$ aisbom scan hf://google-bert/bert-base-uncased", delay: 800 },
@@ -706,7 +742,7 @@
             { text: "⚠ WARNING: License Conflict Detected", delay: 400, color: "#ffbd2e" },
             { text: " > License: 'cc-by-nc-4.0' (Non-Commercial)", delay: 100, color: "#d4d4d4" },
             { text: "Done. Report saved to ./sbom.json", delay: 100, color: "#00ffcc" },
-            { text: "$ _", delay: 2000 }
+            { text: "$ _", delay: 2000 },
         ];
 
         let lineIndex = 0;
@@ -714,48 +750,59 @@
 
         function typeLine() {
             if (lineIndex >= lines.length) {
-                setTimeout(() => { terminalContent.innerHTML = ''; lineIndex = 0; typeLine(); }, 5000);
+                setTimeout(() => {
+                    terminalContent.innerHTML = "";
+                    lineIndex = 0;
+                    typeLine();
+                }, 5000);
                 return;
             }
             const currentLine = lines[lineIndex];
             if (charIndex === 0) {
-                const div = document.createElement('div');
+                const div = document.createElement("div");
                 div.style.marginBottom = "5px";
                 if (currentLine.color) div.style.color = currentLine.color;
                 div.id = `line-${lineIndex}`;
                 terminalContent.appendChild(div);
             }
-            if (currentLine.text.startsWith('$')) {
+            if (currentLine.text.startsWith("$")) {
                 const div = document.getElementById(`line-${lineIndex}`);
                 div.textContent += currentLine.text.charAt(charIndex);
                 charIndex++;
-                if (charIndex < currentLine.text.length) { setTimeout(typeLine, 50); }
-                else { charIndex = 0; lineIndex++; setTimeout(typeLine, currentLine.delay); }
+                if (charIndex < currentLine.text.length) {
+                    setTimeout(typeLine, 50);
+                } else {
+                    charIndex = 0;
+                    lineIndex++;
+                    setTimeout(typeLine, currentLine.delay);
+                }
             } else {
                 const div = document.getElementById(`line-${lineIndex}`);
                 div.textContent = currentLine.text;
-                charIndex = 0; lineIndex++; setTimeout(typeLine, currentLine.delay);
+                charIndex = 0;
+                lineIndex++;
+                setTimeout(typeLine, currentLine.delay);
             }
         }
         setTimeout(typeLine, 1000);
 
         function copyToClipboard() {
             navigator.clipboard.writeText("pip install aisbom-cli").then(() => {
-                const icon = document.querySelector('.copy-icon');
+                const icon = document.querySelector(".copy-icon");
                 icon.textContent = "✅"; // Visual feedback
-                setTimeout(() => icon.textContent = "📋", 2000); // Reset
+                setTimeout(() => (icon.textContent = "📋"), 2000); // Reset
             });
         }
         function trackLead(source) {
             // 1. Fire GA4 Event
-            if (typeof gtag === 'function') {
-                gtag('event', 'click_waitlist', {
-                    'event_category': 'conversion',
-                    'event_label': source // e.g., 'landing_header'
+            if (typeof gtag === "function") {
+                gtag("event", "click_waitlist", {
+                    event_category: "conversion",
+                    event_label: source, // e.g., 'landing_header'
                 });
             }
             // 2. Open Form
-            window.open('https://tally.so/r/rj5MoM', '_blank');
+            window.open("https://tally.so/r/rj5MoM", "_blank");
         }
     </script>
 </body>

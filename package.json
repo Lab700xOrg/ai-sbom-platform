@@ -1,0 +1,12 @@
+{
+    "name": "ai-sbom-landing",
+    "version": "1.0.0",
+    "description": "Frontend tooling for AIsbom Landing Pages",
+    "scripts": {
+        "format": "prettier --write \"**/*.{html,css,js}\"",
+        "format:check": "prettier --check \"**/*.{html,css,js}\""
+    },
+    "devDependencies": {
+        "prettier": "^3.2.5"
+    }
+}
